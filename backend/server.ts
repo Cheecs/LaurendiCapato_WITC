@@ -1,11 +1,14 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import mysql from 'mysql'
+import mysql from 'mysql2';
 
-dotenv.config(); // serve per mettere le variabili di sistema
+//Config the env from the ENVIRONMENT
 
+
+// DEBUG THE ENVS
+dotenv.config();
 const PORT = process.env.PORT || 4000;
-const PWD = process.env.PWD;
+const PWD = process.env.passwd ;
 
 let app = express();
 app.use(express.json());
@@ -22,15 +25,12 @@ app.listen(PORT, () => {
 });
 
 // Connetti al database
-db.connect((err) => {
-
+db.connect((err: mysql.QueryError | null) => {
     if (err) {
         console.error('Errore di connessione:', err);
         return;
     }
-
     console.log('Connesso a MySQL');
-
 });
 
 // test endpoint
