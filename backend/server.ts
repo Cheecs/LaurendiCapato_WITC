@@ -38,13 +38,16 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
-// // Esempio: recupera dati da una tabella
-// app.get('/utenti', (req, res) => {
-//     db.query('SELECT * FROM utenti', (err, results) => {
-//         if (err) {
-//             res.status(500).send(err);
-//             return;
-//         }
-//         res.json(results);
-//     });
-// });
+// Esempio: recupera dati da una tabella
+app.get('/api/utenti', (req, res) => {
+    
+    db.query('SELECT * FROM utenti', (err, results) => {
+
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+
+        res.json(results);
+    });
+});
