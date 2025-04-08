@@ -2,6 +2,12 @@ let seeMore = false;
 
 $(document).ready(function(){
 
+    UIsetup();
+
+});
+
+function UIsetup(){
+
     $("#imgUtente").mouseenter(function(){
         $("#tooltip").removeClass("d-none");
     });
@@ -19,8 +25,8 @@ $(document).ready(function(){
     });
     
     $('#year').text(new Date().getFullYear());
+}
 
-});
 
 function handleSeeMoreAnimation(){
 

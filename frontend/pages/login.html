@@ -15,6 +15,9 @@
         crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../styles/login.css">
+
+
+    <script src="../scripts/utilities.js"></script>
     <script src="../scripts/login.js"></script>
 </head>
 
@@ -30,34 +33,40 @@
             <h2 class="catchphrase ms-2">your Experience.</h2>
         </div>
         <h2 id="catchphrase2" class="m-3">Signin to begin your Experience.</h2>
-        <div class="form-container col-7" id="loginDiv">
-            <p class="title">Login</p>
-            <form class="form">
-                <div class="input-group mb-3">
-                    <label for="username">Email:</label>
-                    <input type="email" name="email" id="email" placeholder="Email">
-                </div>
-                <div class="input-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" placeholder="Password">
-                </div>
-                <div class="form-check mt-2" id="divShowPwd">
-                    <input class="form-check-input mt-1" type="checkbox" value="" id="showPwd">
-                    <label class="form-check-label text-light ms-2" for="flexCheckDefault">
-                        Show password
-                    </label>
-                </div>
-                  
-                <hr>
-                <button class="sign">Sign In</button>
-            </form>
-            <div id="divLinks">
-                <p class="signup mt-2">Don't have an account?
-                    <a rel="noopener noreferrer" href="signup.html" class="linkSignUp">Sign Up</a>
-                    <p>
-                        <a href="#" class="noAccounlnk mt-1">continue without an account →</a>
+        <div class="container" id="containerLogin">
+            <div class="form-container col-7" id="loginDiv">
+                <p class="title">Login</p>
+                <form class="form needs-validation" id="signInForm">
+                    <div class="input-group mb-3">
+                        <label for="username">Email:</label>
+                        <input type="email" name="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-check mt-2" id="divShowPwd">
+                        <input class="form-check-input mt-1" type="checkbox" value="" id="showPwd">
+                        <label class="form-check-label text-light ms-2" for="flexCheckDefault">
+                            Show password
+                        </label>
+                    </div>
+                      
+                    <hr>
+                    <button type="submit" class="sign">Sign In</button>
+                </form>
+                <div id="divLinks">
+                    <p class="signup mt-2">Don't have an account?
+                        <a rel="noopener noreferrer" href="signup.html" class="linkSignUp">Sign Up</a>
+                        <p>
+                            <a href="#" class="noAccounlnk mt-1">continue without an account →</a>
+                        </p>
                     </p>
-                </p>
+                </div>
+            </div>
+            <div class="hideAlert alert alert-danger col-3 container mt-4" id="divAlert">
+                <strong>Error</strong>
+                <span id="errorMsg"></span>
             </div>
         </div>
     </div>

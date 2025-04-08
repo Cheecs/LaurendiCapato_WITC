@@ -4,18 +4,11 @@ window.addEventListener("load", function(){
 
     handleShowHidePwd();
 
-});
+    document.getElementById("signInForm").addEventListener("submit", function(event){
 
-function handleShowHidePwd(){
-    
-    const showPwd = document.getElementById("showPwd");
-    const pwd = document.getElementById("password");
+        event.preventDefault();
 
-    showPwd.addEventListener("change", function () {
-        if (showPwd.checked) {
-            pwd.type = "text";
-        }
-        else
-            pwd.type = "password";
+        console.log("submit");
     })
-}
+
+});

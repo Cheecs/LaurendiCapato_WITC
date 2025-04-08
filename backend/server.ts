@@ -40,14 +40,38 @@ app.get('/api', (req, res) => {
 
 // Esempio: recupera dati da una tabella
 app.get('/api/utenti', (req, res) => {
-    
-    db.query('SELECT * FROM utenti', (err, results) => {
+
+    let { mail, pwd } = req.body;
+    let login = UserExists(mail, pwd);
+
+    if(login.status == 200)
+    {
+        res.status(login.status).send(`Logged In: \\n ${login.loginInfo}`)
+    }
+    else if(login.status == 404)
+    {
+            res.status(login.status).send(`${login.loginInfo}`);
+    }
+    else if(login.status == 500)
+    {
+        res.status(login.status).send(`${login.loginInfo}`);
+    }
+
+});
+
+function UserExists(mail:string, pwd:string):any{
+
+    let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
+
+    db.query(query, [mail, pwd], (err, results) => {
 
         if (err) {
-            res.status(500).send(err);
-            return;
+            return {"loginInfo": "User not found, wrong credentials", "status":404};
         }
 
-        res.json(results);
+        if(results)
+            return {"loginInfo": results, "status":200};
     });
-});
+
+    return {"loginInfo": "An error occured during the login, please try again", "status":500};
+}
