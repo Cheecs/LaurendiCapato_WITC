@@ -19,7 +19,7 @@ $(document).ready(function() {
       request.fail(errore);
       request.done(function(data) {
 
-        console.log(`Logged in: \\n ${data.json()}`);
+        console.log(`Logged in: \\n ${JSON.stringify(data)}`);
 
       });
 
