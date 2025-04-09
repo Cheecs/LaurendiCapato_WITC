@@ -19,7 +19,7 @@ $(document).ready(function() {
       request.fail(errore);
       request.done(function(data) {
 
-        console.log(`Logged in:`, data.data[0]);
+        console.log(`Logged in:`, data[0].data);
 
       });
 
