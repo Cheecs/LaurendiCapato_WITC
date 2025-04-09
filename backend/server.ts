@@ -40,9 +40,7 @@ app.get('/api', (req, res) => {
 
 app.post('/api/login', (req, res) => {
 
-    let mail = req.body.mail;
-    let pwd = req.body.pwd;
-
+    let { mail, pwd } = req.body;
     let login = UserExists(mail, pwd);
 
     if(login.status == 200)
@@ -60,18 +58,23 @@ app.post('/api/login', (req, res) => {
 
 });
 
-function UserExists(mail:string, pwd:string):any{
+function UserExists(mail:string, pwd:string):Promise<any>{
 
-    let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
+return new Promise((resolve, reject) => {
+        let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?";
 
-    db.query(query, [mail, pwd], (err, results) => {
+        db.query(query, [mail, pwd], (err, results) => {
 
-        if (err) 
-            return {"loginInfo": "User not found, wrong credentials", "status":404};
-        
-        if(results)
-            return {"loginInfo": results, "status":200};
-    });
+            if (err)
+                return resolve({ "loginInfo": "An error occured during the login", "status": 500 });
+            
+            if (results) {
 
-    return {"loginInfo": `An error occured during the login, please try again. SQL: ${query}`, "status":500};
-}
+                return resolve({ "loginInfo": results, "status": 200 });
+
+            } else {
+                return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
+            }
+            
+        });
+    });}
