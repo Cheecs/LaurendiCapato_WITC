@@ -45,7 +45,7 @@ app.post('/api/login', async (req, res) => {
 
     if(login.status == 200)
     {
-        res.status(login.status).send({
+        res.status(login.status).json({
             data: login.loginInfo
         });
     }
@@ -72,7 +72,7 @@ return new Promise((resolve, reject) => {
             
             if (results) {
 
-                return resolve({ "loginInfo": JSON.stringify(results), "status": 200 });
+                return resolve({ "loginInfo": results, "status": 200 });
                 
             } else {
                 return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
