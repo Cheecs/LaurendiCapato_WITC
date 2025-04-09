@@ -38,20 +38,6 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
-app.get('/api/users', (req, res) => {
-
-    let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?";
-
-    db.query(query, ["test@gmail.com", "7815696ecbf1c96e6894b779456d330e"], (err, results) => {
-
-        if(err)
-            res.send(err);
-        else    
-            res.send(results);
-    });
-
-})
-
 app.post('/api/login', (req, res) => {
 
     let { mail, pwd } = req.body;
@@ -85,5 +71,5 @@ function UserExists(mail:string, pwd:string):any{
             return {"loginInfo": results, "status":200};
     });
 
-    return {"loginInfo": "An error occured during the login, please try again", "status":500};
+    return {"loginInfo": `An error occured during the login, please try again. SQL: ${query}`, "status":500};
 }
