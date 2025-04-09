@@ -38,8 +38,7 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
-// Esempio: recupera dati da una tabella
-app.get('/api/utenti', (req, res) => {
+app.post('/api/utenti', (req, res) => {
 
     let { mail, pwd } = req.body;
     let login = UserExists(mail, pwd);
