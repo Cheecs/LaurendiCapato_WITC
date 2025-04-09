@@ -40,7 +40,7 @@ app.get('/api', (req, res) => {
 
 app.get('/api/users', (req, res) => {
 
-    let query = "SELECT * FORM utenti WHERE Nickname = ?";
+    let query = "SELECT * FROM utenti WHERE Nickname = ?";
 
     db.query(query, ["test"], (err, results) => {
 
