@@ -38,6 +38,20 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
+app.get('/api/users', (req, res) => {
+
+    let query = "SELECT * FORM utenti WHERE Nickname = ?";
+
+    db.query(query, ["test"], (err, results) => {
+
+        if(err)
+            res.send(err);
+        else    
+            res.send(results);
+    });
+
+})
+
 app.post('/api/login', (req, res) => {
 
     let { mail, pwd } = req.body;
