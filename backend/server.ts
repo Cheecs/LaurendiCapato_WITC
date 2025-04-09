@@ -71,5 +71,5 @@ function UserExists(mail:string, pwd:string):any{
             return {"loginInfo": results, "status":200};
     });
 
-    //return {"loginInfo": "An error occured during the login, please try again", "status":500};
+    return {"loginInfo": "An error occured during the login, please try again", "status":500};
 }
