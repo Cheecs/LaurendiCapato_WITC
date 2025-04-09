@@ -38,10 +38,10 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
 
     let { mail, pwd } = req.body;
-    let login = UserExists(mail, pwd);
+    let login = await UserExists(mail, pwd);
 
     if(login.status == 200)
     {
@@ -66,15 +66,15 @@ return new Promise((resolve, reject) => {
         db.query(query, [mail, pwd], (err, results) => {
 
             if (err)
-                return resolve({ "loginInfo": "An error occured during the login", "status": 500 });
+                return resolve({ "loginInfo": "Errore del server", "status": 500 });
             
             if (results) {
 
                 return resolve({ "loginInfo": results, "status": 200 });
-
+                
             } else {
                 return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
             }
-            
         });
-    });}
+    });
+}
