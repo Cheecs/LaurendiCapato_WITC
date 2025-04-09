@@ -1,29 +1,27 @@
-window.addEventListener("load", function(){
-
-    document.getElementById("showPwd").checked = false;
-
+$(document).ready(function() {
+    $("#showPwd").prop("checked", false);
     handleShowHidePwd();
+  
+    $("#signInForm").submit(function(event) {
 
-    document.getElementById("signInForm").addEventListener("submit", function(event){
+      event.preventDefault();
+  
+      let email = $("#email").val();
+      let pwd = $("#password").val();
+      let hasPwd = CryptoJS.MD5(pwd).toString();
+  
+      let reqBody = {
+        mail: email,
+        pwd: hasPwd
+      };
+  
+      let request = inviaRichiesta("POST", "/api/login", reqBody);
+      request.fail(errore);
+      request.done(function(data) {
 
-        event.preventDefault();
+        console.log(`Logged in: \\n ${data}`);
+        
+      });
 
-        let email = document.getElementById("email").value;
-        let pwd = document.getElementById("password").value;
-
-        let hasPwd = CryptoJS.MD5(pwd).toString();
-
-        let reqBody = {
-            mail: email,
-            pwd: hasPwd
-        };
-
-        let request = inviaRichiesta("POST", "/api/login", reqBody);
-        request.fail(errore)
-        request.done(function(data){
-            console.log(`Logged in: \\n ${data}`);
-        });
-
-    })
-
-});
+    });
+  });
