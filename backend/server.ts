@@ -64,10 +64,11 @@ function UserExists(mail:string, pwd:string):any{
 
     db.query(query, [mail, pwd], (err, results) => {
 
-        if (err) {
-            return {"loginInfo": "User not found, wrong credentials", "status":404};
-        }
+        console.log(query);
 
+        if (err) 
+            return {"loginInfo": "User not found, wrong credentials", "status":404};
+        
         if(results)
             return {"loginInfo": results, "status":200};
     });
