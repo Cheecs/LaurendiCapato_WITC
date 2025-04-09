@@ -40,9 +40,9 @@ app.get('/api', (req, res) => {
 
 app.get('/api/users', (req, res) => {
 
-    let query = "SELECT * FROM utenti WHERE Nickname = ?";
+    let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?";
 
-    db.query(query, ["test"], (err, results) => {
+    db.query(query, ["test@gmail.com", "7815696ecbf1c96e6894b779456d330e"], (err, results) => {
 
         if(err)
             res.send(err);
