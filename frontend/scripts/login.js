@@ -14,12 +14,12 @@ $(document).ready(function() {
         mail: email,
         pwd: hasPwd
       };
-        
+
       let request = inviaRichiesta("POST", "/api/login", reqBody);
       request.fail(errore);
       request.done(function(data) {
 
-        console.log(`Logged in: \\n ${data}`);
+        console.log(`Logged in: \\n ${data.json()}`);
 
       });
 
