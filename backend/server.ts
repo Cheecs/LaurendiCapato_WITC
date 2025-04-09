@@ -40,7 +40,9 @@ app.get('/api', (req, res) => {
 
 app.post('/api/login', (req, res) => {
 
-    let { mail, pwd } = req.body;
+    let mail = req.body.mail;
+    let pwd = req.body.pwd;
+
     let login = UserExists(mail, pwd);
 
     if(login.status == 200)
