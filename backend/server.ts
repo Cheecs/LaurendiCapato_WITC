@@ -45,7 +45,7 @@ app.post('/api/login', async (req, res) => {
 
     if(login.status == 200)
     {
-        res.status(login.status).send({
+        res.status(login.status).json({
             data: login.loginInfo
         });
     }
