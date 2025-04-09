@@ -70,7 +70,7 @@ return new Promise((resolve, reject) => {
             
             if (results) {
 
-                return resolve({ "loginInfo": results, "status": 200 });
+                return resolve({ "loginInfo": JSON.stringify(results), "status": 200 });
                 
             } else {
                 return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
