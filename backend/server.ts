@@ -38,7 +38,7 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
-app.post('/api/utenti', (req, res) => {
+app.post('/api/login', (req, res) => {
 
     let { mail, pwd } = req.body;
     let login = UserExists(mail, pwd);
