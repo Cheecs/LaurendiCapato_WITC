@@ -14,9 +14,7 @@ $(document).ready(function() {
         mail: email,
         pwd: hasPwd
       };
-
-      console.log(reqBody);
-
+      
       let request = inviaRichiesta("POST", "/api/login", reqBody);
       request.fail(errore);
       request.done(function(data) {
