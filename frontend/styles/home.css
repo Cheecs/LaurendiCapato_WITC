@@ -95,7 +95,10 @@ h3 {
     transition: 0.1s; */
     animation-name: linkAnimation;
     animation-duration: 0.3s;
+}
 
+.nav-link:active{
+    color: white;
 }
 
 #btnGetStarted {
