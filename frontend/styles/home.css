@@ -262,6 +262,11 @@ h3 {
     justify-content: center;
 }
 
+/* #containerShortInfo{
+    width: 1000px;
+    height: auto;
+} */
+
 /* codice per ilrating */
 
 @keyframes slideDown {
@@ -528,4 +533,31 @@ a.text-white {
 
 a.text-white:hover {
     opacity: 0.7;
+}
+
+@media screen and (max-width: 931px) {
+
+    #sfondo{
+        margin-top: -600px;
+    }
+
+    #getStartedDiv {
+
+        background-color: transparent;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+
+        text-align: center;    
+    }
+
+    .alignCards{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
 }
