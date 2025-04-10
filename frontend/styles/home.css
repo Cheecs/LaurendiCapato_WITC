@@ -552,6 +552,23 @@ a.text-white:hover {
 
         text-align: center;    
     }
+}
+
+@media screen and (max-width: 1004px) {
+
+    #containerRev{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #containerRev{
+        width: 205%;
+    }
+
+    #showReview{
+        margin-bottom: 10px;
+    }
 
     .alignCards{
         display: flex;
@@ -560,21 +577,13 @@ a.text-white:hover {
         align-items: center;
     }
 
-    #containerRev{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
     .slideLeft{
-        animation: fadeOut 0.3s ease;
+        animation: fadeOut 0.5s ease;
         display: none;
     }
 
     .slideCenter{
-        animation: fadeIn 0.3 ease;
+        animation: fadeIn 0.5s ease;
         display: block;
     }
-
 }
