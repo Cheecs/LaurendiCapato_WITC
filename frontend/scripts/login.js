@@ -15,6 +15,8 @@ $(document).ready(function() {
         pwd: hasPwd
       };
 
+      console.log(reqBody)
+
       let request = inviaRichiesta("POST", "/api/login", reqBody);
       request.fail(errore);
       request.done(function(data) {

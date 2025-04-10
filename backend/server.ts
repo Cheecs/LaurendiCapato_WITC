@@ -63,6 +63,7 @@ app.post('/api/login', async (req, res) => {
 function UserExists(mail:string, pwd:string):Promise<any>{
 
 return new Promise((resolve, reject) => {
+    
         let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?";
 
         db.query(query, [mail, pwd], (err, results) => {
