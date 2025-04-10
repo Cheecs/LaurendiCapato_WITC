@@ -8,13 +8,14 @@ import mysql from 'mysql2';
 // DEBUG THE ENVS
 dotenv.config();
 const PORT = process.env.PORT || 4000;
-const PWD = process.env.passwd ;
+const PWD = process.env.DB_passwd ;
+const SERVER = process.env.DB_host;
 
 let app = express();
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: 'srv-captain--db-witc-db',
+    host: SERVER,
     user: 'root',
     password: PWD,  
     database: 'witc'
@@ -63,7 +64,7 @@ app.post('/api/login', async (req, res) => {
 function UserExists(mail:string, pwd:string):Promise<any>{
 
 return new Promise((resolve, reject) => {
-    
+
         let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?";
 
         db.query(query, [mail, pwd], (err, results) => {
