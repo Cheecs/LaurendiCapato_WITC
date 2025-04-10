@@ -20,6 +20,7 @@ $(document).ready(function() {
       request.done(function(data) {
 
         console.log(`Logged in:`, data.data);
+        window.open("./product.html")
 
       });
 

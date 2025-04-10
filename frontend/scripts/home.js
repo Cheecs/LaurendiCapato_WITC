@@ -34,22 +34,6 @@ function UIsetup(){
     $('#year').text(new Date().getFullYear());
 }
 
-function checkWindow(){
-
-    if ($(window).width() <= 1004) {
-
-        $("#infoCards").removeClass("col-4");
-        $("#infoCards").addClass("col-10");
-
-    } else {
-
-        $("#infoCards").removeClass("col-10");
-        $("#infoCards").addClass("col-4");
-
-    }
-}
-
-
 function handleSeeMoreAnimation(){
 
     const containerShortInfo = $("#containerShortInfo");
@@ -169,4 +153,19 @@ function handleSeeMoreAnimation(){
     }
 
 
+}
+
+function checkWindow(){
+
+    if ($(window).width() <= 1004) {
+
+        $("#infoCards").removeClass("col-4");
+        $("#infoCards").addClass("col-10");
+
+    } else {
+
+        $("#infoCards").removeClass("col-10");
+        $("#infoCards").addClass("col-4");
+
+    }
 }
