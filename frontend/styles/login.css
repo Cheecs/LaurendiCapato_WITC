@@ -7,7 +7,8 @@ html,
 #mainDiv {
     display: flex;
     flex-direction: row;
-    background-image: linear-gradient(to right, #050b0e 38%, white 78%);
+    /* background-image: linear-gradient(to right, #050b0e 38%, white 78%); */
+    background-color: #050b0e;
 
 }
 
@@ -22,7 +23,8 @@ html,
     height: min-content;
     margin: auto;
 
-    box-shadow: 8px 7px 0px 1px #050913;
+    box-shadow: 0px 0px 5px 1px rgb(51, 132, 103);
+
 }
 
 @keyframes hideAlert{
@@ -71,8 +73,8 @@ html,
 
 .form-container {
     width: 320px;
-    border-radius: 0.75rem;
-    background-color: #000c3f;
+    border-radius: 15px;
+    background-color: #171E21;
     padding: 2rem;
     padding-bottom: 0rem;
     color: rgba(243, 244, 246, 1);
@@ -104,15 +106,15 @@ html,
 .input-group input {
     width: 100%;
     border-radius: 0.375rem;
-    border: 1px solid #3b4856;
+    border: 1px solid rgba(51, 132, 104, 0.397);
     outline: 0;
-    background-color: #010828;
+    background-color: #273339;
     padding: 0.75rem 1rem;
     color: rgba(243, 244, 246, 1);
 }
 
 .input-group input:focus {
-    border-color: #6c94bc;
+    border-color: rgb(51, 132, 103);
 }
 
 .linkSignUp{
@@ -128,7 +130,7 @@ html,
 .sign {
     display: block;
     width: 100%;
-    background-color: #d8e9e6;
+    background-color: #00ffd0;
     padding: 0.75rem;
     text-align: center;
     color: rgba(17, 24, 39, 1);

@@ -149,7 +149,8 @@ h3 {
 /* What is it */
 
 .cardShortInfo{
-    background-color: #455a6454;
+    
+    background-color: #37474F;
     color: white;
 }
 
@@ -174,7 +175,7 @@ h3 {
 #seeMoreBtn{
     border: 1px solid transparent;
     border-radius: 20px;
-    background-color: #455A64;
+    background-color: #455a6454;
     color: white;
 }
 
@@ -186,7 +187,7 @@ h3 {
 #infoShort{
     border: 1px solid #1b2327;
     border-radius: 10px;
-    background-color: #37474F;
+    background-color: #455a6454;
     color: white;
 }
 
