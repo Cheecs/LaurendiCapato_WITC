@@ -306,8 +306,8 @@ h3 {
 
 #containerRev{
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
-
 }
 
 #showReview{
@@ -538,7 +538,7 @@ a.text-white:hover {
 @media screen and (max-width: 931px) {
 
     #sfondo{
-        margin-top: -600px;
+        margin-top: -700px;
     }
 
     #getStartedDiv {
@@ -559,5 +559,22 @@ a.text-white:hover {
         justify-content: center;
         align-items: center;
     }
-    
+
+    #containerRev{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .slideLeft{
+        animation: fadeOut 0.3s ease;
+        display: none;
+    }
+
+    .slideCenter{
+        animation: fadeIn 0.3 ease;
+        display: block;
+    }
+
 }
