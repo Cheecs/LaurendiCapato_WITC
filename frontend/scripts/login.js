@@ -24,7 +24,8 @@ $(document).ready(function() {
       });
       request.done(function(data) {
 
-        console.log(`Logged in:`, data.data);
+        // salvare i dati dell'utente
+
         window.open("./product.html", "_self")
 
       });
