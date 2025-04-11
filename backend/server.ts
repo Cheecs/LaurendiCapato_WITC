@@ -58,7 +58,9 @@ app.post('/api/login', async (req, res) => {
     }
     else if(login.status == 500)
     {
-        res.status(login.status).send(login.loginInfo);
+        res.status(login.status).json({
+            msg: login.loginInfo
+        });
     }
 
 });
