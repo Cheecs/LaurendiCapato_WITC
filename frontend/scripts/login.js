@@ -19,8 +19,9 @@ $(document).ready(function() {
       
       request.fail((err) => {
 
-        //showAlert(err.responseJson.msg);
+        showAlert(err.responseJSON.msg);
         console.log(err);
+        console.log(err.responseJSON.msg);
 
       });
       request.done(function(data) {
