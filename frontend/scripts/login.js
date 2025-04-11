@@ -18,7 +18,7 @@ $(document).ready(function() {
       let request = inviaRichiesta("POST", "/api/login", reqBody);
       request.fail((err) => {
 
-        showAlert(err);
+        showAlert(err.data);
 
       });
       request.done(function(data) {
