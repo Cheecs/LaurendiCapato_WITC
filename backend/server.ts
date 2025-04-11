@@ -94,7 +94,7 @@ app.post('/api/signup', async (req, res) => {
     }
     else if(login.status == 200)
     {
-        res.status(login.status).json({
+        res.status(409).json({
             msg: "User already exists, please Login"
         });
     }
