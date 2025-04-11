@@ -18,8 +18,8 @@ $(document).ready(function() {
       let request = inviaRichiesta("POST", "/api/login", reqBody);
       request.fail((err) => {
 
-        showAlert(err.loginInfo);
-        console.log(err.loginInfo);
+        showAlert(err.msg);
+        console.log(err.msg);
 
       });
       request.done(function(data) {
