@@ -26,8 +26,8 @@ function showAlert(msg){
 
         divAlert.addClass("hideAlert");
         divAlert.removeClass("showAlert");
-        
-    }, 4000);
+
+    }, 6000);
 }
 
 function handleShowHidePwd(){
