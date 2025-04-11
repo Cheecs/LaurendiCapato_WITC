@@ -7,8 +7,16 @@ html,
 #mainDiv {
     display: flex;
     flex-direction: row;
-    background-image: linear-gradient(to right, #050913 38%, white 78%);
+    /* background-image: linear-gradient(to right, #050b0e 38%, white 78%); */
+    background-color: #050b0e;
 
+}
+
+#containerSignUp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
 }
 
 #loginDiv {
