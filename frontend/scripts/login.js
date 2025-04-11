@@ -19,6 +19,7 @@ $(document).ready(function() {
       request.fail((err) => {
 
         showAlert(err.loginInfo);
+        console.log(err.loginInfo);
 
       });
       request.done(function(data) {
