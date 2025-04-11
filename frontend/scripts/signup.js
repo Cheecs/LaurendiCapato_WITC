@@ -1,7 +1,37 @@
-window.addEventListener("load", function(){
+$(document).ready(function() {
 
-    document.getElementById("showPwd").checked = false;
+    $("#showPwd").prop("checked", false);
 
     handleShowHidePwd();
 
+    $("#signInForm").submit(function(event) {
+
+        event.preventDefault();
+    
+        let username = $("@username").val();
+        let email = $("#email").val();
+        let pwd = $("#password").val();
+        let hasPwd = CryptoJS.MD5(pwd).toString();
+    
+        let reqBody = {
+          mail: email,
+          usrName: username,
+          pwd: hasPwd
+        };
+        
+        let request = inviaRichiesta("POST", "/api/signup", reqBody);
+        
+        request.fail((err) => {
+  
+          showAlert(err.responseJSON.msg);
+  
+        });
+        request.done(function(data) {
+  
+          console.log(`Logged in:`, data.data);
+        //   window.open("./product.html", "_self")
+  
+        });
+  
+      });
 });

@@ -39,6 +39,8 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
+/* ENDPOINT UTENTI */ 
+
 app.post('/api/login', async (req, res) => {
 
     let { mail, pwd } = req.body;
@@ -65,6 +67,49 @@ app.post('/api/login', async (req, res) => {
 
 });
 
+app.post('/api/signup', async (req, res) => {
+
+    let { mail, pwd, usrName } = req.body;
+    let login = await UserExists(mail, pwd);
+    let query = "INSERT INTO utenti(Nickname, Email, Password, Img) VALUES(?, ?, ?, null)";
+
+    if(login.status == 404)
+    {
+        db.query(query, [usrName, mail, pwd], (err, results) => {
+            
+            if(err)
+            {
+                res.status(500).json({
+                    msg: "Server error, please try again"
+                });
+            }
+
+            if(results)
+            {
+                res.status(200).json({
+                    data: results
+                });
+            }
+        })
+    }
+    else if(login.status == 200)
+    {
+        res.status(login.status).json({
+            msg: "User already exists, please Login"
+        });
+    }
+    else if(login.status == 500)
+    {
+        res.status(login.status).json({
+            msg: login.loginInfo
+        });
+    }
+
+});
+
+/* ------------------------------- */
+
+
 function UserExists(mail:string, pwd:string):Promise<any>{
 
     let rows:any;
@@ -78,7 +123,7 @@ function UserExists(mail:string, pwd:string):Promise<any>{
             rows = results as any[];
             console.log(rows);
             if (err)
-                return resolve({ "loginInfo": "Errore del server", "status": 500 });
+                return resolve({ "loginInfo": "Server error, please try again", "status": 500 });
 
             if (rows.length > 0) {
 
