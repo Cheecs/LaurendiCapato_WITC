@@ -52,9 +52,7 @@ app.post('/api/login', async (req, res) => {
     }
     else if(login.status == 404)
     {
-            res.status(login.status).json({
-                msg: login.loginInfo[0]
-            });
+            res.status(login.status).send(login.loginInfo);
     }
     else if(login.status == 500)
     {
@@ -74,7 +72,7 @@ function UserExists(mail:string, pwd:string):Promise<any>{
         db.query(query, [mail, pwd], (err, results) => {
 
             rows = results as any[];
-
+            console.log(rows);
             if (err)
                 return resolve({ "loginInfo": "Errore del server", "status": 500 });
 
