@@ -53,7 +53,7 @@ app.post('/api/login', async (req, res) => {
     else if(login.status == 404)
     {
             res.status(login.status).json({
-                data: login.loginInfo[0]
+                data: login.loginInfo
             });
     }
     else if(login.status == 500)
