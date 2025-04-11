@@ -67,19 +67,23 @@ app.post('/api/login', async (req, res) => {
 
 function UserExists(mail:string, pwd:string):Promise<any>{
 
-return new Promise((resolve, reject) => {
+    let rows:any;
+
+    return new Promise((resolve, reject) => {
 
         let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?";
 
         db.query(query, [mail, pwd], (err, results) => {
 
+            rows = results as any[];
+
             if (err)
                 return resolve({ "loginInfo": "Errore del server", "status": 500 });
-            
-            if (results) {
+
+            if (rows.length > 0) {
 
                 return resolve({ "loginInfo": results, "status": 200 });
-                
+
             } else {
                 return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
             }
