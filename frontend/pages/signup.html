@@ -20,10 +20,10 @@
 
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-        
+
     <!-- CryptJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    
+
     <script src="../scripts/utilities.js"></script>
     <script src="../scripts/signup.js"></script>
 </head>
@@ -40,46 +40,46 @@
             <h2 class="catchphrase ms-2">your Experience.</h2>
         </div>
         <h2 id="catchphrase2" class="m-3">Signup to begin your Experience.</h2>
-        <div  class="container" id="containerSignUp">       
-           <div class="form-container col-7" id="loginSignUp">
-            <p class="title">Register</p>
-            <form class="form needs-validation" id="signupForm">
-                <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" id="username" placeholder="Username" required>
-                </div>
-                <div class="input-group my-3">
-                    <label for="username">Email:</label>
-                    <input type="email" name="email" id="email" placeholder="Email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                </div>
-                <div class="form-check mt-2" id="divShowPwd">
-                    <input class="form-check-input mt-1" type="checkbox" value="" id="showPwd">
-                    <label class="form-check-label text-light ms-2" for="flexCheckDefault">
-                        Show password
-                    </label>
-                </div>
-                  
-                <hr>
-                <button class="sign">Sign Up</button>
-            </form>
-            <div id="divLinks">
-                <p class="linkLogin mt-2">Already have an account?
-                    <a rel="noopener noreferrer" href="login.html" class="linkLogin">Sign in</a>
+        <div class="container" id="containerSignUp">
+            <div class="form-container col-7" id="loginSignUp">
+                <p class="title">Register</p>
+                <form class="form needs-validation" id="signupForm">
+                    <div class="input-group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" placeholder="Username" required>
+                    </div>
+                    <div class="input-group my-3">
+                        <label for="username">Email:</label>
+                        <input type="email" name="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-check mt-2" id="divShowPwd">
+                        <input class="form-check-input mt-1" type="checkbox" value="" id="showPwd">
+                        <label class="form-check-label text-light ms-2" for="flexCheckDefault">
+                            Show password
+                        </label>
+                    </div>
+
+                    <hr>
+                    <button class="sign">Sign Up</button>
+                </form>
+                <div id="divLinks">
+                    <p class="linkLogin mt-2">Already have an account?
+                        <a rel="noopener noreferrer" href="login.html" class="linkLogin">Sign in</a>
                     <p>
                         <a href="home.html" class="noAccounlnk mt-1">continue without an account →</a>
                     </p>
-                </p>
+                    </p>
+                </div>
             </div>
             <div class="hideAlert alert alert-danger col-4 container mt-4" id="divAlert">
                 <strong>Error</strong>
                 <span id="errorMsg"></span>
             </div>
         </div>
-    </div>
     </div>
 </body>
 
