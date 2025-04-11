@@ -7,19 +7,245 @@ html,
 #mainDiv {
     display: flex;
     flex-direction: row;
-    background-image: linear-gradient(to right, #050913 38%, white 78%);
+    background-color: #050b0e;
 
 }
 
-#loginDiv {
+#containerSignUp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+#loginSignUp {
     height: min-content;
     margin: auto;
+    box-shadow: 0px 0px 5px 1px rgb(51, 132, 103);   
 
+}
 
-    box-shadow: 8px 7px 0px 1px #050913;
+  @keyframes animate {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+@keyframes hideAlert{
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.hideAlert{
+    animation: hideAlert 0.3s ease;
+    opacity: 0;
+}
+
+@keyframes showAlert{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.showAlert{
+    animation: showAlert 0.3s ease;
+    opacity: 1;
 }
 
 #mockupDiv {
+    color: white;
+
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.catchphrase {
+    font-size: 95px;
+    font-weight: 700;
+}
+
+.form-container {
+    width: 320px;
+    border-radius: 15px;
+    background-color: #171E21;
+    padding: 2rem;
+    padding-bottom: 0rem;
+    color: rgba(243, 244, 246, 1);
+}
+
+.title {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+
+.form {
+    margin-top: 1.5rem;
+}
+
+.input-group {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    color: #e6f4f1;
+    margin-bottom: 4px;
+}
+
+.input-group input {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(51, 132, 104, 0.397);
+    outline: 0;
+    background-color: #273339;
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+}
+
+.input-group input:focus {
+    border-color: rgb(51, 132, 103);
+}
+
+.linkLogin{
+    color: rgba(243, 244, 246, 1);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.signup a:hover {
+    text-decoration: underline #6c94bc;
+}
+
+.sign {
+    display: block;
+    width: 100%;
+    background-color: #00ffd0;
+    padding: 0.75rem;
+    text-align: center;
+    color: rgba(17, 24, 39, 1);
+    border: none;
+    border-radius: 0.375rem;
+    font-weight: 600;
+}
+
+.social-message {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.line {
+    height: 1px;
+    flex: 1 1 0%;
+    background-color: rgba(55, 65, 81, 1);
+}
+
+.social-message .message {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgba(156, 163, 175, 1);
+}
+
+.signup {
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgba(156, 163, 175, 1);
+}
+
+.noAccounlnk{
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1rem;
+    color: rgba(156, 163, 175, 1);
+    text-decoration: none;
+}
+
+.noAccounlnk:hover{
+    text-decoration: underline #6c94bc;
+}
+
+#divLinks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#catchphrase2 {
+    display: none;
+}
+
+#imgBackHome{
+    width: 40px;
+}
+
+#divBackHome{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position:absolute;
+}
+
+@media screen and (max-width: 1324px) {
+    #mainDiv {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        background-image: none;
+    }
+
+    #mockupDiv {
+        display: none;
+    }
+
+    #catchphrase2 {
+        display: block;
+        text-align: center;
+        font-weight: 700;
+        font-size: 70px;
+
+        color: linear-gradient(#081f1d, #306761);
+    }
+}
+
+#divShowPwd{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#showPwd{
+    background-color: transparent;
+    border: 1px solid #3b4856;
+}
+
+#showPwd:focus{
+    box-shadow: 0px 0px 10px 2px #010828;
+}
+
+/* #mockupDiv {
     color: white;
 
     height: 100%;
@@ -200,4 +426,4 @@ html,
 #showPwd:focus{
     box-shadow: 0px 0px 10px 2px #010828;
 }
-
+ */
