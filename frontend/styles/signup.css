@@ -21,37 +21,10 @@ html,
 #loginSignUp {
     height: min-content;
     margin: auto;
-    box-shadow: 0px 0px 5px 1px rgb(51, 132, 103);
-
-    
+    box-shadow: 0px 0px 5px 1px rgb(51, 132, 103);   
 
 }
 
-#loginSignUp::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 380px;
-    height: 420px;
-    background: linear-gradient(0deg, transparent, rgb(51, 132, 103), rgb(51, 132, 103));
-    transform-origin: bottom right;
-    animation: animate 6s linear infinite;
-  }
-  
-  #loginSignUp::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 380px;
-    height: 420px;
-    background: linear-gradient(0deg, transparent,rgb(51, 132, 103), rgb(51, 132, 103));
-    transform-origin: bottom right;
-    animation: animate 6s linear infinite;
-    animation-delay: -3s;
-  }
-  
   @keyframes animate {
     0% {
       transform: rotate(0deg);
