@@ -7,7 +7,7 @@ html,
 #mainDiv {
     display: flex;
     flex-direction: row;
-    background-color: pink;
+    background-color: #050b0e;
 
 }
 
