@@ -16,10 +16,11 @@ $(document).ready(function() {
       };
       
       let request = inviaRichiesta("POST", "/api/login", reqBody);
+      
       request.fail((err) => {
 
         showAlert(JSON.stringify(err.msg));
-        console.log(JSON.stringify(err.msg));
+        console.log(err);
 
       });
       request.done(function(data) {
