@@ -27,7 +27,7 @@ html,
 
 }
 
-#loginDiv::before {
+.box::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -39,7 +39,7 @@ html,
     animation: animate 6s linear infinite;
   }
   
-  #loginDiv::after {
+  .box::after {
     content: '';
     position: absolute;
     top: -50%;
