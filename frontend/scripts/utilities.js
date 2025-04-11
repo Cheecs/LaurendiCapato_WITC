@@ -13,6 +13,23 @@ function handleShowHideMenu(){
     });
 }
 
+function showAlert(msg){
+
+    let divAlert = $("#divAlert");
+
+    $("#errorMsg").text(msg);
+
+    divAlert.removeClass("hideAlert");
+    divAlert.addClass("showAlert");
+
+    setTimeout(function(){
+
+        divAlert.addClass("hideAlert");
+        divAlert.removeClass("showAlert");
+        
+    }, 4000);
+}
+
 function handleShowHidePwd(){
     
     const showPwd = document.getElementById("showPwd");
