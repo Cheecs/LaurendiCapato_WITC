@@ -32,7 +32,7 @@ $(document).ready(function() {
             
             // salvare i dati utente
 
-            sendMail(email, usrName, "Registrazione avvenuta con successo! \n Siamo felici di accoglierti nella famiglia di WITC");
+            sendMail(email, username, "Registrazione avvenuta con successo! \n Siamo felici di accoglierti nella famiglia di WITC");
             window.open("./product.html", "_self")
   
         });
