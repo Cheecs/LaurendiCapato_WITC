@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     handleShowHidePwd();
 
-    $("#signInForm").submit(function(event) {
+    $("#signupForm").submit(function(event) {
 
         event.preventDefault();
     
@@ -18,6 +18,8 @@ $(document).ready(function() {
           usrName: username,
           pwd: hasPwd
         };
+
+        console.log(reqBody);
         
         let request = inviaRichiesta("POST", "/api/signup", reqBody);
         
