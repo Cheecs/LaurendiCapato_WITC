@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         event.preventDefault();
     
-        let username = $("@username").val();
+        let username = $("#username").val();
         let email = $("#email").val();
         let pwd = $("#password").val();
         let hasPwd = CryptoJS.MD5(pwd).toString();
