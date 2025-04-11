@@ -19,7 +19,7 @@ $(document).ready(function() {
       request.fail((err) => {
 
         showAlert(err.msg);
-        console.log(err.msg);
+        console.log(err.msg.json());
 
       });
       request.done(function(data) {
