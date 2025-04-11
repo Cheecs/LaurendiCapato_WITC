@@ -19,14 +19,6 @@ html,
     align-self: center;
 }
 
-#loginDiv {
-    height: min-content;
-    margin: auto;
-
-
-    box-shadow: 8px 7px 0px 1px #050913;
-}
-
 #mockupDiv {
     color: white;
 
