@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import mysql from 'mysql2';
+import nodemailer from 'nodemailer'
 
 //Config the env from the ENVIRONMENT
 
@@ -13,6 +14,17 @@ const SERVER = process.env.DB_host;
 
 let app = express();
 app.use(express.json());
+
+// Configure the mailer service
+const mailerService = nodemailer.createTransport({
+    host: process.env.SMTP_HOST, // e.g., 'smtp.gmail.com'
+    port: parseInt(process.env.SMTP_PORT || '587'), // e.g., 587 for TLS
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: process.env.SMTP_USER, // SMTP username
+        pass: process.env.SMTP_PASS, // SMTP password
+    },
+});
 
 const db = mysql.createConnection({
     host: SERVER,
@@ -72,7 +84,7 @@ app.post('/api/signup', async (req, res) => {
     let { mail, pwd, usrName } = req.body;
     let login = await UserExists(mail, pwd);
     let query = "INSERT INTO utenti(Nickname, Email, Password, Img) VALUES(?, ?, ?, null)";
-
+    
     if(login.status == 404)
     {
         db.query(query, [usrName, mail, pwd], (err, results) => {
@@ -86,8 +98,26 @@ app.post('/api/signup', async (req, res) => {
 
             if(results)
             {
-                res.status(200).json({
-                    data: results
+                // Send a signup email
+                
+                mailerService.sendMail({
+                    to: mail, // recipient's email
+                    from: process.env.SMTP_FROM || 'noreply@witc.connectify.it', // sender address
+                    subject: 'Welcome to WITC!', // Subject line
+                    html: `<p>Ciao ${usrName}!</p>
+                    <p style="padding: 12px;">Registrazione avvenuta con successo! \n Siamo felici di accoglierti nella famiglia di WITC</p>
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: end; margin-right:30px; ">
+                    <div style="border:1px solid lightgray; padding:10; border-radius:15px;">
+                        <p style="margin-top:-1;">Team di WITC</p>
+                    <img style="height:100; width: 100; margin-top: -20; margin-bottom: -15;" src="https://witc.connectify.it/img/Logo_WITC_NoBG.png" />
+                    </div>
+                    </div>`, // HTML body
+                }, (emailErr, info) => {
+
+                    res.status(200).json({
+                        data: results,
+                    });
+                    
                 });
             }
         })
