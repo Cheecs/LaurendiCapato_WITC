@@ -114,10 +114,13 @@ app.post('/api/signup', async (req, res) => {
                     </div>`, // HTML body
                 }, (emailErr, info) => {
 
+                    if (emailErr) {
+                        console.error('Error sending email:', emailErr);
+                    }
+
                     res.status(200).json({
                         data: results,
                     });
-                    
                 });
             }
         })
