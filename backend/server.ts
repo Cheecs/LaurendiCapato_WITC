@@ -65,7 +65,8 @@ app.get('/api', (req, res) => {
 app.post('/api/login', async (req, res) => {
 
     let { mail, pwd } = req.body;
-    let login = await UserExists(mail, pwd);
+    let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
+    let login = await UserExists(mail, pwd, query);
 
     if(login.status == 200)
     {
@@ -91,8 +92,9 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/signup', async (req, res) => {
 
     let { mail, pwd, usrName } = req.body;
-    let login = await UserExists(mail, pwd);
     let query = "INSERT INTO utenti(Nickname, Email, Password, Img) VALUES(?, ?, ?, null)";
+    let checkUser = "SELECT * FROM utenti WHERE Email = ?"
+    let login = await UserExists(mail, "", checkUser);
     
     if(login.status == 404)
     {
@@ -151,16 +153,19 @@ app.post('/api/signup', async (req, res) => {
 
 /* ------------------------------- */
 
-
-function UserExists(mail:string, pwd:string):Promise<any>{
+function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 
     let rows:any;
+    let params: string[];
+
+    if(pwd.trim() != "")
+        params = [mail, pwd];
+    else
+        params = [mail];
 
     return new Promise((resolve, reject) => {
 
-        let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?";
-
-        db.query(query, [mail, pwd], (err, results) => {
+        db.query(query, params, (err, results) => {
 
             rows = results as any[];
             console.log(rows);
