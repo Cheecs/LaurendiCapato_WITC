@@ -97,3 +97,75 @@ h3 {
     animation-name: linkAnimation;
     animation-duration: 0.3s;
 }
+
+#uploadFileContainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#sfondo{
+    width: 100%;
+    height: auto;
+    position:absolute;
+    z-index: 0;
+    transform: rotate(180deg);
+
+    margin-top: -400px;
+}
+
+/* From Uiverse.io by Yaya12085 */
+.custum-file-upload {
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #2a373c79;
+    background-color: #455a6454;   
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
+}
+
+#iconContainer{
+    border: 3px dashed #2a373c79;
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 931px) {
+
+    #sfondo{
+        margin-top: -180px;
+    }
+}
+
+.custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+    height: 80px;
+    fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custum-file-upload .text span {
+    font-weight: 400;
+    color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload input {
+    display: none;
+}
