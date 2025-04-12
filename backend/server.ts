@@ -164,15 +164,18 @@ function UserExists(mail:string, pwd:string):Promise<any>{
 
             rows = results as any[];
             console.log(rows);
+
             if (err)
                 return resolve({ "loginInfo": "Server error, please try again", "status": 500 });
+            else
+            {
+                if (rows.length > 0) {
 
-            if (rows.length > 0) {
-
-                return resolve({ "loginInfo": results, "status": 200 });
-
-            } else {
-                return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
+                    return resolve({ "loginInfo": results, "status": 200 });
+    
+                } else {
+                    return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
+                }
             }
         });
     });
