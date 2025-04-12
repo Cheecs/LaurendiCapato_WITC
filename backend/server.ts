@@ -25,6 +25,15 @@ const mailerService = nodemailer.createTransport({
         pass: process.env.SMTP_PASS, // SMTP password
     },
 });
+console.log({
+    host: process.env.SMTP_HOST, // e.g., 'smtp.gmail.com'
+    port: parseInt(process.env.SMTP_PORT || '587'), // e.g., 587 for TLS
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: process.env.SMTP_USER, // SMTP username
+        pass: process.env.SMTP_PASS, // SMTP password
+    },
+})
 
 const db = mysql.createConnection({
     host: SERVER,
