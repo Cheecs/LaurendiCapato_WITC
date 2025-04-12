@@ -2,8 +2,6 @@ $(document).ready(function() {
 
     $("#showPwd").prop("checked", false);
 
-    emailjs.init({ publicKey: "xOPSL_1APpO9HNhWZ" });
-
     handleShowHidePwd();
 
     $("#signupForm").submit(function(event) {
@@ -33,29 +31,9 @@ $(document).ready(function() {
             // salvare i dati utente
 
             console.log(data.data);
-
-            sendMail(email, username, "Registrazione avvenuta con successo! \n Siamo felici di accoglierti nella famiglia di WITC");
             window.open("./product.html", "_self");
   
         });
   
       });
 });
-
-function sendMail(mail, name, msg){
-    
-    let templateParams = {
-        mittente: mail, 
-        to_name: name, 
-        message: msg, 
-    };
-
-    emailjs.send('service_cgo89mc', 'template_lwgxxts', templateParams).then(
-        (response) => {
-            console.log('SUCCESS!');
-        },
-        (error) => {
-            console.log(`ERROR: ${error.message}`);
-        },
-    );
-}
