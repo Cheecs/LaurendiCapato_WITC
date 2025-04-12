@@ -133,7 +133,7 @@ h3 {
 }
 
 #iconContainer{
-    border: 3px dashed #2a373c79;
+    border: 3px dashed rgba(198, 198, 198, 0.373);
     border-radius: 15px;
 }
 
@@ -152,7 +152,7 @@ h3 {
 
 .custum-file-upload .icon svg {
     height: 80px;
-    fill: rgba(75, 85, 99, 1);
+    fill: rgb(198, 198, 198);
 }
 
 .custum-file-upload .text {
@@ -163,7 +163,7 @@ h3 {
 
 .custum-file-upload .text span {
     font-weight: 400;
-    color: rgba(75, 85, 99, 1);
+    color: rgb(198, 198, 198);
 }
 
 .custum-file-upload input {

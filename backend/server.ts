@@ -116,9 +116,9 @@ app.post('/api/signup', async (req, res) => {
                     html: `<p>Ciao ${usrName}!</p>
                     <p style="padding: 12px;">Registrazione avvenuta con successo! \n Siamo felici di accoglierti nella famiglia di WITC</p>
                     <div style="display: flex; flex-direction: column; justify-content: center; align-items: end; margin-right:30px; ">
-                    <div style="border:1px solid lightgray; padding:10; border-radius:15px;">
+                    <div style="border:1px solid lightgray; padding:10px; border-radius:15px;">
                         <p style="margin-top:-1;">Team di WITC</p>
-                    <img style="height:100; width: 100; margin-top: -20; margin-bottom: -15;" src="https://witc.connectify.it/img/Logo_WITC_NoBG.png" />
+                    <img style="height:100px; width: 100px; margin-top: -20px; margin-bottom: -15px;" src="https://witc.connectify.it/img/Logo_WITC_NoBG.png" />
                     </div>
                     </div>`, // HTML body
                 }, (emailErr, info) => {
