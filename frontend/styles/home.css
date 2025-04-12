@@ -150,7 +150,10 @@ h3 {
 
 .cardShortInfo{
     
-    background-color: #37474F;
+    background: rgba(255, 255, 255, 0.138); /* Sfondo bianco semi-trasparente */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombra leggera (opzionale) */
+    backdrop-filter: blur(10px); /* Effetto sfocatura dello sfondo */
+    -webkit-backdrop-filter: blur(10px); /* Per browser Safari */
     color: white;
 }
 
