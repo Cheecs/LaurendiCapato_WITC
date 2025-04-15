@@ -172,4 +172,5 @@ h3 {
 
 table{
     z-index: 3;
+    position: relative;
 }
