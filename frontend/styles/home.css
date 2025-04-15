@@ -100,10 +100,6 @@ h3 {
 
 #btnGetStarted {
     background-color: #00ffd0;
-    /*box-shadow: 0px 0px 20px 0px #24e41e; */
-
-    /* background-image: linear-gradient(to bottom right, #ec771d, #1888bb 60%, #e1dc5b); */
-    /* background-image: linear-gradient(to bottom right,#1888bb, #6ebd33 70%, #e1dc5b); */
     box-shadow: 0px 0px 3px 0px #00ffd071;
     border: 0px;
     color: #050913;
