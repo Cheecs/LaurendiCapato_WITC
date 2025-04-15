@@ -169,3 +169,7 @@ h3 {
 .custum-file-upload input {
     display: none;
 }
+
+table{
+    z-index: 3;
+}
