@@ -25,6 +25,7 @@ const mailerService = nodemailer.createTransport({
         pass: process.env.SMTP_PASS, // SMTP password
     },
 });
+
 console.log({
     host: process.env.SMTP_HOST, // e.g., 'smtp.gmail.com'
     port: parseInt(process.env.SMTP_PORT || '587'), // e.g., 587 for TLS
@@ -60,8 +61,9 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
-/* ENDPOINT UTENTI */ 
+/* -- ENDPOINT UTENTI -- */ 
 
+// Login
 app.post('/api/login', async (req, res) => {
 
     let { mail, pwd } = req.body;
@@ -89,6 +91,7 @@ app.post('/api/login', async (req, res) => {
 
 });
 
+// registrazione
 app.post('/api/signup', async (req, res) => {
 
     let { mail, pwd, usrName } = req.body;
@@ -174,13 +177,10 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
                 return resolve({ "loginInfo": "Server error, please try again", "status": 500 });
             else
             {
-                if (rows.length > 0) {
-
+                if (rows.length > 0) 
                     return resolve({ "loginInfo": results, "status": 200 });
-    
-                } else {
+                else
                     return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
-                }
             }
         });
     });
