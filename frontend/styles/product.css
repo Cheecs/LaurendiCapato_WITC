@@ -101,6 +101,8 @@ h3 {
 #uploadFileContainer{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     position: relative;
 }
 
