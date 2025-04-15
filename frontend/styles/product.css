@@ -171,3 +171,241 @@ h3 {
 .custum-file-upload input {
     display: none;
 }
+
+#divRev {
+    border: 1px solid rgba(51, 132, 104, 0.562);
+    border-radius: 15px;
+    box-shadow: 0px 0px 35px 1px rgb(51, 132, 103);
+    background-color: #050b0e;
+}
+
+#containerRev{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#showReview{
+    background-color: #050b0e;
+    border: 1px solid #27292a;
+    border-radius: 15px;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#divReviews{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 0.3rem;
+    --stroke: #666;
+    --fill: #00ffd0;
+    align-items: center;
+}
+
+.rating input {
+    appearance: unset;
+}
+
+.rating label {
+    cursor: pointer;
+}
+
+.rating svg {
+    width: 2rem;
+    height: 2rem;
+    overflow: visible;
+    fill: transparent;
+    stroke: var(--stroke);
+    stroke-linejoin: bevel;
+    stroke-dasharray: 12;
+    animation: idle 4s linear infinite;
+    transition: stroke 0.2s, fill 0.5s;
+}
+
+@keyframes idle {
+    from {
+        stroke-dashoffset: 24;
+    }
+}
+
+.rating label:hover svg {
+    stroke: var(--fill);
+}
+
+.rating input:checked~label svg {
+    transition: 0s;
+    animation: idle 4s linear infinite, yippee 0.75s backwards;
+    fill: var(--fill);
+    stroke: var(--fill);
+    stroke-opacity: 0;
+    stroke-dasharray: 0;
+    stroke-linejoin: miter;
+    stroke-width: 8px;
+}
+
+@keyframes yippee {
+    0% {
+        transform: scale(1);
+        fill: var(--fill);
+        fill-opacity: 0;
+        stroke-opacity: 1;
+        stroke: var(--stroke);
+        stroke-dasharray: 10;
+        stroke-width: 1px;
+        stroke-linejoin: bevel;
+    }
+
+    30% {
+        transform: scale(0);
+        fill: var(--fill);
+        fill-opacity: 0;
+        stroke-opacity: 1;
+        stroke: var(--stroke);
+        stroke-dasharray: 10;
+        stroke-width: 1px;
+        stroke-linejoin: bevel;
+    }
+
+    30.1% {
+        stroke: var(--fill);
+        stroke-dasharray: 0;
+        stroke-linejoin: miter;
+        stroke-width: 8px;
+    }
+
+    60% {
+        transform: scale(1.2);
+        fill: var(--fill);
+    }
+}
+
+/* ----------------------------------- */
+
+/* codice per le reviews */
+
+.testimonial-card {
+    max-width: 500px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #455a6454;
+    color: white;
+    backdrop-filter: blur(10px)
+}
+
+#btnShowMoreRev{
+    background-color: #00ffd0;
+}
+
+#btnShowMoreRev:hover{
+    color:black;
+    box-shadow: 2px 2px 0px 2px #00ffd03d;
+}
+
+#divShowMoreRev{
+    display: flex;
+    justify-content: center;
+}
+
+#writeReview{
+    background-color: #455a6454;
+    color: white;
+    border-radius: 15px;
+}
+
+#btnWriteReview{
+    background-color: #00ffd0;
+}
+
+#btnWriteReview:hover{
+    color:black;
+    box-shadow: 2px 2px 0px 2px #00ffd03d;
+}
+
+#divBtnSendRev{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#txtReview{
+    background-color: #050b0e2f;
+    border: 1px solid #4e5152;
+    color: white;
+    font-size: small;
+
+    height: 375px;
+    resize: none;
+}
+
+#txtReview:focus{
+    box-shadow: 0px 0px 30px 3px #00ffd034;
+    border: 1px solid #4e5152;
+    color: white;
+    font-size: small;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #00ffd0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.stars {
+    color: #00ffd0;
+    letter-spacing: 2px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-text {
+    color: #4a4a4a;
+    line-height: 1.5;
+}
+
+/* footer */
+
+.footer {
+    /* background: linear-gradient(to right, #111827, #581c87); */
+    color: white;
+}
+
+.social-icon {
+    color: white;
+    transition: color 0.2s;
+}
+
+.social-icon:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.payment-icon {
+    height: 2rem;
+    width: auto;
+}
+
+a.text-white {
+    transition: opacity 0.2s;
+}
+
+a.text-white:hover {
+    opacity: 0.7;
+}
