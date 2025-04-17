@@ -176,6 +176,23 @@ h3 {
     display: none;
 }
 
+#imgPreview{
+    height: 300px;
+    border-radius: 5px;
+
+    box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.399);
+}
+
+#divPreview{
+    background-color: #455a6460;
+    border: 1px solid transparent;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
 #btnSalvaPalette{
     background-color: #00ffd0;
     box-shadow: 0px 0px 3px 0px #00ffd071;
@@ -193,6 +210,12 @@ h3 {
     box-shadow: 0px 0px 3px 0px #00ffd071;
     border: 0px;
     color: #050913;
+}
+
+#divBtnAnalizza{
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 #btnAnalizza:hover {
@@ -436,4 +459,21 @@ a.text-white {
 
 a.text-white:hover {
     opacity: 0.7;
+}
+
+@media screen and (max-width: 1004px) {
+
+    #containerRev{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #containerRev{
+        width: 205%;
+    }
+
+    #showReview{
+        margin-bottom: 10px;
+    }
 }

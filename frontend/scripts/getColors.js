@@ -1,94 +1,67 @@
 const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
 
-    const hex = x.toString(16)
-    return hex.length === 1 ? '0' + hex : hex
+    const hex = x.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
 
 }).join('');
-
-$(document).ready(() => {
-
-    // $("#imgInput").on("change", changeImg);
-    // $("#btn-visualizza").on("click", extractColor);
-
-});
-
-// function changeImg() {
-
-//     const fileInput = document.getElementById("imgInput");
-//     let imgPreview = fileInput.files[0];
-
-//     if (imgPreview) {
-//         let reader = new FileReader();
-
-//         reader.readAsDataURL(imgPreview);
-
-//         reader.onload = function (e) {
-//             let tempImg = document.getElementById("preview");
-//             tempImg.src = e.target.result;
-//             tempImg.style.height = "400px";
-//             tempImg.style.width = "auto";
-//         }
-//     }
-
-// }
 
 function extractColor() {
 
     const colorThief = new ColorThief();
-    let img;
-    let palette = new Object();
+    let img = $('#imgPreview');
+    let palette = {};
     let color;
-
-    img = document.getElementById("preview");
+    let ret = {}
 
     /* -- PALETTE -- */
-    if (img.complete) {
+    if (img[0].complete) {
+        
+        palette = colorThief.getPalette(img[0]);
 
-        palette = colorThief.getPalette(img);
+    } 
+    else {
 
-    } else {
-
-        img.addEventListener('load', function () {
-            palette = colorThief.getPalette(img);
+        img.on('load', function () {
+            palette = colorThief.getPalette(this);
         });
 
     }
-
 
     /* -- SINGOLO COLORE -- */
-    if (img.complete) {
+    if (img[0].complete) {
 
-        color = colorThief.getColor(img);
+        color = colorThief.getColor(img[0]);
 
-    } else {
+    } 
+    else {
 
-        img.addEventListener('load', function () {
-            color = colorThief.getColor(img);
+        img.on('load', function () {
+            color = colorThief.getColor(this); 
         });
 
     }
 
-    if (palette.length >= 2) {
+    if ((palette && palette.length >= 2) || color) {
 
-        let divColors = document.getElementById("colors");
-        // div.style.background = "rgb(" + palette[i][0] + ", " + palette[i][1] + ", " + palette[i][2] + ")";
-        // div.setAttribute("title", rgbToHex(palette[i][0], palette[i][1], palette[i][2]));
-        // a.innerText = rgbToHex(palette[i][0], palette[i][1], palette[i][2]);
+        let tempArray = Array.from(palette);
+        let arrayPalette_rgb = [];
+        let arrayPalette_hex = [];
+        let arrayColor = Array.from(color);
 
-        // console.log("rgb(" + palette[i][1] + ", " + palette[i][2] + ", " + palette[i][3] + ")");
+        tempArray.forEach(color => {
 
+            arrayPalette_hex.push(rgbToHex(color[0], color[1], color[2]));
+            arrayPalette_rgb.push(color.join(','));
+        })
+        
+        ret = {
+            "colorRGB": color.join(','),
+            "colorHEX": rgbToHex(arrayColor[0], arrayColor[1], arrayColor[2]),
+            "paletteRGB": arrayPalette_rgb,
+            "paletteHEX": arrayPalette_hex
+        };
+
+        return ret;
 
     }
-
-    // mainColor.style.backgroundColor = "rgb(" + color[0] + ", " + color[1] + ", " + color[2] + ")";
-    mainColor.setAttribute("title", rgbToHex(color[0], color[1], color[2]));
-    // aMC.innerText = rgbToHex(color[0], color[1], color[2]);
-
-
-}
-
-
-function svuotaDiv() {
-    $("#colors").empty();
-    $("#mainColor").empty();
 }
