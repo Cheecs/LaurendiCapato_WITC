@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    handleShowHideMenu();
+
     $("#file").on("change", () => {
         changeImg();
     });
