@@ -26,7 +26,9 @@ $(document).ready(function() {
 
         // salvare i dati dell'utente
 
-        window.open("./product.html", "_self")
+        console.log(data.token);
+
+        //window.open("./product.html", "_self")
 
       });
 
