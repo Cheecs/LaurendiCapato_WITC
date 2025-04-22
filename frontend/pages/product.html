@@ -42,7 +42,7 @@
 <!-- Modale palette -->
 <div class="modal modal-dark" id="SavePaletteModal">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-white" id="SavePaletteModalContent">
+    <div class="modal-content text-white SaveModalContent">
 
       <!-- Modal Header -->
       <div class="modal-header">
@@ -53,7 +53,7 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <input type="text" class="form-control mb-3" id="name" aria-describedby="name" placeholder="Enter name">
+            <input type="text" class="inputName form-control mb-3" id="name" aria-describedby="name" placeholder="Enter name">
             <button type="submit" class="btn btnSave">Save</button>
           </div>        
         </form>
@@ -71,24 +71,20 @@
 <!-- Modale colore -->
 <div class="modal" id="SaveColorModal">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content text-white SaveModalContent">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title text-dark">Add a name for your color</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <h4 class="modal-title">Add a name for your color</h4>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="name" class="text-dark">insert name</label>
-            <input type="text" class="form-control mb-3" id="name" aria-describedby="name" placeholder="Enter name">
+            <input type="text" class="inputName form-control mb-3" id="name" aria-describedby="name" placeholder="Enter name">
             <button type="submit" class="btn btnSave">Save</button>
-          </div>
-         
-          
+          </div>      
         </form>
       </div>
 

@@ -520,13 +520,25 @@ a.text-white:hover {
     }
 }
 
-#SavePaletteModalContent{
+.SaveModalContent{
     max-width: 500px;
     border-radius: 12px;
     border: none;
     background-color: #455a6454;
     color: white;
     backdrop-filter: blur(10px)
+}
+
+.inputName{
+    border: 1px solid rgba(51, 132, 104, 0.397);
+    color: rgba(243, 244, 246, 1);
+    outline: 0;
+}
+
+.inputName:focus{
+    box-shadow: none;
+    border-color: rgb(51, 132, 103);
+    box-shadow:0px 0px 10px 1px rgb(51, 132, 103);
 }
 
 .modal-header{
@@ -543,6 +555,7 @@ a.text-white:hover {
     border: 0px;
     color: #050913;
 }
+
 .btnClose{
     background-color: #00ffd0;
     box-shadow: 0px 0px 3px 0px #00ffd071;
