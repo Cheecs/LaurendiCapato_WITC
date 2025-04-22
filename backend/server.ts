@@ -83,7 +83,7 @@ app.post('/api/login', async (req, res) => {
         //     data: token,
         // });
 
-        res.status(200).send(token);
+        res.status(200).send(token.toString());
 
     }
     else if(login.status == 404)
