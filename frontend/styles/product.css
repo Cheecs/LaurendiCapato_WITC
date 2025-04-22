@@ -198,7 +198,14 @@ h3 {
 
     display: flex;
     flex-direction: column;
+}
 
+#divClosePreview{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    cursor: pointer;
 }
 
 .tdColor{

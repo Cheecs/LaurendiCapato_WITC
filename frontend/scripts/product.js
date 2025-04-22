@@ -13,6 +13,11 @@ $(document).ready(function(){
         writeInTable(imgInfo);
     });
 
+    $("#closePreview").on("click", () => {
+        $("#divPreview").addClass("d-none");
+        $("#fileInputContainer").removeClass("d-none");
+    })
+
 });
 
 function writeInTable(data){
@@ -82,5 +87,7 @@ function changeImg() {
             $("#imgPreview").attr("src", e.target.result);
         }
     }
+
+    $("#fileInputContainer").addClass("d-none");
 
 }

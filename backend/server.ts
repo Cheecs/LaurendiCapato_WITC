@@ -142,13 +142,13 @@ app.post('/api/signup', async (req, res) => {
                         console.error('Error sending email:', emailErr);
                     }
 
-                    let token = createToken(results);
+                    // let token = createToken(results);
 
-                    res.setHeader("authorization", token);
-                    res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
+                    // res.setHeader("authorization", token);
+                    // res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
                     res.status(200).json({
-                        data: token,
+                        data: "token",
                     });
                 });
             }
