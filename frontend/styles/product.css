@@ -513,6 +513,6 @@ a.text-white:hover {
     }
 }
 
-#SavePaletteModal{
+#SavePaletteModalContent{
     backdrop-filter:blur(10px);
 }
