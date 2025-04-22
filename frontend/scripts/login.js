@@ -20,6 +20,7 @@ $(document).ready(function() {
       request.fail((err) => {
 
         showAlert(err.responseJSON.msg);
+        console.log(err);
 
       });
       request.done(function(data) {
