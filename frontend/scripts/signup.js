@@ -30,8 +30,8 @@ $(document).ready(function() {
             
             // salvare i dati utente
 
-            console.log(data.data);
-            window.open("./product.html", "_self");
+            console.log(data.token);
+            //window.open("./product.html", "_self");
   
         });
   
