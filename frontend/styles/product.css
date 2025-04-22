@@ -521,5 +521,18 @@ a.text-white:hover {
 }
 
 #SavePaletteModalContent{
-    backdrop-filter:blur(10px);
+    max-width: 500px;
+    border-radius: 12px;
+    border: none;
+    background-color: #455a6454;
+    color: white;
+    backdrop-filter: blur(10px)
+}
+
+.modal-header{
+	border: none;
+}
+
+.modal-footer{
+	border: none;
 }
