@@ -74,16 +74,16 @@ app.post('/api/login', async (req, res) => {
 
     if(login.status == 200)
     {
-        let token = await createToken(login.loginInfo[0]);
+        let token = createToken(login.loginInfo[0]);
 
         res.setHeader("authorization", token);
         res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
-        // res.status(login.loginInfo[0]).json({
-        //     data: token,
-        // });
+        res.status(login.status).json({
+            data: login.loginInfo[0],
+            token: token
+        });
 
-        res.status(200).send(token.toString());
 
     }
     else if(login.status == 404)

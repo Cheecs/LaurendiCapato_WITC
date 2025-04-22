@@ -27,7 +27,7 @@ $(document).ready(function() {
 
         // salvare i dati dell'utente
 
-        console.log(data.token);
+        console.log(`dati: \n ${data.data} \n\n token: \n ${data.token}`);
 
         //window.open("./product.html", "_self")
 
