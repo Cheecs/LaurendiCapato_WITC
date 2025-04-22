@@ -79,9 +79,12 @@ app.post('/api/login', async (req, res) => {
         res.setHeader("authorization", token);
         res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
-        res.status(200).json({
-            data: token,
-        });
+        // res.status(200).json({
+        //     data: token,
+        // });
+
+        res.status(200).send(token);
+
     }
     else if(login.status == 404)
     {
