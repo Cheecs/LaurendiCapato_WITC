@@ -512,3 +512,7 @@ a.text-white:hover {
         margin-bottom: 10px;
     }
 }
+
+#SavePaletteModal{
+    backdrop-filter:blur(10px);
+}
