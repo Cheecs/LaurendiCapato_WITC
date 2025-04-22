@@ -2,9 +2,11 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import mysql from 'mysql2';
 import nodemailer from 'nodemailer'
+import Jwt from "jsonwebtoken";
+import fs from "fs";
 
-//Config the env from the ENVIRONMENT
-
+const privateKey = fs.readFileSync("keys/key.pem", "utf8") as any;
+const DURATA_TOKEN = 900; // secondi
 
 // DEBUG THE ENVS
 dotenv.config();
@@ -132,8 +134,13 @@ app.post('/api/signup', async (req, res) => {
                         console.error('Error sending email:', emailErr);
                     }
 
+                    let token = createToken(results);
+
+                    res.setHeader("authorization", token);
+                    res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
+
                     res.status(200).json({
-                        data: results,
+                        data: token,
                     });
                 });
             }
@@ -185,3 +192,54 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
         });
     });
 }
+
+/* FUNZIONI PER JWT */
+
+function createToken(data:any){
+
+    let now = Math.floor(new Date().getTime()/1000); // data
+    let payload = {
+
+        "_id": data.idU,
+        "mail": data.Mail,
+        "iat": now,
+        "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
+    };
+
+    // private key è nel server
+
+    let token = Jwt.sign(payload, privateKey, {algorithm:"RS256"});
+    console.log(`Creato nuovo token: ${token}`);
+
+    return token;
+}
+
+
+// function controllaToken(req, res, next){
+
+//     if(!req.headers.authorization)
+//         res.send(403).send("Token mancante");
+//     else
+//     {
+//         // la verify controlla anche la scadenza 
+
+//         let token = req.headers.authorization;
+//         Jwt.verify(token, privateKey, function(err, payload, ){
+            
+//             if(err)
+//                 res.status(403).send("Token non valido");
+//             else
+//             {
+//                 let newToken =  createToken(payload);
+//                 console.log("Payload", payload.username);
+
+//                 res.setHeader("authorization", newToken);
+//                 res.setHeader("access-control-expose-header", "authorization");
+
+//                 req["payload"] = payload;
+
+//                 next();
+//             }
+//         })
+//     }
+// }
