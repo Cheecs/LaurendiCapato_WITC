@@ -28,7 +28,7 @@ function decodeToken(_token){
         token: _token
     };
 
-    let request = inviaRihiesta("POST", "/api/decodeToken", reqBody);
+    let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
     request.fail((err) => {
         
         console.log(err);
