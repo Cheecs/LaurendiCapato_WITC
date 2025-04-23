@@ -1,6 +1,6 @@
 let usrData;
 
-$(document).ready(function(){
+$(document).ready(async function(){
 
     handleShowHideMenu();
 
@@ -22,7 +22,7 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
 
-    let usrData = getUserInfo(token);
+    let usrData = await getUserInfo(token);
     console.log("usrData:\n", usrData);
 });
 
