@@ -230,7 +230,7 @@ function createToken(data:any){
     let now = Math.floor(new Date().getTime()/1000); // data
     let payload = {
 
-        "_id": data.idU,
+        "id": data.idU,
         "mail": data.Email,
         "usrName": data.Nickname,
         "img": data.Img,
