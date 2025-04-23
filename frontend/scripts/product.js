@@ -22,7 +22,7 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
 
-    getUserInfo(token);
+    let usrData = getUserInfo(token);
     console.log("usrData:\n", usrData);
 });
 
@@ -32,7 +32,7 @@ async function getUserInfo(token) {
 
         let data = await decodeToken(token);
         console.log("Dati utente:", data);
-        usrData = data;
+        return data;
 
     } catch (err) {
         // mostra alert o gestisci errore
