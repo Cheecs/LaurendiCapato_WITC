@@ -1,4 +1,4 @@
-let mail;
+let usrData;
 
 $(document).ready(function(){
 
@@ -21,7 +21,9 @@ $(document).ready(function(){
     });
 
     let token = sessionStorage.getItem("token");
-    let usrData = decodeToken(token);
+    decodeToken(token);
+
+    console.log("usrData:\n", usrData);
 });
 
 function decodeToken(_token){
@@ -40,18 +42,15 @@ function decodeToken(_token){
 
     request.done((data) => {
 
-        let ret = data.data;
 
-        console.log(data.data.mail);
         $("#mailUsr").text(data.data.mail);
 
         usrInfo(data.data);
-
-        return ret;
     });
 
     function usrInfo(data){
         console.log("usrInfo:\n", data);
+        usrData = data;
     }
 }
 
