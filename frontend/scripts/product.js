@@ -22,6 +22,8 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
     decodeToken(token);
+    console.log("usrData:\n", usrData);
+
 
 });
 
@@ -52,7 +54,7 @@ function decodeToken(_token){
         let localData = data;
 
         usrData = localData;
-        console.log("usrData:\n", usrData);
+        console.log("popolato usrData");
     }
 }
 
