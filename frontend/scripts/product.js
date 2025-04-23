@@ -36,7 +36,7 @@ function decodeToken(_token){
 
     request.done((data) => {
 
-        console.log(data);  
+        console.log(data.data);  
     });
 }
 
