@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import mysql from 'mysql2';
 import nodemailer from 'nodemailer'
 import jwt from "jsonwebtoken";
-import fs from "fs";
 
 const privateKey = process.env.PRIVATE_KEY!;
 const DURATA_TOKEN = 900; // secondi
@@ -218,7 +217,7 @@ function createToken(data:any){
 
     // private key è nel server
 
-    let token = jwt.sign(payload, privateKey, {algorithm:"RS256"});
+    let token = jwt.sign(payload, privateKey, {algorithm:"HS256"});
     console.log(`Creato nuovo token: ${token}`);
 
     return token;
