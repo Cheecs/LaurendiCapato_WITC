@@ -43,7 +43,7 @@ const db = mysql.createConnection({
     host: SERVER,
     user: 'root',
     password: PWD,  
-    database: 'db-witc-db'
+    database: 'witc'
 });
 
 app.listen(PORT, () => {
