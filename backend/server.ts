@@ -201,7 +201,30 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
     });
 }
 
-/* FUNZIONI PER jwt */
+app.post("/api/decodeToken", (req, res) => {
+
+    let { token } = req.body; 
+
+    try 
+    {
+
+        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
+
+        res.status(200).json({
+            data: decoded
+        });
+
+    } 
+    catch (err: any) 
+    {
+
+        res.status(500).json({
+            msg: "Error in the token's verification" 
+        });    
+    }
+});
+
+/* FUNZIONE PER jwt */
 
 function createToken(data:any){
 
@@ -216,38 +239,7 @@ function createToken(data:any){
         "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
     };
 
-    // private key è nel server
-
     let token = jwt.sign(payload, privateKey, {algorithm:"HS256"});
 
     return token;
-}
-
-
-function controllaToken(req:any, res:any){
-
-    if(!req.headers.authorization)
-        res.send(403).send("Token mancante");
-    else
-    {
-        // la verify controlla anche la scadenza 
-
-        let token = req.headers.authorization;
-
-        jwt.verify(token, privateKey, function(err:any, payload:any){
-            
-            if(err)
-                res.status(403).send("Token non valido");
-            else
-            {
-                let newToken =  createToken(payload);
-                console.log("Payload", payload.username);
-
-                res.setHeader("authorization", newToken);
-                res.setHeader("access-control-expose-header", "authorization");
-
-                req["payload"] = payload;
-            }
-        })
-    }
 }

@@ -19,9 +19,27 @@ $(document).ready(function(){
     });
 
     let token = sessionStorage.getItem("token");
-    console.log(token);
-
+    let usrData = decodeToken(token);
 });
+
+function decodeToken(_token){
+
+    let reqBody = {
+        token: _token
+    };
+
+    let request = inviaRihiesta("POST", "/api/decodeToken", reqBody);
+    request.fail((err) => {
+        
+        console.log(err);
+    });
+
+    request.done((data) => {
+
+        console.log(data);
+        
+    });
+}
 
 function writeInTable(data){
 
