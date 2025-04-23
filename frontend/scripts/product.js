@@ -23,7 +23,6 @@ $(document).ready(function(){
     let token = sessionStorage.getItem("token");
     decodeToken(token);
 
-    console.log("usrData:\n", usrData);
 });
 
 function decodeToken(_token){
@@ -50,7 +49,10 @@ function decodeToken(_token){
 
     function usrInfo(data){
         console.log("usrInfo:\n", data);
-        usrData = data;
+        let localData = data;
+
+        usrData = localData;
+        console.log("usrData:\n", usrData);
     }
 }
 
