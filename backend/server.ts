@@ -2,10 +2,10 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import mysql from 'mysql2';
 import nodemailer from 'nodemailer'
-import Jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import fs from "fs";
 
-// const privateKey = ptov
+const privateKey = process.env.PRIVATE_KEY!;
 const DURATA_TOKEN = 900; // secondi
 
 // DEBUG THE ENVS
@@ -77,10 +77,10 @@ app.post('/api/login', async (req, res) => {
     
     if(login.status == 200)
     {
-        // let token = createToken(login.loginInfo[0]);
+        let token = createToken(login.loginInfo[0]);
 
-        // res.setHeader("authorization", token);
-        // res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
+        res.setHeader("authorization", token);
+        res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
         res.status(login.status).json({
             data: login.loginInfo[0],
@@ -144,10 +144,10 @@ app.post('/api/signup', async (req, res) => {
                         console.error('Error sending email:', emailErr);
                     }
 
-                    // let token = createToken(results);
+                    let token = createToken(results);
 
-                    // res.setHeader("authorization", token);
-                    // res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
+                    res.setHeader("authorization", token);
+                    res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
                     res.status(200).json({
                         data: "token",
@@ -203,53 +203,52 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
     });
 }
 
-/* FUNZIONI PER JWT */
+/* FUNZIONI PER jwt */
 
-// function createToken(data:any){
+function createToken(data:any){
 
-//     let now = Math.floor(new Date().getTime()/1000); // data
-//     let payload = {
+    let now = Math.floor(new Date().getTime()/1000); // data
+    let payload = {
 
-//         "_id": data.idU,
-//         "mail": data.Mail,
-//         "iat": now,
-//         "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
-//     };
+        "_id": data.idU,
+        "mail": data.Mail,
+        "iat": now,
+        "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
+    };
 
-//     // private key è nel server
+    // private key è nel server
 
-//     let token = Jwt.sign(payload, privateKey, {algorithm:"RS256"});
-//     console.log(`Creato nuovo token: ${token}`);
+    let token = jwt.sign(payload, privateKey, {algorithm:"RS256"});
+    console.log(`Creato nuovo token: ${token}`);
 
-//     return token;
-// }
+    return token;
+}
 
 
-// function controllaToken(req, res, next){
+function controllaToken(req:any, res:any){
 
-//     if(!req.headers.authorization)
-//         res.send(403).send("Token mancante");
-//     else
-//     {
-//         // la verify controlla anche la scadenza 
+    if(!req.headers.authorization)
+        res.send(403).send("Token mancante");
+    else
+    {
+        // la verify controlla anche la scadenza 
 
-//         let token = req.headers.authorization;
-//         Jwt.verify(token, privateKey, function(err, payload, ){
+        let token = req.headers.authorization;
+
+        jwt.verify(token, privateKey, function(err:any, payload:any){
             
-//             if(err)
-//                 res.status(403).send("Token non valido");
-//             else
-//             {
-//                 let newToken =  createToken(payload);
-//                 console.log("Payload", payload.username);
+            if(err)
+                res.status(403).send("Token non valido");
+            else
+            {
+                let newToken =  createToken(payload);
+                console.log("Payload", payload.username);
 
-//                 res.setHeader("authorization", newToken);
-//                 res.setHeader("access-control-expose-header", "authorization");
+                res.setHeader("authorization", newToken);
+                res.setHeader("access-control-expose-header", "authorization");
 
-//                 req["payload"] = payload;
-
-//                 next();
-//             }
-//         })
-//     }
-// }
+                req["payload"] = payload;
+            }
+        })
+    }
+}
