@@ -29,7 +29,7 @@ $(document).ready(function() {
 
         console.log(`dati: \n ${data.data} \n\n token: \n ${data.token}`);
 
-        //window.open("./product.html", "_self")
+        window.open("./product.html", "_self")
 
       });
 
