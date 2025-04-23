@@ -40,7 +40,7 @@ function decodeToken(_token){
 
     request.done((data) => {
 
-        return data.data
+        return data.token
     });
 }
 
