@@ -41,9 +41,7 @@ function decodeToken(_token){
 
     request.done((data) => {
 
-        console.log(`data.token: \n ${data.token}`);
-
-        return data.token
+        return data.data;
     });
 }
 

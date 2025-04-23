@@ -81,13 +81,9 @@ app.post('/api/login', async (req, res) => {
         res.setHeader("authorization", token);
         res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization  
         
-        console.log(`token: ${token}`);
-
         res.status(login.status).json({
             token: token
         });
-
-
     }
     else if(login.status == 404)
     {
@@ -171,6 +167,30 @@ app.post('/api/signup', async (req, res) => {
 
 });
 
+app.post("/api/decodeToken", (req, res) => {
+
+    let { token } = req.body; 
+
+    try 
+    {
+
+        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
+
+        res.status(200).json({
+            data: decoded
+        });
+
+    } 
+    catch (err: any) 
+    {
+
+        res.status(500).json({
+            msg: "Error in the token's verification" 
+        });    
+    }
+});
+
+
 /* ------------------------------- */
 
 function UserExists(mail:string, pwd:string, query:string):Promise<any>{
@@ -202,29 +222,6 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
         });
     });
 }
-
-app.post("/api/decodeToken", (req, res) => {
-
-    let { token } = req.body; 
-
-    try 
-    {
-
-        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
-
-        res.status(200).json({
-            data: decoded
-        });
-
-    } 
-    catch (err: any) 
-    {
-
-        res.status(500).json({
-            msg: "Error in the token's verification" 
-        });    
-    }
-});
 
 /* FUNZIONE PER jwt */
 
