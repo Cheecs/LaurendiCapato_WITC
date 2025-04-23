@@ -21,7 +21,7 @@ $(document).ready(function(){
     let token = sessionStorage.getItem("token");
 
     let usrData = getUserInfo(token);
-    console.log("usrData:\n", usrData);
+    console.log("usrData:\n", usrData.mail);
 });
 
 async function getUserInfo(token) {
