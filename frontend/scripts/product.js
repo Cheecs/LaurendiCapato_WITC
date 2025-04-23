@@ -23,6 +23,10 @@ $(document).ready(function(){
     let token = sessionStorage.getItem("token");
 
     getUserInfo(token);
+
+    $("#btnSalvaColore").click(function(){
+        console.log("id utente: ", usrData.idU);
+    });
 });
 
 async function getUserInfo(token) {
@@ -30,7 +34,6 @@ async function getUserInfo(token) {
     try {
 
         let usrData = await decodeToken(token);
-        console.log("Dati utente:", usrData);
 
         $("#mailUsr").text(usrData.mail);
 
