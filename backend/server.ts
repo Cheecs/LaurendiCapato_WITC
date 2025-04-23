@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer'
 import Jwt from "jsonwebtoken";
 import fs from "fs";
 
-const privateKey = fs.readFileSync("key.pem", "utf8") as any;
+// const privateKey = ptov
 const DURATA_TOKEN = 900; // secondi
 
 // DEBUG THE ENVS
@@ -52,10 +52,12 @@ app.listen(PORT, () => {
 
 // Connetti al database
 db.connect((err: mysql.QueryError | null) => {
+
     if (err) {
         console.error('Errore di connessione:', err);
         return;
     }
+
     console.log('Connesso a MySQL');
 });
 
@@ -72,8 +74,6 @@ app.post('/api/login', async (req, res) => {
     let { mail, pwd } = req.body;
     let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
     let login = await UserExists(mail, pwd, query);
-
-    res.send("Baci e abbracci");
     
     if(login.status == 200)
     {
@@ -205,24 +205,24 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 
 /* FUNZIONI PER JWT */
 
-function createToken(data:any){
+// function createToken(data:any){
 
-    let now = Math.floor(new Date().getTime()/1000); // data
-    let payload = {
+//     let now = Math.floor(new Date().getTime()/1000); // data
+//     let payload = {
 
-        "_id": data.idU,
-        "mail": data.Mail,
-        "iat": now,
-        "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
-    };
+//         "_id": data.idU,
+//         "mail": data.Mail,
+//         "iat": now,
+//         "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
+//     };
 
-    // private key è nel server
+//     // private key è nel server
 
-    let token = Jwt.sign(payload, privateKey, {algorithm:"RS256"});
-    console.log(`Creato nuovo token: ${token}`);
+//     let token = Jwt.sign(payload, privateKey, {algorithm:"RS256"});
+//     console.log(`Creato nuovo token: ${token}`);
 
-    return token;
-}
+//     return token;
+// }
 
 
 // function controllaToken(req, res, next){
