@@ -1,3 +1,5 @@
+let test;
+
 $(document).ready(function(){
 
     handleShowHideMenu();
@@ -20,7 +22,8 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
     let usrData = decodeToken(token);
-    console.log(`usrData: \n ${usrData}`);
+    console.log("usrData:\n", usrData);
+    console.log("test:\n", test);
 
     $("#mailUsr").text(usrData.mail)
 });
@@ -41,7 +44,8 @@ function decodeToken(_token){
 
     request.done((data) => {
 
-        console.log("data.data: \n ", data.data);
+        console.log(data.data);
+        test = data.data;
 
         return data.data;
     });
