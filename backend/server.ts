@@ -5,13 +5,14 @@ import nodemailer from 'nodemailer'
 import Jwt from "jsonwebtoken";
 import fs from "fs";
 
-const privateKey = fs.readFileSync("keys/key.pem", "utf8") as any;
+const privateKey = fs.readFileSync("key.pem", "utf8") as any;
 const DURATA_TOKEN = 900; // secondi
 
 // DEBUG THE ENVS
 dotenv.config();
+
 const PORT = process.env.PORT || 4000;
-const PWD = process.env.DB_passwd ;
+const PWD = process.env.DB_passwd;
 const SERVER = process.env.DB_host;
 
 let app = express();
@@ -42,7 +43,7 @@ const db = mysql.createConnection({
     host: SERVER,
     user: 'root',
     password: PWD,  
-    database: 'witc'
+    database: 'db-witc-db'
 });
 
 app.listen(PORT, () => {
