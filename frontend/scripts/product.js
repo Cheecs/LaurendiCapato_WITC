@@ -20,6 +20,7 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
     let usrData = decodeToken(token);
+    console.log(`usrData: \n ${usrData}`);
 
     $("#mailUsr").text(usrData.mail)
 });
@@ -39,6 +40,8 @@ function decodeToken(_token){
     });
 
     request.done((data) => {
+
+        console.log(`data.token: \n ${data.token}`);
 
         return data.token
     });
