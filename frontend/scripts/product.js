@@ -22,10 +22,6 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
     let usrData = decodeToken(token);
-    console.log("usrData:\n", usrData);
-    console.log("mail:\n", mail);
-
-    $("#mailUsr").text(usrData.mail)
 });
 
 function decodeToken(_token){
@@ -44,11 +40,19 @@ function decodeToken(_token){
 
     request.done((data) => {
 
-        mail = data.data.mail;
         let ret = data.data;
+
+        console.log(data.data.mail);
+        $("#mailUsr").text(data.data.mail);
+
+        usrInfo(data.data);
 
         return ret;
     });
+
+    function usrInfo(data){
+        console.log("usrInfo:\n", data);
+    }
 }
 
 function writeInTable(data){
