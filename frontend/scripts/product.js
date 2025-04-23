@@ -20,6 +20,8 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
     let usrData = decodeToken(token);
+
+    $("#mailUsr").text(usrData.mail)
 });
 
 function decodeToken(_token){
@@ -30,13 +32,15 @@ function decodeToken(_token){
 
     let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
     request.fail((err) => {
+
+        // da fare lo show alert
         
         console.log(err);
     });
 
     request.done((data) => {
 
-        console.log(data.data);  
+        return data
     });
 }
 

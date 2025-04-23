@@ -232,7 +232,7 @@ function createToken(data:any){
     let payload = {
 
         "_id": data.idU,
-        "mail": data.Mail,
+        "mail": data.Email,
         "usrName": data.Nickname,
         "img": data.Img,
         "iat": now,
