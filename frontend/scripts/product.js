@@ -1,5 +1,3 @@
-let usrData;
-
 $(document).ready(function(){
 
     handleShowHideMenu();
@@ -21,11 +19,25 @@ $(document).ready(function(){
     });
 
     let token = sessionStorage.getItem("token");
-    decodeToken(token);
+
+    let usrData = getUserInfo(token);
     console.log("usrData:\n", usrData);
-
-
 });
+
+async function getUserInfo(token) {
+
+    try {
+
+        let data = await decodeToken(token);
+        console.log("Dati utente:", data);
+        return data;
+
+    } catch (err) {
+        // mostra alert o gestisci errore
+        console.error("Errore nel recupero dei dati utente:", err);
+    }
+}
+
 
 function decodeToken(_token){
 
@@ -33,29 +45,40 @@ function decodeToken(_token){
         token: _token
     };
 
-    let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
-    request.fail((err) => {
-
-        // da fare lo show alert
+    return new Promise((resolve, reject) => {
+        let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
         
-        console.log(err);
+        request.done((data) => {
+            resolve(data.data);
+        });
+
+        request.fail((err) => {
+            console.error("Errore durante la decodifica:", err);
+            reject(err);
+        });
     });
 
-    request.done((data) => {
+    // let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
+    // request.fail((err) => {
+
+    //     // da fare lo show alert
+        
+    //     console.log(err);
+    // });
+
+    // request.done((data) => {
 
 
-        $("#mailUsr").text(data.data.mail);
+    //     $("#mailUsr").text(data.data.mail);
 
-        usrInfo(data.data);
-    });
+    //     usrInfo(data.data);
 
-    function usrInfo(data){
-        console.log("usrInfo:\n", data);
-        let localData = data;
+    //     return data.data;
+    // });
 
-        usrData = localData;
-        console.log("popolato usrData");
-    }
+    // function usrInfo(data){
+    //     console.log("usrInfo:\n", data);
+    // }
 }
 
 function writeInTable(data){
