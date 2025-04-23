@@ -79,7 +79,9 @@ app.post('/api/login', async (req, res) => {
         let token = createToken(login.loginInfo[0]);
 
         res.setHeader("authorization", token);
-        res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
+        res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization  
+        
+        console.log(`token: ${token}`);
 
         res.status(login.status).json({
             token: token
