@@ -1,6 +1,6 @@
 let usrData;
 
-$(document).ready(async function(){
+$(document).ready(function(){
 
     handleShowHideMenu();
 
@@ -22,7 +22,8 @@ $(document).ready(async function(){
 
     let token = sessionStorage.getItem("token");
 
-    let usrData = await getUserInfo(token);
+    getUserInfo(token);
+
     console.log("usrData:\n", usrData);
 });
 
@@ -30,9 +31,8 @@ async function getUserInfo(token) {
 
     try {
 
-        let data = await decodeToken(token);
-        console.log("Dati utente:", data);
-        return data;
+        let usrData = await decodeToken(token);
+        console.log("Dati utente:", usrData);
 
     } catch (err) {
         // mostra alert o gestisci errore
