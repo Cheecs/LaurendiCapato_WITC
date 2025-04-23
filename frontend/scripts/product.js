@@ -16,7 +16,10 @@ $(document).ready(function(){
     $("#closePreview").on("click", () => {
         $("#divPreview").addClass("d-none");
         $("#fileInputContainer").removeClass("d-none");
-    })
+    });
+
+    let token = sessionStorage.getItem("token");
+    console.log(token);
 
 });
 

@@ -82,7 +82,6 @@ app.post('/api/login', async (req, res) => {
         res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
         res.status(login.status).json({
-            data: login.loginInfo[0],
             token: token
         });
 
@@ -149,7 +148,7 @@ app.post('/api/signup', async (req, res) => {
                     res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
                     res.status(200).json({
-                        data: "token",
+                        token: token,
                     });
                 });
             }
@@ -211,6 +210,8 @@ function createToken(data:any){
 
         "_id": data.idU,
         "mail": data.Mail,
+        "usrName": data.Nickname,
+        "img": data.Img,
         "iat": now,
         "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
     };
@@ -218,7 +219,6 @@ function createToken(data:any){
     // private key è nel server
 
     let token = jwt.sign(payload, privateKey, {algorithm:"HS256"});
-    console.log(`Creato nuovo token: ${token}`);
 
     return token;
 }
