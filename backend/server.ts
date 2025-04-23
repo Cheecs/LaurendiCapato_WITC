@@ -73,6 +73,8 @@ app.post('/api/login', async (req, res) => {
     let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
     let login = await UserExists(mail, pwd, query);
 
+    res.send("Baci e abbracci");
+    
     if(login.status == 200)
     {
         // let token = createToken(login.loginInfo[0]);
@@ -99,7 +101,6 @@ app.post('/api/login', async (req, res) => {
             msg: login.loginInfo
         });
     }
-
 });
 
 // registrazione
