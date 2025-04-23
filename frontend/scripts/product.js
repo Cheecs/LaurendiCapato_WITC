@@ -23,8 +23,6 @@ $(document).ready(function(){
     let token = sessionStorage.getItem("token");
 
     getUserInfo(token);
-
-    console.log("usrData:\n", usrData);
 });
 
 async function getUserInfo(token) {
@@ -33,6 +31,8 @@ async function getUserInfo(token) {
 
         let usrData = await decodeToken(token);
         console.log("Dati utente:", usrData);
+
+        $("#mailUsr").text(usrData.mail);
 
     } catch (err) {
         // mostra alert o gestisci errore
@@ -59,28 +59,6 @@ function decodeToken(_token){
             reject(err);
         });
     });
-
-    // let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
-    // request.fail((err) => {
-
-    //     // da fare lo show alert
-        
-    //     console.log(err);
-    // });
-
-    // request.done((data) => {
-
-
-    //     $("#mailUsr").text(data.data.mail);
-
-    //     usrInfo(data.data);
-
-    //     return data.data;
-    // });
-
-    // function usrInfo(data){
-    //     console.log("usrInfo:\n", data);
-    // }
 }
 
 function writeInTable(data){
