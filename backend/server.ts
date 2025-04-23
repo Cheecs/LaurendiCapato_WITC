@@ -81,7 +81,7 @@ app.post('/api/login', async (req, res) => {
 
         res.status(login.status).json({
             data: login.loginInfo[0],
-            token: "token"
+            //token: "token"
         });
 
 
