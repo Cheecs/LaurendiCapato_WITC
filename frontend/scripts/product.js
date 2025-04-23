@@ -1,4 +1,4 @@
-let test;
+let mail;
 
 $(document).ready(function(){
 
@@ -23,7 +23,7 @@ $(document).ready(function(){
     let token = sessionStorage.getItem("token");
     let usrData = decodeToken(token);
     console.log("usrData:\n", usrData);
-    console.log("test:\n", test);
+    console.log("mail:\n", mail);
 
     $("#mailUsr").text(usrData.mail)
 });
@@ -44,10 +44,10 @@ function decodeToken(_token){
 
     request.done((data) => {
 
-        console.log(data.data);
-        test = data.data;
+        mail = data.data.mail;
+        let ret = data.data;
 
-        return data.data;
+        return ret;
     });
 }
 
