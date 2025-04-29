@@ -184,7 +184,7 @@ app.post("/api/decodeToken", (req, res) => {
     catch (err: any) 
     {
 
-        res.status(500).json({
+        res.status(401).json({
             msg: "Error in the token's verification" 
         });    
     }

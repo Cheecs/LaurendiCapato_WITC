@@ -8,22 +8,6 @@ $(document).ready(function(){
 
 function UIsetup(){
 
-    $("#imgUtente").mouseenter(function(){
-        $("#tooltip").removeClass("d-none");
-    });
-
-    $("#tooltip").mouseleave(function(){
-        $(this).addClass("d-none");
-    });
-
-    $("#tooltip").mouseenter(function(){
-        $(this).removeClass("d-none");
-    });
-
-    $("#seeMoreBtn").click(function(){
-        handleSeeMoreAnimation();
-    });
-
     $(window).on('resize', function() {
 
         checkWindow()
