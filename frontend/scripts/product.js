@@ -38,13 +38,36 @@ async function getUserInfo(token) {
         $("#imgUtente").tooltip("dispose").tooltip();
 
         $("#btnSalvaColore").click(function(){
-            console.log(`id utente: ${ usrData.id}`);
+
+            console.log("ok");
+
+            const img = $("#file")[0].files[0];
+
+            saveColor(usrData.id, img);
         });
 
     } catch (err) {
         // mostra alert o gestisci errore
         console.error("Errore nel recupero dei dati utente:", err);
     }
+}
+
+async function saveColor(id, img){
+
+    let promiseResponse = await imgToBase64(img);
+    let imgBase64 = promiseResponse.split(',')[1];
+    let colorHEX = $(".mainColorHEX").text();
+    let colorRGB = $(".mainColorRGB").text();
+
+    console.log(`id utente`);
+    console.log(`img base64: ${imgBase64}`);
+    console.log(`color: ${colorHEX}`);
+    console.log(`color: ${colorRGB}`);
+
+    // per palettes
+    // let colorsRGB = $(".rgbColors").text();
+    // let colorsHEX = $(".hexColors").text();
+
 }
 
 function imgToBase64(img) {
@@ -98,8 +121,8 @@ function writeInTable(data){
     divColore.css("backgroundColor", data.colorHEX);
     tdColore.append(divColore);
 
-    let tdRGB = $(`<td class="tdText">${data.colorRGB}</td>`); 
-    let tdHEX = $(`<td class="tdText">${data.colorHEX}</td>`);
+    let tdRGB = $(`<td class="tdText mainColorRGB">${data.colorRGB}</td>`); 
+    let tdHEX = $(`<td class="tdText mainColorHEX">${data.colorHEX}</td>`);
 
     tr.append(tdColore);
     tr.append(tdHEX);
@@ -122,8 +145,8 @@ function writeInTable(data){
         divColore.css("backgroundColor", paletteHEX[i]);
         tdColore.append(divColore);
 
-        let tdRGB = $(`<td class="divText">${paletteRGB[i]}</td>`);
-        let tdHEX = $(`<td class="tdText">${paletteHEX[i]}</td>`);
+        let tdRGB = $(`<td class="tdText rgbColors">${paletteRGB[i]} </td>`);
+        let tdHEX = $(`<td class="tdText hexColors">${paletteHEX[i]} </td>`);
 
         tr.append(tdColore);
         tr.append(tdHEX);
