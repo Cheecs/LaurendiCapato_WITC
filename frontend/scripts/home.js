@@ -8,6 +8,8 @@ $(document).ready(function(){
 
 function UIsetup(){
 
+    handleSeeMoreAnimation();
+
     $(window).on('resize', function() {
 
         checkWindow()
