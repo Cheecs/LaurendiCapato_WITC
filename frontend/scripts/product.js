@@ -16,8 +16,11 @@ $(document).ready(function(){
     });
 
     $("#closePreview").on("click", () => {
+
         $("#divPreview").addClass("d-none");
         $("#fileInputContainer").removeClass("d-none");
+
+        clearTables();
     });
 
     let token = sessionStorage.getItem("token");
@@ -80,6 +83,8 @@ function decodeToken(_token){
 
 function writeInTable(data){
 
+    clearTables()
+
     let tBodyColor = $("#tBodyColor");
     let tBodyPalette = $("#tBodyPalette");
 
@@ -128,6 +133,15 @@ function writeInTable(data){
 
     }
 
+}
+
+function clearTables(){
+
+    let tBodyColor = $("#tBodyColor");
+    let tBodyPalette = $("#tBodyPalette");
+
+    tBodyColor.empty();
+    tBodyPalette.empty();
 }
 
 function changeImg() {
