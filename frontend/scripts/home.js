@@ -8,7 +8,9 @@ $(document).ready(function(){
 
 function UIsetup(){
 
-    handleSeeMoreAnimation();
+    $("#seeMoreBtn").click(function(){
+        handleSeeMoreAnimation();
+    });
 
     $(window).on('resize', function() {
 
