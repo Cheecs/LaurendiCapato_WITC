@@ -2,8 +2,7 @@ let usrData;
 
 $(document).ready(function(){
 
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    $('[data-toggle="tooltip"]').tooltip();
 
     $("#file").on("change", () => {
         changeImg();
@@ -31,8 +30,6 @@ async function getUserInfo(token) {
     try {
 
         let usrData = await decodeToken(token);
-
-        //$("#mailUsr").text(usrData.mail); da mettere nel tooltip
 
         $("#imgUtente").attr("title", usrData.mail);
         $("#imgUtente").tooltip("dispose").tooltip();
