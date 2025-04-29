@@ -33,10 +33,9 @@ async function getUserInfo(token) {
         let usrData = await decodeToken(token);
 
         //$("#mailUsr").text(usrData.mail); da mettere nel tooltip
-        console.log("usrData: ", usrData);
-        console.log(`mail: ${usrData.mail}`);
 
         $("#imgUtente").attr("title", usrData.mail);
+        $("#imgUtente").tooltip("dispose").tooltip();
 
         $("#btnSalvaColore").click(function(){
             console.log(`id utente: ${ usrData.id}`);
