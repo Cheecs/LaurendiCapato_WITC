@@ -2,6 +2,9 @@ let usrData;
 
 $(document).ready(function(){
 
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
     $("#file").on("change", () => {
         changeImg();
     });
@@ -29,7 +32,8 @@ async function getUserInfo(token) {
 
         let usrData = await decodeToken(token);
 
-        $("#mailUsr").text(usrData.mail);
+        //$("#mailUsr").text(usrData.mail); da mettere nel tooltip
+        $("#imgUtente").attr("data-bs-title", usrData.mail);
 
         $("#btnSalvaColore").click(function(){
             console.log(`id utente: ${ usrData.id}`);
@@ -46,7 +50,7 @@ function imgToBase64(img) {
     return new Promise((resolve, reject) => {
 
         const reader = new FileReader();
-        
+
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
         reader.readAsDataURL(img);
