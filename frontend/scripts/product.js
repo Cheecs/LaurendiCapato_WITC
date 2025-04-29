@@ -36,7 +36,7 @@ async function getUserInfo(token) {
         console.log("usrData: ", usrData);
         console.log(`mail: ${usrData.mail}`);
 
-        $("#imgUtente").attr("data-bs-title", usrData.mail);
+        $("#imgUtente").attr("title", usrData.mail);
 
         $("#btnSalvaColore").click(function(){
             console.log(`id utente: ${ usrData.id}`);
