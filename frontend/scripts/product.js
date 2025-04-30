@@ -20,7 +20,7 @@ $(document).ready(function(){
         if(loggedIn)
         {
             btnSalva.attr("data-bs-toggle", "modal");
-            btnSalva.attr(" data-bs-target", "#SaveModal");
+            btnSalva.attr("data-bs-target", "#SaveModal");
         }
         else
         {
