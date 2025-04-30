@@ -55,6 +55,7 @@ $(document).ready(function(){
     if(token && token.trim() != "")
     {
         getUserInfo(token);
+        loggedIn = true;
     }
     else
     {
