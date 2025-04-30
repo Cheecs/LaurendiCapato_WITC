@@ -203,13 +203,9 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
     else
         params = [mail];
 
-    console.log("parametri: ", params);
-
     return new Promise((resolve, reject) => {
 
         db.query(query, params, (err, results) => {
-
-            console.log("query: ", query);
 
             rows = results as any[];
             console.log(rows);

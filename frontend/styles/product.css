@@ -114,7 +114,7 @@ h3 {
     position: relative;
 }
 
-#conteinerTable{
+#containerTable{
     position: relative;
 }
 
@@ -223,26 +223,14 @@ h3 {
     height: min-content;
 }
 
-#btnSalvaPalette{
+#btnSalva{
     background-color: #00ffd0;
     box-shadow: 0px 0px 3px 0px #00ffd071;
     border: 0px;
     color: #050913;
 }
 
-#btnSalvaPalette:hover {
-    transition: 0.15s;
-    box-shadow: 0px 0px 35px 1px #00ffd071;
-}
-
-#btnSalvaColore{
-    background-color: #00ffd0;
-    box-shadow: 0px 0px 3px 0px #00ffd071;
-    border: 0px;
-    color: #050913;
-}
-
-#btnSalvaColore:hover {
+#btnSalva:hover {
     transition: 0.15s;
     box-shadow: 0px 0px 35px 1px #00ffd071;
 }
@@ -556,9 +544,14 @@ a.text-white:hover {
     color: #050913;
 }
 
-.btnClose{
-    background-color: #00ffd0;
+.btnClose {
+    background-color: #273339;
     box-shadow: 0px 0px 3px 0px #00ffd071;
-    border: 0px;
-    color: #050913;
+    border: 1px solid #00ffd0;
+    color: #00ffd0;
+}
+
+.btnClose:hover {
+    transition: 0.15s;
+    box-shadow: 0px 0px 35px 1px #00ffd071;
 }

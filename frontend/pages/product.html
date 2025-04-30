@@ -39,50 +39,32 @@
 </head>
 
 <body>
-<!-- Modale palette -->
-<div class="modal modal-dark" id="SavePaletteModal">
+<!-- Modale salvataggio -->
+<div class="modal" id="SaveModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-white SaveModalContent">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Add a name for your palette</h4>
+        <h3 class="modal-title">Save your color and palette</h3>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
+        <h5 class="modal-title mb-2">Add a name for your color</h5>
         <form>
           <div class="form-group">
-            <input type="text" class="inputName form-control mb-3" id="name" aria-describedby="name" placeholder="Enter name">
-            <button type="submit" class="btn btnSave">Save</button>
-          </div>        
+            <input type="text" class="inputName form-control mb-3" id="colorName" aria-describedby="name" placeholder="Enter name">
+          </div>      
         </form>
       </div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btnClose" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Modale colore -->
-<div class="modal" id="SaveColorModal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-white SaveModalContent">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Add a name for your color</h4>
-      </div>
-
       <!-- Modal body -->
       <div class="modal-body">
+        <h5 class="modal-title mb-2">Add a name for your Palette</h5>
         <form>
           <div class="form-group">
-            <input type="text" class="inputName form-control mb-3" id="name" aria-describedby="name" placeholder="Enter name">
+            <input type="text" class="inputName form-control mb-3" id="paletteName" aria-describedby="name" placeholder="Enter name">
             <button type="submit" class="btn btnSave">Save</button>
           </div>      
         </form>
@@ -142,14 +124,14 @@
         </div>
         <img src="" id="imgPreview" class="mb-4" alt="">
         <div id="divBtnAnalizza">
-          <button class="btn" id="btnAnalizza">Analizza</button>
+          <a class="btn" id="btnAnalizza" href="#containerTable">Analizza</a>
         </div>
       </div>    
     </div>
 
-    <div class="container" id="conteinerTable">
-      <h2 class="mt-4 heading">Main color</h2>
-      <button class="btn" id="btnSalvaColore" data-bs-toggle="modal" data-bs-target="#SaveColorModal">Salva</button>
+    <div class="container" id="containerTable">
+      <h2 class="mt-5 heading">Color</h2>
+
       <table class="table table-dark table-striped table-borderless mt-3">
         <thead>
           <tr>
@@ -164,7 +146,6 @@
       </table>
 
       <h2 class="mt-5 heading">Palette</h2>
-      <button class="btn" id="btnSalvaPalette" data-bs-toggle="modal" data-bs-target="#SavePaletteModal">Salva</button>
 
       <table class="table table-dark table-striped table-borderless mt-3">
         <thead>
@@ -178,7 +159,9 @@
 
         </tbody>
       </table>
+      <button class="btn" id="btnSalva" data-bs-toggle="modal" data-bs-target="#SaveModal">Salva</button>
     </div>
+
   </main>
   <section class="container mt-5" id="review">
     <div class="card mt-3 mb-3" id="divRev">

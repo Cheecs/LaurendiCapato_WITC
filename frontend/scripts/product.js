@@ -1,3 +1,5 @@
+let loggedIn;
+
 $(document).ready(function(){
 
     $('[data-toggle="tooltip"]').tooltip();
@@ -23,7 +25,13 @@ $(document).ready(function(){
 
     let token = sessionStorage.getItem("token");
 
-    getUserInfo(token);
+    if(token && token.trim() != "")
+    {
+        getUserInfo(token);
+    }
+    else
+        loggedIn = false;
+
 });
 
 async function getUserInfo(token) {
