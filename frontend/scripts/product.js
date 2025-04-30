@@ -53,8 +53,7 @@ async function getUserInfo(token) {
         });
 
     } catch (err) {
-        // mostra alert o gestisci errore
-        console.error("Errore nel recupero dei dati utente:", err);
+        showAlert("Errore nel recupero dei dati utente");
     }
 }
 
@@ -104,7 +103,6 @@ function decodeToken(_token){
         });
 
         request.fail((err) => {
-            console.error("Errore durante la decodifica:", err);
             reject(err);
         });
     });
