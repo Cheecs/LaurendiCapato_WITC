@@ -15,8 +15,18 @@ $(document).ready(function(){
 
         analized = true;
 
-        $("#btnSalva").attr("data-bs-toggle", "modal");
-        $("#btnSalva").attr("data-bs-target", "#LoginModal");
+        let btnSalva = $("#btnSalva");
+
+        if(loggedIn)
+        {
+            btnSalva.attr("data-bs-toggle", "modal");
+            btnSalva.attr(" data-bs-target", "#SaveModal");
+        }
+        else
+        {
+            btnSalva.attr("data-bs-toggle", "modal");
+            btnSalva.attr("data-bs-target", "#LoginModal");    
+        }
         
         writeInTable(imgInfo);
     });
@@ -55,11 +65,6 @@ $(document).ready(function(){
 
 async function getUserInfo(token) {
 
-    let btnSalva = $("#btnSalva");
-
-    btnSalva.attr("data-bs-toggle", "modal");
-    btnSalva.attr(" data-bs-target", "#SaveModal");
-
     try {
 
         let usrData = await decodeToken(token);
@@ -67,7 +72,7 @@ async function getUserInfo(token) {
         $("#imgUtente").attr("title", usrData.mail);
         $("#imgUtente").tooltip("dispose").tooltip();
 
-        btnSalva.click(function(){
+        $("#btnSalva").click(function(){
 
             console.log("ok")
 
