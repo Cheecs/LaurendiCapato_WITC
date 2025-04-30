@@ -1,4 +1,5 @@
 let loggedIn;
+let analized;
 
 $(document).ready(function(){
 
@@ -11,6 +12,11 @@ $(document).ready(function(){
     $("#btnAnalizza").on("click", () => {
         
         let imgInfo = extractColor();
+
+        analized = true;
+
+        $("#btnSalva").attr("data-bs-toggle", "modal");
+        $("#btnSalva").attr("data-bs-target", "#LoginModal");
         
         writeInTable(imgInfo);
     });
@@ -21,6 +27,17 @@ $(document).ready(function(){
         $("#fileInputContainer").removeClass("d-none");
 
         clearTables();
+        analized = false;
+
+        $("#btnSalva").removeAttr("data-bs-toggle");
+        $("#btnSalva").removeAttr("data-bs-target");
+    });
+
+    $("#btnSalva").click(function() {
+
+        if(!analized)
+            showAlert("Analizzare l'immagine");
+
     });
 
     let token = sessionStorage.getItem("token");
@@ -30,11 +47,18 @@ $(document).ready(function(){
         getUserInfo(token);
     }
     else
+    {
         loggedIn = false;
+    }
 
 });
 
 async function getUserInfo(token) {
+
+    let btnSalva = $("#btnSalva");
+
+    btnSalva.attr("data-bs-toggle", "modal");
+    btnSalva.attr(" data-bs-target", "#SaveModal");
 
     try {
 
@@ -43,9 +67,9 @@ async function getUserInfo(token) {
         $("#imgUtente").attr("title", usrData.mail);
         $("#imgUtente").tooltip("dispose").tooltip();
 
-        $("#btnSalvaColore").click(function(){
+        btnSalva.click(function(){
 
-            console.log("ok");
+            console.log("ok")
 
             const img = $("#file")[0].files[0];
 
@@ -61,18 +85,19 @@ async function saveColor(id, img){
 
     let promiseResponse = await imgToBase64(img);
     let imgBase64 = promiseResponse.split(',')[1];
+
     let colorHEX = $(".mainColorHEX").text();
     let colorRGB = $(".mainColorRGB").text();
+
+    let colorsRGB = $(".rgbColors").text();
+    let colorsHEX = $(".hexColors").text();
 
     console.log(`id utente`);
     console.log(`img base64: ${imgBase64}`);
     console.log(`color: ${colorHEX}`);
     console.log(`color: ${colorRGB}`);
-
-    // per palettes
-    // let colorsRGB = $(".rgbColors").text();
-    // let colorsHEX = $(".hexColors").text();
-
+    console.log(`palette: ${colorsHEX}`);
+    console.log(`palette: ${colorsRGB}`);
 }
 
 function imgToBase64(img) {

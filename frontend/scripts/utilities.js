@@ -12,7 +12,7 @@ function showAlert(msg){
         divAlert.addClass("hideAlert");
         divAlert.removeClass("showAlert");
 
-    }, 6000);
+    }, 4000);
 }
 
 function handleShowHidePwd(){

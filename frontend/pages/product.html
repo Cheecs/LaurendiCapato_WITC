@@ -78,11 +78,36 @@
     </div>
   </div>
 </div>
-<div id="containerAlert">
-  <div class="hideAlert alert alert-danger col-4 container mt-5" id="divAlert">
+
+<!-- Modale login -->
+<div class="modal" id="LoginModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-white SaveModalContent">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h3 class="modal-title">You must login!</h3>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h5 class="modal-title mb-2">In order to save you color and your palettes you have to be logged in.</h5>
+        <h5 class="modal-title mb-2">Follow <a id="loginLink" href="./login.html">this link</a> to the login page or close this message.</h5>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btnClose" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div id="containerAlert" class="sticky-top">
+  <div class="hideAlert alert alert-danger col-4 container mt-4" id="divAlert">
     <strong>Error</strong>
     <span id="errorMsg"></span>
-  </div>
+</div>
 </div>
 <!-- --------------- -->
   <header class="mb-5">
@@ -161,10 +186,10 @@
           </tr>
         </thead>
         <tbody id="tBodyPalette">
-
+          
         </tbody>
       </table>
-      <button class="btn" id="btnSalva" data-bs-toggle="modal" data-bs-target="#SaveModal">Salva</button>
+      <button class="btn" id="btnSalva">Salva</button>
     </div>
 
   </main>
