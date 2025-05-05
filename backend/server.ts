@@ -190,8 +190,36 @@ app.post("/api/decodeToken", (req, res) => {
     }
 });
 
+/* -- ENDPOINTS COLORI */
 
-/* ------------------------------- */
+app.post("/api/saveInfo", async (req, res) => {
+
+    // recupera info dal body
+    let colorName = req.body.colorName;
+    let paletteName = req.body.paletteName;
+    let mainColorHEX = req.body.mainColorHEX;
+    let mainColorRGB = req.body.mainColorRGB;
+    let paletteHEX = req.body.paletteHEX;
+    let paletteRGB = req.body.paletteRGB;
+    let img = req.body.img;
+    let idUser = req.body.idUser;
+
+    let paletteID = await getNewPaletteID();
+    let insertedPalette = await insertPalette(paletteID, paletteName);
+    let insertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
+
+    if(insertedPalette)
+    {
+        // inserisci immagine e colori (con un for)
+    }
+    else
+    {
+        res.status(500);
+    }
+
+})
+
+/* -------------  UTILITIES ------------------ */
 
 function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 
@@ -225,8 +253,48 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
     });
 }
 
-/* FUNZIONE PER jwt */
+function insertPalette(idP:number, nomeP:string):Promise<boolean>{
 
+    let query = "INSERT INTO palettes ('NomeP') VALUES (?)";
+    let params = [idP, nomeP];
+
+    return new Promise((resolve, reject) => {
+
+        db.query(query, params, (err, results) => {
+
+            if(err)
+                return resolve(false);
+            else
+                return resolve(true);
+        });
+    });
+
+
+}
+
+function getNewPaletteID():Promise<number>{
+
+    let query = "SELECT MAX(idP) as 'lastID' FROM palettes";
+    let newID:number;
+
+    return new Promise((resolve, reject) => {
+
+        db.query(query, (err, results) => {
+
+            let queryRes = results as any[];
+            let lastID:any = queryRes[0].lastID;
+
+            if(lastID == null)
+                newID = 1;
+            else
+                newID = lastID++;
+
+            return resolve(newID);
+        });
+    });
+}
+
+// creazione token JWT
 function createToken(data:any){
 
     let now = Math.floor(new Date().getTime()/1000); // data
@@ -244,3 +312,5 @@ function createToken(data:any){
 
     return token;
 }
+
+/* -------------------------------- */

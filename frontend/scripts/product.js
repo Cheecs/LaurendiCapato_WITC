@@ -75,8 +75,6 @@ async function getUserInfo(token) {
 
         $("#saveImgInfo").click(function(){
 
-            console.log("ok")
-
             const img = $("#file")[0].files[0];
 
             saveColor(usrData.id, img);
@@ -97,8 +95,8 @@ async function saveColor(id, img){
     let promiseResponse = await imgToBase64(img);
     let imgBase64 = promiseResponse.split(',')[1];
 
-    let colorHEX = $(".mainColorHEX").text();
-    let colorRGB = $(".mainColorRGB").text();
+    let mainHEX = $(".mainColorHEX").text();
+    let mainRGB = $(".mainColorRGB").text();
 
     let colorsRGB = $(".rgbColors").text();
     let colorsHEX = $(".hexColors").text();
@@ -106,14 +104,36 @@ async function saveColor(id, img){
     let colorName = colorNameInput != "" ? colorNameInput : "Color";
     let paletteName = paletteNameInput != "" ? paletteNameInput : "Palette";
 
-    console.log(`id utente`);
-    console.log(`img base64: ${imgBase64}`);
-    console.log(`color: ${colorHEX}`);
-    console.log(`color: ${colorRGB}`);
-    console.log(`palette: ${colorsHEX}`);
-    console.log(`palette: ${colorsRGB}`);
-    console.log(`colorName: ${colorName}`);
-    console.log(`paletteName: ${paletteName}`);
+    let reqBody = {
+        
+        colorName: colorName,
+        paletteName: paletteName,
+        mainColorHEX: mainHEX,
+        mainColorRGB: mainRGB,
+        paletteHEX: colorsHEX,
+        paletteRGB: colorsRGB,
+        img: imgBase64,
+        idUser: id
+    }
+
+    let request = inviaRichiesta("POST", "/api/saveInfo", reqBody);
+
+    request.done(() => {
+        showSuccess("informations saved correctly, visit your profile page to see your collection");
+    });
+
+    request.fail(() => {
+        showAlert("An error occured while saving informations");
+    })
+
+    // console.log(`id utente: ${id}`);
+    // console.log(`img base64: ${imgBase64}`);
+    // console.log(`color: ${mainHEX}`);
+    // console.log(`color: ${mainRGB}`);
+    // console.log(`palette: ${colorsHEX}`);
+    // console.log(`palette: ${colorsRGB}`);
+    // console.log(`colorName: ${colorName}`);
+    // console.log(`paletteName: ${paletteName}`);
 }
 
 function imgToBase64(img) {
@@ -231,3 +251,34 @@ function changeImg() {
     $("#fileInputContainer").addClass("d-none");
 
 }
+
+function showSuccess(msg){
+
+    let divAlert = $("#divAlert");
+    divAlert.removeClass("alert-danger");
+    divAlert.addClass("alert-success");
+
+    $("#alertHeading").text("Success!");
+
+    $("#errorMsg").text(msg);
+
+    divAlert.removeClass("hideAlert");
+    divAlert.addClass("showAlert");
+
+    setTimeout(function(){
+
+        divAlert.addClass("hideAlert");
+        divAlert.removeClass("showAlert");
+
+    }, 4000);
+
+    setTimeout(function(){
+
+        $("#alertHeading").text("Error");
+
+        divAlert.removeClass("alert-Success");
+        divAlert.addClass("alert-danger");
+
+    }, 5000);
+}
+
