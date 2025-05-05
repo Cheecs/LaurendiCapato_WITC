@@ -207,6 +207,8 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 
         db.query(query, params, (err, results) => {
 
+            console.log(query + " " + params);
+
             rows = results as any[];
             console.log(rows);
 
