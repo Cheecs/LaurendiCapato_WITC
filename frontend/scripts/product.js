@@ -90,6 +90,9 @@ async function getUserInfo(token) {
 
 async function saveColor(id, img){
 
+    let colorNameInput = $("#colorName");
+    let paletteNameInput = $("#paletteName");
+
     let promiseResponse = await imgToBase64(img);
     let imgBase64 = promiseResponse.split(',')[1];
 
@@ -99,12 +102,17 @@ async function saveColor(id, img){
     let colorsRGB = $(".rgbColors").text();
     let colorsHEX = $(".hexColors").text();
 
+    let colorName = colorNameInput.text() != "" ? colorNameInput.text() : "Color";
+    let paletteName = paletteNameInput.text() != "" ? paletteNameInput.text() : "Palette";
+
     console.log(`id utente`);
     console.log(`img base64: ${imgBase64}`);
     console.log(`color: ${colorHEX}`);
     console.log(`color: ${colorRGB}`);
     console.log(`palette: ${colorsHEX}`);
     console.log(`palette: ${colorsRGB}`);
+    console.log(`colorName: ${colorName}`);
+    console.log(`paletteName: ${paletteName}`);
 }
 
 function imgToBase64(img) {
