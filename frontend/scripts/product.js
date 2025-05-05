@@ -73,9 +73,7 @@ async function getUserInfo(token) {
         $("#imgUtente").attr("title", usrData.mail);
         $("#imgUtente").tooltip("dispose").tooltip();
 
-        $("#saveInfoForm").sumbit(function(event){
-
-            event.preventDefault();
+        $("#saveImgInfo").click(function(){
 
             console.log("ok")
 
