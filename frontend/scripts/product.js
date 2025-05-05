@@ -85,13 +85,14 @@ async function getUserInfo(token) {
     } catch (err) 
     {
         showAlert("Errore nel recupero dei dati utente");
+        loggedIn = false;
     }
 }
 
 async function saveColor(id, img){
 
-    let colorNameInput = $("#colorName");
-    let paletteNameInput = $("#paletteName");
+    let colorNameInput = $("#colorName").val();
+    let paletteNameInput = $("#paletteName").val();
 
     let promiseResponse = await imgToBase64(img);
     let imgBase64 = promiseResponse.split(',')[1];
@@ -102,8 +103,8 @@ async function saveColor(id, img){
     let colorsRGB = $(".rgbColors").text();
     let colorsHEX = $(".hexColors").text();
 
-    let colorName = colorNameInput.text() != "" ? colorNameInput.text() : "Color";
-    let paletteName = paletteNameInput.text() != "" ? paletteNameInput.text() : "Palette";
+    let colorName = colorNameInput != "" ? colorNameInput : "Color";
+    let paletteName = paletteNameInput != "" ? paletteNameInput : "Palette";
 
     console.log(`id utente`);
     console.log(`img base64: ${imgBase64}`);
