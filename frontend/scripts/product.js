@@ -84,7 +84,8 @@ async function getUserInfo(token) {
             saveColor(usrData.id, img);
         });
 
-    } catch (err) {
+    } catch (err) 
+    {
         showAlert("Errore nel recupero dei dati utente");
     }
 }
