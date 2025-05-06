@@ -194,7 +194,6 @@ app.post("/api/decodeToken", (req, res) => {
 
 app.post("/api/saveInfo", async (req, res) => {
 
-    // recupera info dal body
     let colorName = req.body.colorName;
     let paletteName = req.body.paletteName;
     let mainColorHEX = req.body.mainColorHEX;
@@ -203,14 +202,50 @@ app.post("/api/saveInfo", async (req, res) => {
     let paletteRGB = req.body.paletteRGB;
     let img = req.body.img;
     let idUser = req.body.idUser;
-
     let paletteID = await getNewPaletteID();
+
     let insertedPalette = await insertPalette(paletteID, paletteName);
-    let insertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
+
+    let queryInsertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
+    let paramsInsertImg = [img, mainColorRGB, mainColorHEX, colorName, paletteID, idUser];
+
+    let queryInsertPalette = "INSERT INTO colori(`idP`, `cRGB`, `cHEX`) VALUES (?, ?, ?);";
+    let paramsInsertPalette = [];
+
+    let resultInsert = false;
+
 
     if(insertedPalette)
     {
-        // inserisci immagine e colori (con un for)
+        // setup parametri per insert dei colori della palette
+        for(let i = 0; i < paletteHEX.length; i++)
+        {
+            let tempArray = [paletteID, paletteRGB[i], paletteHEX[i]];
+            paramsInsertImg.push(tempArray);
+        }
+
+        db.query(queryInsertImg, paramsInsertImg, (err, results) => {
+
+            if(err)
+                resultInsert = false
+            else
+                resultInsert = true;
+        });
+
+        db.query(queryInsertPalette, paramsInsertImg, (err, results) => {
+
+            if(err)
+                resultInsert = false
+            else
+                resultInsert = true;
+
+        });
+
+        if(resultInsert)
+            res.send(200);
+        else
+            res.send(500);
+
     }
     else
     {
