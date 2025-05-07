@@ -200,6 +200,8 @@ app.post("/api/savePalette", async (req, res) => {
  
     let idP = getNewPaletteID();
     let insertedPalette = false;
+
+    console.log("id new palette: " + idP);
     
     let queryInsertPalette = "INSERT INTO palettes ('NomeP') VALUES (?)";
     let paramsInsertPalette = [idP, paletteName];
@@ -225,7 +227,7 @@ app.post("/api/savePalette", async (req, res) => {
             paramsInsertColors.push(tempArray);
         }
         
-        db.query(queryInsertPalette, paramsInsertColors, (err, results) => {
+        db.query(queryInsertColors, paramsInsertColors, (err, results) => {
 
             if (err)
                 res.status(500).send(null);
