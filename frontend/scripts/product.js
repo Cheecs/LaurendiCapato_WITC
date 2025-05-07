@@ -115,6 +115,8 @@ async function saveColor(id, img){
 
     if(insertPaletteRes != null)
     {
+        console.log("insertPaletteRes: true");
+
         let reqBodyC = {
         
             colorName: colorName,
@@ -129,6 +131,8 @@ async function saveColor(id, img){
 
         if(insertColorRes)
             showSuccess("informations saved correctly, visit your profile page to see your collection");
+        else
+            showAlert("An error occured while saving informations");
     }
     else
         showAlert("An error occured while saving informations");
@@ -153,13 +157,21 @@ function insertPalette(reqBody){
 
     request.fail(() => {
         return null;
-    })
+    });
 
 }
 
 function insertColor(reqBody){
 
     let request = inviaRichiesta("POST", "/api/saveColor", reqBody);
+
+    request.done(() => {
+        return true;
+    });
+
+    request.fail(() => {
+        return false;
+    });
 
 }
 
