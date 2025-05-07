@@ -198,7 +198,7 @@ app.post("/api/savePalette", async (req, res) => {
     let paletteRGB = req.body.paletteRGB;
     let paletteName = req.body.paletteName;
  
-    let idP = getNewPaletteID();
+    let idP = await getNewPaletteID();
     let insertedPalette = false;
 
     console.log("id new palette: " + idP);
@@ -306,24 +306,29 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
     });
 }
 
-function getNewPaletteID(){
+function getNewPaletteID():Promise<number | null>{
 
     let query = "SELECT MAX(idP) as 'lastID' FROM palettes";
     let newID:number;
 
-    db.query(query, (err, results) => {
+    return new Promise((resolve, reject) => {
 
-        let queryRes = results as any[];
-        let lastID: any = queryRes[0].lastID;
+        db.query(query, (err, results) => {
 
-        if(err)
-            return null;
-        else if (lastID == null)
-            newID = 1;
-        else
-            newID = lastID++;
+            if(err)
+                return resolve(null);
 
-        return newID;
+            let queryRes = results as any[];
+            let lastID:any = queryRes[0].lastID;
+
+
+            if(lastID == null)
+                newID = 1;
+            else
+                newID = lastID + 1;
+
+            return resolve(newID);
+        });
     });
 }
 
