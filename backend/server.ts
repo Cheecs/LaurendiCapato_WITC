@@ -306,25 +306,24 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
     });
 }
 
-function getNewPaletteID():Promise<number>{
+function getNewPaletteID(){
 
     let query = "SELECT MAX(idP) as 'lastID' FROM palettes";
     let newID:number;
 
-    return new Promise((resolve, reject) => {
+    db.query(query, (err, results) => {
 
-        db.query(query, (err, results) => {
+        let queryRes = results as any[];
+        let lastID: any = queryRes[0].lastID;
 
-            let queryRes = results as any[];
-            let lastID:any = queryRes[0].lastID;
+        if(err)
+            return null;
+        else if (lastID == null)
+            newID = 1;
+        else
+            newID = lastID++;
 
-            if(lastID == null)
-                newID = 1;
-            else
-                newID = lastID++;
-
-            return resolve(newID);
-        });
+        return newID;
     });
 }
 
