@@ -194,49 +194,95 @@ app.post("/api/decodeToken", (req, res) => {
 
 app.post("/api/savePalette", async (req, res) => {
 
-    let paletteHEX = req.body.paletteHEX;
-    let paletteRGB = req.body.paletteRGB;
-    let paletteName = req.body.paletteName;
- 
-    let idP = await getNewPaletteID();
-    let insertedPalette = false;
+    try {
+        let paletteHEX = req.body.paletteHEX;
+        let paletteRGB = req.body.paletteRGB;
+        let paletteName = req.body.paletteName;
 
-    console.log("id new palette: " + idP);
-    
-    let queryInsertPalette = "INSERT INTO palettes ('NomeP') VALUES (?)";
-    let paramsInsertPalette = [idP, paletteName];
+        let idP = await getNewPaletteID();
 
-    let queryInsertColors = "INSERT INTO colori(`idP`, `cRGB`, `cHEX`) VALUES (?, ?, ?);";
-    let paramsInsertColors = [];
-
-
-    db.query(queryInsertPalette, paramsInsertPalette, (err, results) => {
-
-        if(err)
-            insertedPalette = false;
-        else
-            insertedPalette = true;
-    });
-
-    if(insertedPalette)
-    {
-        // setup parametri per insert dei colori della palette
-        for (let i = 0; i < paletteHEX.length; i++) 
+        if (idP != null) 
         {
-            let tempArray = [idP, paletteRGB[i], paletteHEX[i]];
-            paramsInsertColors.push(tempArray);
+            res.status(500);
+            res.end();
         }
-        
-        db.query(queryInsertColors, paramsInsertColors, (err, results) => {
+        else
+        {
+            console.log("id new palette:", idP);
 
-            if (err)
-                res.status(500).send(null);
+            const queryInsertPalette = "INSERT INTO palettes (idP, NomeP) VALUES (?, ?)";
+            const paramsInsertPalette = [idP, paletteName];
+            let insertedPalette = await insertPalette(queryInsertPalette, paramsInsertPalette);
+    
+            if(insertedPalette)
+            {
+                const queryInsertColors = "INSERT INTO colori (idP, cRGB, cHEX) VALUES ?";
+                const colorValues = paletteHEX.map((hex:string, i:number) => [idP, paletteRGB[i], hex]);
+                let insertedColors = await insertColors(queryInsertColors, [colorValues]); 
+                
+                if(insertedColors)
+                    res.status(200).send(idP);
+                else
+                    throw new Error();
+            } 
             else
-                res.status(200).send(idP);
+                throw new Error();   
+            
+        }
 
-        });
+    } catch (err) {
+        console.error("Errore nel salvataggio:", err);
+        res.status(500).send();
     }
-});
+
+})
+
+
+// app.post("/api/savePalette", async (req, res) => {
+
+    // let paletteHEX = req.body.paletteHEX;
+    // let paletteRGB = req.body.paletteRGB;
+    // let paletteName = req.body.paletteName;
+ 
+    // let idP = await getNewPaletteID();
+    // let insertedPalette = false;
+
+    // console.log("id new palette: " + idP);
+    
+    // let queryInsertPalette = "INSERT INTO palettes ('NomeP') VALUES (?)";
+    // let paramsInsertPalette = [idP, paletteName];
+
+    // let queryInsertColors = "INSERT INTO colori(`idP`, `cRGB`, `cHEX`) VALUES (?, ?, ?);";
+    // let paramsInsertColors = [];
+
+
+    // db.query(queryInsertPalette, paramsInsertPalette, (err, results) => {
+
+    //     if(err)
+    //         insertedPalette = false;
+    //     else
+    //         insertedPalette = true;
+    // });
+
+    // if(insertedPalette)
+    // {
+    //     // setup parametri per insert dei colori della palette
+    //     for (let i = 0; i < paletteHEX.length; i++) 
+    //     {
+    //         let tempArray = [idP, paletteRGB[i], paletteHEX[i]];
+    //         paramsInsertColors.push(tempArray);
+    //     }
+        
+    //     db.query(queryInsertColors, paramsInsertColors, (err, results) => {
+
+    //         if (err)
+    //             res.status(500).send(null);
+    //         else
+    //             res.status(200).send(idP);
+
+    //     });
+    // }
+// });
 
 app.post("/api/saveColor", async (req, res) => {
 
@@ -250,26 +296,19 @@ app.post("/api/saveColor", async (req, res) => {
     let queryInsertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
     let paramsInsertImg = [img, mainColorRGB, mainColorHEX, colorName, paletteID, idUser];
 
-    let resultInsert = false;
-
     db.query(queryInsertImg, paramsInsertImg, (err, results) => {
 
         if (err)
-            resultInsert = false
+            res.status(500);
         else
-            resultInsert = true;
+            res.status(200);
     });
-
-    if (resultInsert)
-        res.status(200);
-    else
-        res.status(500);
 
     res.end();
 
 });
 
-/* -------------  UTILITIES ------------------ */
+/* -------------  OTHER FUNCTIONS ------------------ */
 
 function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 
@@ -305,6 +344,36 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
         });
     });
 }
+
+function insertColors(query:string, params:any){
+
+    return new Promise((resolve, reject) => {
+
+        db.query(query, params, (err, results) => {
+
+            if(err)
+                return resolve(false);
+            else
+                return resolve(true);
+        });
+    });
+}
+
+
+function insertPalette(query:string, params:any):Promise<boolean>{
+
+    return new Promise((resolve, reject) => {
+
+        db.query(query, params, (err, results) => {
+
+            if(err)
+                return resolve(false);
+            else
+                return resolve(true);
+        });
+    });
+}
+
 
 function getNewPaletteID():Promise<number | null>{
 
