@@ -192,67 +192,80 @@ app.post("/api/decodeToken", (req, res) => {
 
 /* -- ENDPOINTS COLORI */
 
-app.post("/api/saveInfo", async (req, res) => {
+app.post("/api/savePalette", async (req, res) => {
 
-    let colorName = req.body.colorName;
-    let paletteName = req.body.paletteName;
-    let mainColorHEX = req.body.mainColorHEX;
-    let mainColorRGB = req.body.mainColorRGB;
     let paletteHEX = req.body.paletteHEX;
     let paletteRGB = req.body.paletteRGB;
-    let img = req.body.img;
-    let idUser = req.body.idUser;
-    let paletteID = await getNewPaletteID();
+    let paletteName = req.body.paletteName;
+ 
+    let idP = getNewPaletteID();
+    let insertedPalette = false;
+    
+    let queryInsertPalette = "INSERT INTO palettes ('NomeP') VALUES (?)";
+    let paramsInsertPalette = [idP, paletteName];
 
-    let insertedPalette = await insertPalette(paletteID, paletteName);
+    let queryInsertColors = "INSERT INTO colori(`idP`, `cRGB`, `cHEX`) VALUES (?, ?, ?);";
+    let paramsInsertColors = [];
 
-    let queryInsertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
-    let paramsInsertImg = [img, mainColorRGB, mainColorHEX, colorName, paletteID, idUser];
 
-    let queryInsertPalette = "INSERT INTO colori(`idP`, `cRGB`, `cHEX`) VALUES (?, ?, ?);";
-    let paramsInsertPalette = [];
+    db.query(queryInsertPalette, paramsInsertPalette, (err, results) => {
 
-    let resultInsert = false;
-
+        if(err)
+            insertedPalette = false;
+        else
+            insertedPalette = true;
+    });
 
     if(insertedPalette)
     {
         // setup parametri per insert dei colori della palette
-        for(let i = 0; i < paletteHEX.length; i++)
+        for (let i = 0; i < paletteHEX.length; i++) 
         {
-            let tempArray = [paletteID, paletteRGB[i], paletteHEX[i]];
-            paramsInsertImg.push(tempArray);
+            let tempArray = [idP, paletteRGB[i], paletteHEX[i]];
+            paramsInsertColors.push(tempArray);
         }
+        
+        db.query(queryInsertPalette, paramsInsertColors, (err, results) => {
 
-        db.query(queryInsertImg, paramsInsertImg, (err, results) => {
-
-            if(err)
-                resultInsert = false
+            if (err)
+                res.status(500).send(null);
             else
-                resultInsert = true;
-        });
-
-        db.query(queryInsertPalette, paramsInsertImg, (err, results) => {
-
-            if(err)
-                resultInsert = false
-            else
-                resultInsert = true;
+                res.status(200).send(idP);
 
         });
+    }
+});
 
-        if(resultInsert)
-            res.send(200);
+app.post("/api/saveColor", async (req, res) => {
+
+    let colorName = req.body.colorName;
+    let mainColorHEX = req.body.mainColorHEX;
+    let mainColorRGB = req.body.mainColorRGB;
+    let img = req.body.img;
+    let idUser = req.body.idUser;
+    let paletteID = req.body.idPalette;
+
+    let queryInsertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
+    let paramsInsertImg = [img, mainColorRGB, mainColorHEX, colorName, paletteID, idUser];
+
+    let resultInsert = false;
+
+    db.query(queryInsertImg, paramsInsertImg, (err, results) => {
+
+        if (err)
+            resultInsert = false
         else
-            res.send(500);
+            resultInsert = true;
+    });
 
-    }
+    if (resultInsert)
+        res.status(200);
     else
-    {
         res.status(500);
-    }
 
-})
+    res.end();
+
+});
 
 /* -------------  UTILITIES ------------------ */
 
@@ -276,7 +289,10 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
             console.log(rows);
 
             if (err)
+            {
+                console.error("Errore nella query:", err);
                 return resolve({ "loginInfo": "Server error, please try again", "status": 500 });
+            }
             else
             {
                 if (rows.length > 0) 
@@ -286,25 +302,6 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
             }
         });
     });
-}
-
-function insertPalette(idP:number, nomeP:string):Promise<boolean>{
-
-    let query = "INSERT INTO palettes ('NomeP') VALUES (?)";
-    let params = [idP, nomeP];
-
-    return new Promise((resolve, reject) => {
-
-        db.query(query, params, (err, results) => {
-
-            if(err)
-                return resolve(false);
-            else
-                return resolve(true);
-        });
-    });
-
-
 }
 
 function getNewPaletteID():Promise<number>{

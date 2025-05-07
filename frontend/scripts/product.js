@@ -104,27 +104,34 @@ async function saveColor(id, img){
     let colorName = colorNameInput != "" ? colorNameInput : "Color";
     let paletteName = paletteNameInput != "" ? paletteNameInput : "Palette";
 
-    let reqBody = {
-        
-        colorName: colorName,
+    let reqBodyP = {
         paletteName: paletteName,
-        mainColorHEX: mainHEX,
-        mainColorRGB: mainRGB,
         paletteHEX: colorsHEX,
         paletteRGB: colorsRGB,
-        img: imgBase64,
-        idUser: id
     }
 
-    let request = inviaRichiesta("POST", "/api/saveInfo", reqBody);
+    let insertPaletteRes = insertPalette(reqBodyP);
+    let insertColorRes = false;
 
-    request.done(() => {
-        showSuccess("informations saved correctly, visit your profile page to see your collection");
-    });
+    if(insertPaletteRes != null)
+    {
+        let reqBodyC = {
+        
+            colorName: colorName,
+            mainColorHEX: mainHEX,
+            mainColorRGB: mainRGB,
+            img: imgBase64,
+            idUser: id,
+            idPalette: insertPaletteRes,
+        }
 
-    request.fail(() => {
+        insertColorRes = insertColor(reqBodyC);
+
+        if(insertColorRes)
+            showSuccess("informations saved correctly, visit your profile page to see your collection");
+    }
+    else
         showAlert("An error occured while saving informations");
-    })
 
     // console.log(`id utente: ${id}`);
     // console.log(`img base64: ${imgBase64}`);
@@ -134,6 +141,26 @@ async function saveColor(id, img){
     // console.log(`palette: ${colorsRGB}`);
     // console.log(`colorName: ${colorName}`);
     // console.log(`paletteName: ${paletteName}`);
+}
+
+function insertPalette(reqBody){
+
+    let request = inviaRichiesta("POST", "/api/savePalette", reqBody);
+
+    request.done((data) => {
+        return data;
+    });
+
+    request.fail(() => {
+        return null;
+    })
+
+}
+
+function insertColor(reqBody){
+
+    let request = inviaRichiesta("POST", "/api/saveColor", reqBody);
+
 }
 
 function imgToBase64(img) {
