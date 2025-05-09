@@ -52,17 +52,6 @@ app.listen(PORT, () => {
     console.log(`Server in ascolto sulla porta ${PORT}`);
 });
 
-// // Connetti al database
-// db.connect((err: mysql.QueryError | null) => {
-
-//     if (err) {
-//         console.error('Errore di connessione:', err);
-//         return;
-//     }
-
-//     console.log('Connesso a MySQL');
-// });
-
 // test endpoint
 app.get('/api', (req, res) => {
     res.send('API attiva!');
@@ -142,15 +131,15 @@ app.post('/api/signup', async (req, res) => {
                     if (emailErr) {
                         console.error('Error sending email:', emailErr);
                     }
+                });
 
-                    let token = createToken(results);
+                let token = createToken(results);
 
-                    res.setHeader("authorization", token);
-                    res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
+                res.setHeader("authorization", token);
+                res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization        
 
-                    res.status(200).json({
-                        token: token,
-                    });
+                res.status(200).json({
+                    token: token,
                 });
             }
         })
@@ -198,13 +187,14 @@ app.post("/api/decodeToken", (req, res) => {
 app.post("/api/savePalette", async (req, res) => {
 
     try {
+
         let paletteHEX = req.body.paletteHEX;
         let paletteRGB = req.body.paletteRGB;
         let paletteName = req.body.paletteName;
 
         let idP = await getNewPaletteID();
 
-        if (idP != null) 
+        if (idP == null) 
         {
             res.status(500);
             res.end();
