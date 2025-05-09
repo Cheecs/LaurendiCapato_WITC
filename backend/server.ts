@@ -44,8 +44,8 @@ const db = mysql.createPool({
     password: PWD,  
     database: 'witc',
     waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    connectionLimit: 20,
+    queueLimit: 10
 });
 
 app.listen(PORT, () => {
