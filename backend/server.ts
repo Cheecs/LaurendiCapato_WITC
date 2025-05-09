@@ -38,27 +38,30 @@ console.log({
     },
 })
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: SERVER,
     user: 'root',
     password: PWD,  
-    database: 'witc'
+    database: 'witc',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 app.listen(PORT, () => {
     console.log(`Server in ascolto sulla porta ${PORT}`);
 });
 
-// Connetti al database
-db.connect((err: mysql.QueryError | null) => {
+// // Connetti al database
+// db.connect((err: mysql.QueryError | null) => {
 
-    if (err) {
-        console.error('Errore di connessione:', err);
-        return;
-    }
+//     if (err) {
+//         console.error('Errore di connessione:', err);
+//         return;
+//     }
 
-    console.log('Connesso a MySQL');
-});
+//     console.log('Connesso a MySQL');
+// });
 
 // test endpoint
 app.get('/api', (req, res) => {
