@@ -225,7 +225,8 @@ app.post("/api/savePalette", async (req, res) => {
 
     } catch (err) {
         console.error("Errore nel salvataggio:", err);
-        res.status(500).send();
+        res.status(500);
+        res.end();
     }
 
 })
