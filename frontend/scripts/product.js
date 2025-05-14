@@ -41,6 +41,8 @@ $(document).ready(function(){
 
         $("#btnSalva").removeAttr("data-bs-toggle");
         $("#btnSalva").removeAttr("data-bs-target");
+
+        $("#file").replaceWith($("#file").clone());
     });
 
     $("#btnSalva").click(function() {
