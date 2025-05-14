@@ -42,7 +42,7 @@ $(document).ready(function(){
         $("#btnSalva").removeAttr("data-bs-toggle");
         $("#btnSalva").removeAttr("data-bs-target");
 
-        $("#file").replaceWith($("#file").clone());
+        $("#file").val("");
     });
 
     $("#btnSalva").click(function() {
