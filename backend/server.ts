@@ -229,54 +229,7 @@ app.post("/api/savePalette", async (req, res) => {
         res.end();
     }
 
-})
-
-
-// app.post("/api/savePalette", async (req, res) => {
-
-    // let paletteHEX = req.body.paletteHEX;
-    // let paletteRGB = req.body.paletteRGB;
-    // let paletteName = req.body.paletteName;
- 
-    // let idP = await getNewPaletteID();
-    // let insertedPalette = false;
-
-    // console.log("id new palette: " + idP);
-    
-    // let queryInsertPalette = "INSERT INTO palettes ('NomeP') VALUES (?)";
-    // let paramsInsertPalette = [idP, paletteName];
-
-    // let queryInsertColors = "INSERT INTO colori(`idP`, `cRGB`, `cHEX`) VALUES (?, ?, ?);";
-    // let paramsInsertColors = [];
-
-
-    // db.query(queryInsertPalette, paramsInsertPalette, (err, results) => {
-
-    //     if(err)
-    //         insertedPalette = false;
-    //     else
-    //         insertedPalette = true;
-    // });
-
-    // if(insertedPalette)
-    // {
-    //     // setup parametri per insert dei colori della palette
-    //     for (let i = 0; i < paletteHEX.length; i++) 
-    //     {
-    //         let tempArray = [idP, paletteRGB[i], paletteHEX[i]];
-    //         paramsInsertColors.push(tempArray);
-    //     }
-        
-    //     db.query(queryInsertColors, paramsInsertColors, (err, results) => {
-
-    //         if (err)
-    //             res.status(500).send(null);
-    //         else
-    //             res.status(200).send(idP);
-
-    //     });
-    // }
-// });
+});
 
 app.post("/api/saveColor", async (req, res) => {
 

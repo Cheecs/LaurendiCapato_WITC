@@ -4,7 +4,31 @@ $(document).ready(function(){
 
     UIsetup();
 
+        let token = sessionStorage.getItem("token");
+
+    if(token && token.trim() != "")
+    {
+        getUserInfo(token);
+    }
+
 });
+
+async function getUserInfo(token) {
+
+    try {
+
+        let usrData = await decodeToken(token);
+
+        $("#imgUtente").attr("title", usrData.mail);
+        $("#imgUtente").tooltip("dispose").tooltip();
+
+
+    } catch (err) 
+    {
+        loggedIn = false;
+    }
+}
+
 
 function UIsetup(){
 
