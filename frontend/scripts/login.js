@@ -10,7 +10,8 @@ $(document).ready(function() {
       let token = sessionStorage.getItem("token");
 
       if(token)
-        window.location.href = "./product.html";
+        console.log(sessionStorage.getItem("token"));
+        //window.location.href = "./product.html";
 
       let email = $("#email").val();
       let pwd = $("#password").val();
