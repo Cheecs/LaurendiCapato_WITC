@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  
     $("#showPwd").prop("checked", false);
     handleShowHidePwd();
   
@@ -6,6 +7,11 @@ $(document).ready(function() {
 
       event.preventDefault();
   
+      let token = sessionStorage.getItem("token");
+
+      if(token)
+        window.location.href = "./product.html";
+
       let email = $("#email").val();
       let pwd = $("#password").val();
       let hasPwd = CryptoJS.MD5(pwd).toString();

@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     UIsetup();
 
-        let token = sessionStorage.getItem("token");
+    let token = sessionStorage.getItem("token");
 
     if(token && token.trim() != "")
     {
@@ -24,7 +24,7 @@ async function getUserInfo(token) {
 
 
     } catch (err) 
-    {
+    {   
         loggedIn = false;
     }
 }
