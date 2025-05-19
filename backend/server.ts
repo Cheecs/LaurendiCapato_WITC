@@ -220,7 +220,7 @@ app.post("/api/savePalette", async (req, res) => {
                 let insertedColors = await insertColors(queryInsertColors, colorValues); 
                 
                 if(insertedColors)
-                    res.status(200).send(idP);
+                    res.status(200).json({IdP: idP});
                 else
                     throw new Error();
             } 
