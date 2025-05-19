@@ -188,8 +188,8 @@ app.post("/api/savePalette", async (req, res) => {
     try {
 
         let paletteHEX = req.body.paletteHEX;
-        let paletteRGB = req.body.paletteRGB;
-        let paletteName = req.body.paletteName;
+        let paletteRGB = req.body.paletteRGB.split(' ');
+        let paletteName = req.body.paletteName.split(' ');
 
         let idP = await getNewPaletteID();
 
