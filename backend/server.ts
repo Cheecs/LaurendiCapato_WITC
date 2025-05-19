@@ -208,7 +208,7 @@ app.post("/api/savePalette", async (req, res) => {
     
             if(insertedPalette)
             {
-                const queryInsertColors = "INSERT INTO colori (idP, cRGB, cHEX) VALUES ?";
+                const queryInsertColors = "INSERT INTO colori (idP, cRGB, cHEX) VALUES (?)";
                 const colorValues:any = [];
 
                 for(let i = 0; i < paletteHEX.length; i++)
