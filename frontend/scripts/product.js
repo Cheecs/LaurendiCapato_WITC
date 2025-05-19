@@ -143,8 +143,8 @@ async function saveColor(id, img){
     // console.log(`img base64: ${imgBase64}`);
     // console.log(`color: ${mainHEX}`);
     // console.log(`color: ${mainRGB}`);
-    // console.log(`palette: ${colorsHEX}`);
-    // console.log(`palette: ${colorsRGB}`);
+    console.log(`palette: ${colorsHEX}`);
+    console.log(`palette: ${colorsRGB}`);
     // console.log(`colorName: ${colorName}`);
     // console.log(`paletteName: ${paletteName}`);
 }
