@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     console.log(sessionStorage.getItem("token"));
 
-    if(token)
+    if(token != "")
       console.log(token);
         //window.location.href = "./product.html";
   
