@@ -61,9 +61,5 @@ function validateToken(_token) {
     request.done((data) => {
       resolve(data.data, true);
     });
-
-    request.fail((err) => {
-      reject(err, false);
-    });
   });
 }
