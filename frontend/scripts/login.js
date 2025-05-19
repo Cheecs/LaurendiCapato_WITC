@@ -3,10 +3,12 @@ $(document).ready(function() {
     $("#showPwd").prop("checked", false);
     handleShowHidePwd();
 
-      let token = sessionStorage.getItem("token");
+    let token = sessionStorage.getItem("token");
 
-      if(token)
-        console.log(token);
+    console.log(sessionStorage.getItem("token"));
+
+    if(token)
+      console.log(token);
         //window.location.href = "./product.html";
   
     $("#signInForm").submit(function(event) {
