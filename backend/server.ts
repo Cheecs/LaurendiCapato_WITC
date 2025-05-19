@@ -200,7 +200,6 @@ app.post("/api/savePalette", async (req, res) => {
         }
         else
         {
-            console.log("id new palette:", idP);
 
             const queryInsertPalette = "INSERT INTO palettes (idP, NomeP) VALUES (?, ?)";
             const paramsInsertPalette = [idP, paletteName];
@@ -252,7 +251,10 @@ app.post("/api/saveColor", async (req, res) => {
     db.query(queryInsertImg, paramsInsertImg, (err, results) => {
 
         if (err)
+        {
+            console.log(err);
             res.status(500);
+        }
         else
             res.status(200);
     });
@@ -299,8 +301,6 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 }
 
 function insertColors(query:string, params:any){
-
-    console.log(query + " " + params);
 
     return new Promise((resolve, reject) => {
 
