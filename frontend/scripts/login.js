@@ -1,12 +1,18 @@
-$(document).ready(function () {
+$(document).ready(async function () {
 
   $("#showPwd").prop("checked", false);
   handleShowHidePwd();
 
   let token = sessionStorage.getItem("token");
 
-  if(decodeToken(token))  
-    window.location.href = "./product.html";
+  if(token)
+  {
+    let validToken = await validateToken(token)
+
+    if(validToken)
+      window.location.href = "./product.html";
+
+  }
 
   $("#signInForm").submit(function (event) {
 
