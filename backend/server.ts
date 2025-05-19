@@ -217,7 +217,7 @@ app.post("/api/savePalette", async (req, res) => {
                     colorValues.push(param);
                 }
 
-                let insertedColors = await insertColors(queryInsertColors, [colorValues]); 
+                let insertedColors = await insertColors(queryInsertColors, colorValues); 
                 
                 if(insertedColors)
                     res.status(200).send(idP);
