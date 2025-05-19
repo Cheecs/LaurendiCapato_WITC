@@ -181,3 +181,22 @@ function checkWindow(){
 
     }
 }
+
+function decodeToken(_token){
+
+    let reqBody = {
+        token: _token
+    };
+
+    return new Promise((resolve, reject) => {
+        let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
+        
+        request.done((data) => {
+            resolve(data.data);
+        });
+
+        request.fail((err) => {
+            reject(err);
+        });
+    });
+}
