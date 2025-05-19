@@ -165,7 +165,6 @@ app.post("/api/decodeToken", (req, res) => {
 
     try 
     {
-
         const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
         res.status(200).json({

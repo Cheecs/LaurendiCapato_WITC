@@ -2,16 +2,16 @@ $(document).ready(function() {
   
     $("#showPwd").prop("checked", false);
     handleShowHidePwd();
+
+          let token = sessionStorage.getItem("token");
+
+      if(token)
+        window.location.href = "./product.html";
   
     $("#signInForm").submit(function(event) {
 
       event.preventDefault();
-  
-      let token = sessionStorage.getItem("token");
 
-      if(token)
-        console.log(sessionStorage.getItem("token"));
-        //window.location.href = "./product.html";
 
       let email = $("#email").val();
       let pwd = $("#password").val();
