@@ -1,16 +1,20 @@
-$(document).ready(async function () {
+$(document).ready(function () {
 
   $("#showPwd").prop("checked", false);
   handleShowHidePwd();
+  redirect();
 
-  let token = sessionStorage.getItem("token");
+  async function redirect() {
 
-  if(token)
-  {
-    let validToken = await validateToken(token)
+    let token = sessionStorage.getItem("token");
 
-    if(validToken)
-      window.open("./product.html", "_self");
+    if (token) {
+      let validToken = await validateToken(token)
+
+      if (validToken)
+        window.open("./product.html", "_self");
+    }
+
   }
 
   $("#signInForm").submit(function (event) {
@@ -36,8 +40,6 @@ $(document).ready(async function () {
 
     });
     request.done(function (data) {
-
-      // salvare i dati dell'utente
 
       sessionStorage.setItem("token", data.token);
       window.open("./product.html", "_self");
