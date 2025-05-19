@@ -213,7 +213,7 @@ app.post("/api/savePalette", async (req, res) => {
 
                 for(let i = 0; i < paletteHEX.length; i++)
                 {
-                    let param = [paletteHEX[i], paletteRGB[i], idP];
+                    let param = [idP, paletteRGB[i], paletteHEX[i]];
                     colorValues.push(param);
                 }
 
