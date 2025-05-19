@@ -300,12 +300,17 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 
 function insertColors(query:string, params:any){
 
+    console.log(query + " " + params);
+
     return new Promise((resolve, reject) => {
 
         db.query(query, params, (err, results) => {
 
             if(err)
+            {
+                console.log(err);
                 return resolve(false);
+            }
             else
                 return resolve(true);
         });
