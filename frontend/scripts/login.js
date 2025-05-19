@@ -10,8 +10,7 @@ $(document).ready(async function () {
     let validToken = await validateToken(token)
 
     if(validToken)
-      window.location.href = "./product.html";
-
+      window.open("./product.html", "_self");
   }
 
   $("#signInForm").submit(function (event) {
