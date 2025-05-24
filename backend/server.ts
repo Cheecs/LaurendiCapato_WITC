@@ -308,6 +308,10 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
 
 function insertColors(query:string, params:any){
 
+    
+    console.log("query: ", query);
+    console.log("params: ", params);
+
     return new Promise((resolve, reject) => {
 
         db.query(query, params, (err, results) => {
@@ -325,10 +329,6 @@ function insertColors(query:string, params:any){
 
 
 function insertPalette(query:string, params:any):Promise<boolean>{
-
-    console.log("query: ", query);
-    console.log("params: ", params);
-
 
     return new Promise((resolve, reject) => {
 
