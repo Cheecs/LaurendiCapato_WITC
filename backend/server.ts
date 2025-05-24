@@ -187,6 +187,8 @@ app.post("/api/savePalette", async (req, res) => {
 
     try {
 
+        console.log(req.body);
+
         let { paletteName, paletteRGB, paletteHEX } = req.body;
 
         let paletteHEXArray = paletteHEX.split(' ');
