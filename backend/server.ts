@@ -186,8 +186,9 @@ app.post("/api/decodeToken", (req, res) => {
 app.post("/api/savePalette", async (req, res) => {
 
     try {
-
+        console.log(req.body)
         let paletteHEX = req.body.paletteHEX.split(' ');
+
         let paletteRGB = req.body.paletteRGB.split(' ');
         let paletteName = req.body.paletteName;
 
