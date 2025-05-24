@@ -186,8 +186,9 @@ app.post("/api/decodeToken", (req, res) => {
 app.post("/api/savePalette", async (req, res) => {
 
     try {
-        console.log(req.body)
-        let { paletteName, paletteRGB, paletteHEX }= req.body;
+
+        let { paletteName, paletteRGB, paletteHEX } = req.body;
+
         let paletteHEXArray = paletteHEX.split(' ');
 
         let paletteRGBArray = paletteRGB.split(' ');
@@ -214,7 +215,7 @@ app.post("/api/savePalette", async (req, res) => {
 
                 for(let i = 0; i < paletteHEX.length; i++)
                 {
-                    let param = [idP, paletteRGB[i], paletteHEX[i]];
+                    let param = [idP, paletteRGBArray[i], paletteHEXArray[i]];
                     queryInsertColors += "INSERT INTO colori (idP, cRGB, cHEX) VALUES (?);\n";
                     colorValues.push(param);
                 }
