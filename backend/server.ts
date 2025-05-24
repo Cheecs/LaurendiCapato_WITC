@@ -215,7 +215,7 @@ app.post("/api/savePalette", async (req, res) => {
                 let queryInsertColors = "";
                 const colorValues:any = [];
 
-                for(let i = 0; i < paletteHEX.length; i++)
+                for(let i = 0; i < paletteHEXArray.length; i++)
                 {
                     let param = [idP, paletteRGBArray[i], paletteHEXArray[i]];
                     queryInsertColors += "INSERT INTO colori ('idP', 'cRGB', 'cHEX') VALUES (?, ?, ?);";
