@@ -39,7 +39,7 @@ console.log({
 })
 
 const db = mysql.createPool({
-    host: SERVER,
+    host: SERVER,   
     user: 'root',
     password: PWD,  
     database: 'witc',
@@ -207,12 +207,13 @@ app.post("/api/savePalette", async (req, res) => {
     
             if(insertedPalette)
             {
-                const queryInsertColors = "INSERT INTO colori (idP, cRGB, cHEX) VALUES (?)";
+                let queryInsertColors = "";
                 const colorValues:any = [];
 
                 for(let i = 0; i < paletteHEX.length; i++)
                 {
                     let param = [idP, paletteRGB[i], paletteHEX[i]];
+                    queryInsertColors += "INSERT INTO colori (idP, cRGB, cHEX) VALUES (?);\n";
                     colorValues.push(param);
                 }
 
