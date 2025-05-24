@@ -225,7 +225,7 @@ app.post("/api/savePalette", async (req, res) => {
                 if(insertedColors)
                     res.status(200).json({IdP: idP});
                 else
-                    res.status(104).send("test error");
+                    throw new Error();
             } 
             else
                 throw new Error();   
