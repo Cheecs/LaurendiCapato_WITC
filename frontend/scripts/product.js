@@ -115,7 +115,7 @@ async function saveColor(id, img){
     let insertPaletteRes = await insertPalette(reqBodyP);
     let insertColorRes = false;
 
-    console.log(insertColorRes);
+    console.log(insertPaletteRes);
 
     if(insertPaletteRes != null)
     {
