@@ -154,6 +154,7 @@ function insertPalette(reqBody){
     let request = inviaRichiesta("POST", "/api/savePalette", reqBody);
 
     request.done((data) => {
+        console.log("ok");
         return data.IdP;
     });
 
