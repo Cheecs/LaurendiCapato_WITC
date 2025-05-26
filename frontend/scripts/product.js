@@ -112,8 +112,10 @@ async function saveColor(id, img){
         paletteRGB: colorsRGB,
     }
 
-    let insertPaletteRes = insertPalette(reqBodyP);
+    let insertPaletteRes = await insertPalette(reqBodyP);
     let insertColorRes = false;
+
+    console.log(insertColorRes);
 
     if(insertPaletteRes != null)
     {
@@ -154,8 +156,6 @@ function insertPalette(reqBody){
     let request = inviaRichiesta("POST", "/api/savePalette", reqBody);
 
     request.done((data) => {
-        console.log("ok");
-        console.log(data.IdP);
         return data.IdP;
     });
 
