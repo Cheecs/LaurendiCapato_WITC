@@ -15,7 +15,6 @@ const PWD = process.env.DB_passwd;
 const SERVER = process.env.DB_host;
 
 let app = express();
-
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
@@ -247,12 +246,7 @@ app.post("/api/savePalette", async (req, res) => {
 
 app.post("/api/saveColor", async (req, res) => {
 
-    let colorName = req.body.colorName;
-    let mainColorHEX = req.body.mainColorHEX;
-    let mainColorRGB = req.body.mainColorRGB;
-    let img = req.body.img;
-    let idUser = req.body.idUser;
-    let paletteID = req.body.idPalette;
+    let { colorName, mainColorHEX, mainColorRGB, img, idUser, paletteID } = req.body;
 
     let queryInsertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
     let paramsInsertImg = [img, mainColorRGB, mainColorHEX, colorName, paletteID, idUser];
