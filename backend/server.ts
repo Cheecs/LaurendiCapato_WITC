@@ -212,15 +212,16 @@ app.post("/api/savePalette", async (req, res) => {
     
             if(insertedPalette)
             {
-                let queryInsertColors = "";
-                const colorValues:any = [];
+                let queryInsertColors = "INSERT INTO `colori` (`idP`, `cRGB`, `cHEX`) VALUES ";
+                let placeholders = [];
+                let colorValues : any = [];
 
-                for(let i = 0; i < paletteHEXArray.length; i++)
-                {
-                    let param = [idP, paletteRGBArray[i], paletteHEXArray[i]];
-                    queryInsertColors += "INSERT INTO `colori` (`idP`, `cRGB`, `cHEX`) VALUES (?);";
-                    colorValues.push(param);
+                for (let i = 0; i < paletteHEXArray.length; i++) {
+                    placeholders.push("(?, ?, ?)");
+                    colorValues.push(idP, paletteRGBArray[i], paletteHEXArray[i]);
                 }
+
+                queryInsertColors += placeholders.join(", ") + ";";
 
                 let insertedColors = await insertColors(queryInsertColors, colorValues); 
                 
