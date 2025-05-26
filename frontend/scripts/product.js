@@ -129,7 +129,7 @@ async function saveColor(id, img){
             idPalette: insertPaletteRes,
         }
 
-        insertColorRes = insertColor(reqBodyC);
+        insertColorRes = await insertColor(reqBodyC);
 
         if(insertColorRes)
             showSuccess("informations saved correctly, visit your profile page to see your collection");
