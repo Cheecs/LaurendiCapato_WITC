@@ -153,14 +153,16 @@ async function saveColor(id, img){
 
 function insertPalette(reqBody){
 
-    let request = inviaRichiesta("POST", "/api/savePalette", reqBody);
+    return new Promise((resolve, reject) => {
+        let request = inviaRichiesta("POST", "/api/savePalette", reqBody);
 
-    request.done((data) => {
-        return data.IdP;
-    });
+        request.done((data) => {
+            return resolve(data.IdP);
+        });
 
-    request.fail(() => {
-        return null;
+        request.fail(() => {
+            return resolve(null);
+        });
     });
 
 }
