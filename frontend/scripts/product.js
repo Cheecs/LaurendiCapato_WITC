@@ -155,6 +155,7 @@ function insertPalette(reqBody){
 
     request.done((data) => {
         console.log("ok");
+        console.log(data.IdP);
         return data.IdP;
     });
 
