@@ -115,8 +115,6 @@ async function saveColor(id, img){
     let insertPaletteRes = await insertPalette(reqBodyP);
     let insertColorRes = false;
 
-    console.log(insertPaletteRes);
-
     if(insertPaletteRes != null)
     {
         console.log("insertPaletteRes: true, idP: ", insertPaletteRes);
@@ -154,6 +152,7 @@ async function saveColor(id, img){
 function insertPalette(reqBody){
 
     return new Promise((resolve, reject) => {
+
         let request = inviaRichiesta("POST", "/api/savePalette", reqBody);
 
         request.done((data) => {
@@ -169,15 +168,20 @@ function insertPalette(reqBody){
 
 function insertColor(reqBody){
 
-    let request = inviaRichiesta("POST", "/api/saveColor", reqBody);
+    return new Promise((resolve, reject) => {
 
-    request.done(() => {
-        return true;
+        let request = inviaRichiesta("POST", "/api/saveColor", reqBody);
+
+        request.done(() => {
+            return resolve(true);
+        });
+
+        request.fail(() => {
+            return resolve(false);
+        });
+
     });
 
-    request.fail(() => {
-        return false;
-    });
 
 }
 
