@@ -246,10 +246,10 @@ app.post("/api/savePalette", async (req, res) => {
 
 app.post("/api/saveColor", async (req, res) => {
 
-    let { colorName, mainColorHEX, mainColorRGB, img, idUser, paletteID } = req.body;
+    let { colorName, mainColorHEX, mainColorRGB, img, idUser, idPalette } = req.body;
 
     let queryInsertImg = "INSERT INTO immagini(`Img`, `cRGB`, `cHEX`, `nomeC`, `idP`, `idU`) VALUES (?, ?, ?, ?, ?, ?)";
-    let paramsInsertImg = [img, mainColorRGB, mainColorHEX, colorName, paletteID, idUser];
+    let paramsInsertImg = [img, mainColorRGB, mainColorHEX, colorName, idPalette, idUser];
 
     db.query(queryInsertImg, paramsInsertImg, (err, results) => {
 
