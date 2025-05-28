@@ -239,7 +239,7 @@ app.post("/api/savePalette", async (req, res) => {
     } catch (err) {
         console.error("Errore nel salvataggio:", err);
         res.status(500);
-        res.end();
+        res.json({msg:"Errore nel salvataggio"});
     }
 
 });
@@ -260,9 +260,9 @@ app.post("/api/saveColor", async (req, res) => {
         }
         else
             res.status(200);
+        
+        res.json({msg:"Errore nel salvataggio"});
     });
-
-    res.end();
 
 });
 
