@@ -117,7 +117,6 @@ async function saveColor(id, img){
 
     if(insertPaletteRes != null)
     {
-        console.log("insertPaletteRes: true, idP: ", insertPaletteRes);
 
         let reqBodyC = {
         
@@ -259,7 +258,7 @@ function writeInTable(data){
         divColore.css("backgroundColor", paletteHEX[i]);
         tdColore.append(divColore);
 
-        let tdRGB = $(`<td class="tdText rgbColors">${paletteRGB[i]} </td>`);
+        let tdRGB = $(`<td class="tdText rgbColors">rgb(${paletteRGB[i]}) </td>`);
         let tdHEX = $(`<td class="tdText hexColors">${paletteHEX[i]} </td>`);
 
         tr.append(tdColore);
