@@ -68,6 +68,15 @@ h3 {
     animation-duration: 0.3s;
 }
 
+#sfondo {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 0;
+    transform: rotate(180deg);
+    margin-top: -300px;
+}
+
 #profileSettings {
     background-color: black;
     position: relative;
@@ -282,4 +291,33 @@ td {
         background-color: #455a6454;
         border-radius: 15px;
     }
+}
+
+/* footer */
+
+footer{
+    position: relative;
+}
+
+.footer {
+    /* background: linear-gradient(to right, #111827, #581c87); */
+    color: white;
+}
+
+.social-icon {
+    color: white;
+    transition: color 0.2s;
+}
+
+.social-icon:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.payment-icon {
+    height: 2rem;
+    width: auto;
+}
+
+a.text-white {
+    transition: opacity 0.2s;
 }
