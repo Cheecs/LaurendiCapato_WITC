@@ -40,9 +40,9 @@ console.log({
 })
 
 const db = mysql.createPool({
-    host: SERVER,   
+    host: SERVER,
     user: 'root',
-    password: PWD,  
+    password: PWD,
     database: 'witc',
     waitForConnections: true,
     connectionLimit: 20,
@@ -58,7 +58,7 @@ app.get('/api', (req, res) => {
     res.send('API attiva!');
 });
 
-/* -- ENDPOINT UTENTI -- */ 
+/* -- ENDPOINT UTENTI -- */
 
 // Login
 app.post('/api/login', async (req, res) => {
@@ -66,26 +66,23 @@ app.post('/api/login', async (req, res) => {
     let { mail, pwd } = req.body;
     let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
     let login = await UserExists(mail, pwd, query);
-    
-    if(login.status == 200)
-    {
+
+    if (login.status == 200) {
         let token = createToken(login.loginInfo[0]);
 
         res.setHeader("authorization", token);
         res.setHeader("access-control-expose-headers", "authorization"); // dice al client di leggere l'authorization  
-        
+
         res.status(login.status).json({
             token: token
         });
     }
-    else if(login.status == 404)
-    {
-            res.status(login.status).json({
-                msg: login.loginInfo
-            });
+    else if (login.status == 404) {
+        res.status(login.status).json({
+            msg: login.loginInfo
+        });
     }
-    else if(login.status == 500)
-    {
+    else if (login.status == 500) {
         res.status(login.status).json({
             msg: login.loginInfo
         });
@@ -99,22 +96,19 @@ app.post('/api/signup', async (req, res) => {
     let query = "INSERT INTO utenti(Nickname, Email, Password, Img) VALUES(?, ?, ?, null)";
     let checkUser = "SELECT * FROM utenti WHERE Email = ?"
     let login = await UserExists(mail, "", checkUser);
-    
-    if(login.status == 404)
-    {
+
+    if (login.status == 404) {
         db.query(query, [usrName, mail, pwd], (err, results) => {
-            
-            if(err)
-            {
+
+            if (err) {
                 res.status(500).json({
                     msg: "Server error, please try again"
                 });
             }
 
-            if(results)
-            {
+            if (results) {
                 // Send a signup email
-                
+
                 mailerService.sendMail({
                     to: mail, // recipient's email
                     from: process.env.SMTP_FROM || 'noreply@witc.connectify.it', // sender address
@@ -145,14 +139,12 @@ app.post('/api/signup', async (req, res) => {
             }
         })
     }
-    else if(login.status == 200)
-    {
+    else if (login.status == 200) {
         res.status(409).json({
             msg: "User already exists, please Login"
         });
     }
-    else if(login.status == 500)
-    {
+    else if (login.status == 500) {
         res.status(login.status).json({
             msg: login.loginInfo
         });
@@ -162,27 +154,73 @@ app.post('/api/signup', async (req, res) => {
 
 app.post("/api/decodeToken", (req, res) => {
 
-    let { token } = req.body; 
+    let { token } = req.body;
 
-    try 
-    {
-        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
+    let tokenResponse = decodeToken(token);
 
-        res.status(200).json({
-            data: decoded
+    if (tokenResponse.status == 200) {
+        res.status(token.status).json({
+            data: token.data
         });
-
-    } 
-    catch (err: any) 
-    {
-
-        res.status(401).json({
-            msg: "Error in the token's verification" 
-        });    
     }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
+
+    // try 
+    // {
+    //     const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
+
+    //     res.status(200).json({
+    //         data: decoded
+    //     });
+
+    // } 
+    // catch (err: any) 
+    // {
+
+    //     res.status(401).json({
+    //         msg: "Error in the token's verification" 
+    //     });    
+    // }
 });
 
-/* -- ENDPOINTS COLORI */
+app.post("/api/updateUser", (req, res) => {
+
+    let { id, username, pwd, img, token } = req.body
+    let tokenResponse = decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        let query = "UPDATE utenti SET Nickname = ?, Password = ?, Img = ? WHERE idU = ?";
+        let params = [username, pwd, img, id];
+
+        db.query(query, params, (err, resluts) => {
+
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    msg: "Error during the update of the user"
+                });
+            }
+            else {
+                res.status(200).json({
+                    msg: "User upated correctly"
+                });
+            }
+
+        });
+
+    }
+    res.status(token.status).json({
+        msg: token.msg
+    });
+
+});
+
+/* -- ENDPOINTS COLORI -- */
 
 app.post("/api/savePalette", async (req, res) => {
 
@@ -199,23 +237,20 @@ app.post("/api/savePalette", async (req, res) => {
 
         let idP = await getNewPaletteID();
 
-        if (idP == null) 
-        {
+        if (idP == null) {
             res.status(500);
             res.end();
         }
-        else
-        {
+        else {
 
             const queryInsertPalette = "INSERT INTO palettes (idP, NomeP) VALUES (?, ?)";
             const paramsInsertPalette = [idP, paletteName];
             let insertedPalette = await insertPalette(queryInsertPalette, paramsInsertPalette);
-    
-            if(insertedPalette)
-            {
+
+            if (insertedPalette) {
                 let queryInsertColors = "INSERT INTO `colori` (`idP`, `cRGB`, `cHEX`) VALUES ";
                 let placeholders = [];
-                let colorValues : any = [];
+                let colorValues: any = [];
 
                 for (let i = 0; i < paletteHEXArray.length; i++) {
                     placeholders.push("(?, ?, ?)");
@@ -224,22 +259,22 @@ app.post("/api/savePalette", async (req, res) => {
 
                 queryInsertColors += placeholders.join(", ") + ";";
 
-                let insertedColors = await insertColors(queryInsertColors, colorValues); 
-                
-                if(insertedColors)
-                    res.status(200).json({IdP: idP});
+                let insertedColors = await insertColors(queryInsertColors, colorValues);
+
+                if (insertedColors)
+                    res.status(200).json({ IdP: idP });
                 else
                     throw new Error();
-            } 
+            }
             else
-                throw new Error();   
-            
+                throw new Error();
+
         }
 
     } catch (err) {
         console.error("Errore nel salvataggio:", err);
         res.status(500);
-        res.json({msg:"Errore nel salvataggio"});
+        res.json({ msg: "Errore nel salvataggio" });
     }
 
 });
@@ -253,27 +288,111 @@ app.post("/api/saveColor", async (req, res) => {
 
     db.query(queryInsertImg, paramsInsertImg, (err, results) => {
 
-        if (err)
-        {
+        if (err) {
             console.log(err);
             res.status(500);
         }
         else
             res.status(200);
-        
-        res.json({msg:"Errore nel salvataggio"});
+
+        res.json({ msg: "Errore nel salvataggio" });
     });
+
+});
+
+app.post("/api/getImages", (req, res) => {
+
+    // passo il token che decifro, se è valido allora mando i dati all'utente
+
+    /*
+    
+        SELECT immagini.Img, immagini.cRGB, immagini.cHEX, immagini.nomeC, palettes.NomeP, colori.cRGB, colori.cHEX
+        FROM immagini, palettes, colori
+        WHERE immagini.IdP = palettes.idP
+        AND colori.IdP = palettes.idP
+        AND immagini.idU = 15
+
+
+    */
+
+    let { id, token } = req.body;
+    let tokenResponse = decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+        let query = "SELECT immagini.Img, immagini.cRGB, immagini.cHEX, immagini.idP FROM immagini WHERE immagini.idU = ?";
+        let params = [id];
+
+        db.query(query, params, (err, results) => {
+
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    msg: "An error occured while getting informations"
+                });
+            }
+            else {
+                res.status(200).json({
+                    data: results // è un array di oggetti
+                });
+            }
+
+        });
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
+
+});
+
+app.post("api/getPalette", (req, res) => {
+
+    let { id, token } = req.body;
+    let tokenResponse = decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        /* da guardare come fare le query in relazione a come fare il frontend */
+
+
+        // let query = "SELECT immagini.Img, immagini.cRGB, immagini.cHEX, immagini.idP FROM immagini WHERE immagini.idU = ?";
+        // let params = [id];
+
+        // db.query(query, params, (err, results) => {
+
+        //     if(err)
+        //     {
+        //         console.log(err);
+        //         res.status(500).json({
+        //             msg: "An error occured while getting informations"
+        //         });
+        //     }
+        //     else
+        //     {
+        //         res.status(200).json({
+        //             data: results // è un array di oggetti
+        //         });
+        //     }
+
+        // });
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
 
 });
 
 /* -------------  OTHER FUNCTIONS ------------------ */
 
-function UserExists(mail:string, pwd:string, query:string):Promise<any>{
+function UserExists(mail: string, pwd: string, query: string): Promise<any> {
 
-    let rows:any;
+    let rows: any;
     let params: string[];
 
-    if(pwd.trim() != "")
+    if (pwd.trim() != "")
         params = [mail, pwd];
     else
         params = [mail];
@@ -287,14 +406,12 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
             rows = results as any[];
             console.log(rows);
 
-            if (err)
-            {
+            if (err) {
                 console.error("Errore nella query:", err);
                 return resolve({ "loginInfo": "Server error, please try again", "status": 500 });
             }
-            else
-            {
-                if (rows.length > 0) 
+            else {
+                if (rows.length > 0)
                     return resolve({ "loginInfo": results, "status": 200 });
                 else
                     return resolve({ "loginInfo": "User not found, wrong credentials", "status": 404 });
@@ -303,9 +420,9 @@ function UserExists(mail:string, pwd:string, query:string):Promise<any>{
     });
 }
 
-function insertColors(query:string, params:any){
+function insertColors(query: string, params: any) {
 
-    
+
     console.log("query: ", query);
     console.log("params: ", params);
 
@@ -313,8 +430,7 @@ function insertColors(query:string, params:any){
 
         db.query(query, params, (err, results) => {
 
-            if(err)
-            {
+            if (err) {
                 console.log(err);
                 return resolve(false);
             }
@@ -325,13 +441,13 @@ function insertColors(query:string, params:any){
 }
 
 
-function insertPalette(query:string, params:any):Promise<boolean>{
+function insertPalette(query: string, params: any): Promise<boolean> {
 
     return new Promise((resolve, reject) => {
 
         db.query(query, params, (err, results) => {
 
-            if(err)
+            if (err)
                 return resolve(false);
             else
                 return resolve(true);
@@ -340,23 +456,23 @@ function insertPalette(query:string, params:any):Promise<boolean>{
 }
 
 
-function getNewPaletteID():Promise<number | null>{
+function getNewPaletteID(): Promise<number | null> {
 
     let query = "SELECT MAX(idP) as 'lastID' FROM palettes";
-    let newID:number;
+    let newID: number;
 
     return new Promise((resolve, reject) => {
 
         db.query(query, (err, results) => {
 
-            if(err)
+            if (err)
                 return resolve(null);
 
             let queryRes = results as any[];
-            let lastID:any = queryRes[0].lastID;
+            let lastID: any = queryRes[0].lastID;
 
 
-            if(lastID == null)
+            if (lastID == null)
                 newID = 1;
             else
                 newID = lastID + 1;
@@ -367,9 +483,9 @@ function getNewPaletteID():Promise<number | null>{
 }
 
 // creazione token JWT
-function createToken(data:any){
+function createToken(data: any) {
 
-    let now = Math.floor(new Date().getTime()/1000); // data
+    let now = Math.floor(new Date().getTime() / 1000); // data
     let payload = {
 
         "id": data.idU,
@@ -380,9 +496,30 @@ function createToken(data:any){
         "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
     };
 
-    let token = jwt.sign(payload, privateKey, {algorithm:"HS256"});
+    let token = jwt.sign(payload, privateKey, { algorithm: "HS256" });
 
     return token;
+}
+
+function decodeToken(token: any) {
+
+    try {
+        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
+
+        return {
+            status: 200,
+            data: decoded
+        };
+
+    }
+    catch (err: any) {
+
+
+        return {
+            status: 401,
+            msg: "Error in token's verification"
+        }
+    }
 }
 
 /* -------------------------------- */
