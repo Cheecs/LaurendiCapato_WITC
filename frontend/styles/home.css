@@ -38,36 +38,6 @@ header {
     width: auto;
 }
 
-#tooltip {
-    margin-top: 64px;
-    position: fixed;
-    right: 0;
-    top: 0%;
-    z-index: 3;
-}
-
-#tooltip div {
-    background-color: rgba(32, 33, 36, 0.21);
-    border: 1px solid rgba(32, 33, 36, 0.21);
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-
-    display: flex;
-    flex-direction: column;
-}
-
-#tooltip div a {
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-}
-
-#tooltip div a:hover {
-    text-decoration: underline;
-}
-
 
 h3 {
     color: white;

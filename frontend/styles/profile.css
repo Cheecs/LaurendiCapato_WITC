@@ -1,0 +1,285 @@
+html,
+body,
+main {
+    background-color: black;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+header {
+    margin-top: 150px;
+
+}
+
+#logoNav {
+    height: 50px;
+    width: auto;
+    cursor: pointer;
+}
+
+/* codice per la navbar figa blurrata */
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(5, 9, 19, 0.01);
+    z-index: 2;
+}
+
+/* ----------------------- */
+
+#imgUtente {
+    height: 35px;
+    width: auto;
+}
+
+
+h3 {
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+@keyframes linkAnimation {
+    50% {
+        transform: scaleY(1.1);
+        transform: scaleX(1.1);
+    }
+
+    100% {
+        transform: scaleY(1.0);
+        transform: scaleX(1.0);
+    }
+
+}
+
+.nav-link:hover {
+    color: white;
+    /* transform: scale(1.1);
+    transition: 0.1s; */
+    animation-name: linkAnimation;
+    animation-duration: 0.3s;
+}
+
+#profileSettings {
+    background-color: black;
+    position: relative;
+}
+
+#mainDiv {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+#btnEditProfile {
+    background-color: #00ffd0;
+    box-shadow: 0px 0px 3px 0px #00ffd071;
+    border: 0px;
+    color: #050913;
+    width: 200%;
+}
+
+#btnEditProfile:hover {
+    transition: 0.15s;
+    box-shadow: 0px 0px 35px 1px #00ffd071;
+}
+
+#editProfileDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+
+    height: min-content;
+    background-color: #455a6454;
+    border-radius: 15px;
+}
+
+.divImgProfile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form {
+    margin-top: 1.5rem;
+}
+
+.input-group {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    color: #e6f4f1;
+    margin-bottom: 4px;
+}
+
+.input-group input {
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid rgba(51, 132, 104, 0.397);
+    outline: 0;
+    background-color: #273339;
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+}
+
+.input-group input:focus {
+    border-color: rgb(51, 132, 103);
+}
+
+#save {
+    background-color: #00ffd0;
+    box-shadow: 0px 0px 3px 0px #00ffd071;
+    border: 0px;
+    color: #050913;
+}
+
+#save:hover {
+    transition: 0.15s;
+    box-shadow: 0px 0px 35px 1px #00ffd071;
+}
+
+#cancel {
+    background-color: #273339;
+    box-shadow: 0px 0px 3px 0px #00ffd071;
+    border: 1px solid #00ffd0;
+    color: #00ffd0;
+}
+
+#cancel:hover {
+    transition: 0.15s;
+    box-shadow: 0px 0px 35px 1px #00ffd071;
+}
+
+#btnShowpalette {
+    background-color: #00ffd0;
+    box-shadow: 0px 0px 3px 0px #00ffd071;
+    border: 0px;
+    color: #050913;
+}
+
+#btnShowpalette:hover {
+    transition: 0.15s;
+    box-shadow: 0px 0px 35px 1px #00ffd071;
+}
+
+.divTable {
+    overflow-x: visible;
+    overflow-y: auto;
+    height: 350px;
+    width: fit-content;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+}
+
+td {
+    vertical-align: middle;
+}
+
+#changeImgDiv {
+
+    height: 35px;
+    width: 35px;
+    background-color: #00000054;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.hr {
+    height: 0.02cm;
+    background-color: #2b373c8c;
+}
+
+.modal-content {
+    background-color: transparent !important;
+}
+
+.showImgModal {
+    justify-content: center;
+}
+
+#showImgZoomIn {
+    border-radius: 12px;
+    border: none;
+    background-color: #455a6454;
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+#imgZoomIn {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+#closePreview {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#closePreview svg {
+    cursor: pointer;
+}
+
+#profileTablesDiv {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: min-content;
+    background-color: #455a6454;
+    border-radius: 15px;
+}
+
+.rounded-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+
+    box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.695);
+}
+
+@media screen and (max-width: 1004px) {
+
+    #mainDiv {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #profileTablesDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: min-content;
+        background-color: #455a6454;
+        border-radius: 15px;
+    }
+
+    #editProfileDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+
+        height: min-content;
+        background-color: #455a6454;
+        border-radius: 15px;
+    }
+}
