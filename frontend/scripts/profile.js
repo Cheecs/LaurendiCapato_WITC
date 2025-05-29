@@ -196,7 +196,6 @@ function hidePalette() {
 
     varShowPalette = false;
     $("#paletteTableDiv").removeClass("divTable");
-    checkShowpalette();
 }
 
 function showPalette(id) {
