@@ -24,7 +24,6 @@ async function checkToken(token) {
         let info = await decodeToken(token);
 
         checkStatus();
-        checkShowpalette();
         handleShowHidePwd();
 
         $("#txtUsername").text(info.usrName);
@@ -102,8 +101,6 @@ function loadTable() {
                     else 
                     {
                         let id = $(this).attr("id");
-
-                        console.log("ok" + id);
 
                         showPalette(id);
                     }
@@ -207,23 +204,26 @@ function hidePalette() {
 function showPalette(id) {
 
     let _token = sessionStorage.getItem("token");
+    let paletteId = id.split('_')[0];
+
+    console.log(paletteId);
 
     let bodyPalette = {
         token: _token,
-        idP: id
+        idP: paletteId
     }
 
-    let palette = inviaRichiesta("POST", "/api/getPalette", bodyPalette);
+    // let palette = inviaRichiesta("POST", "/api/getPalette", bodyPalette);
 
-    palette.done(() => {
+    // palette.done(() => {
 
-        // scrivi in tabella delle palette
+    //     // scrivi in tabella delle palette
 
-    });
+    // });
 
-    palette.fail((err) => {
-        showAlert("Error while getting images");
-    })
+    // palette.fail((err) => {
+    //     showAlert("Error while getting images");
+    // })
 
 
     const btn = $("#btnShowpalette");
@@ -253,7 +253,6 @@ function showPalette(id) {
 
 
     varShowPalette = true;
-    checkShowpalette();
 }
 
 function decodeToken(_token) {
