@@ -156,35 +156,22 @@ app.post("/api/decodeToken", async (req, res) => {
 
     let { token } = req.body;
 
-    let tokenResponse:any = await decodeToken(token);
+    try 
+    {
+        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
-    if (tokenResponse.status == 200) {
-        res.status(token.status).json({
-            data: token.data
+        res.status(200).json({
+            data: decoded
         });
+
+    } 
+    catch (err: any) 
+    {
+
+        res.status(401).json({
+            msg: "Error in the token's verification" 
+        });    
     }
-    else {
-        res.status(token.status).json({
-            msg: token.msg
-        });
-    }
-
-    // try 
-    // {
-    //     const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
-
-    //     res.status(200).json({
-    //         data: decoded
-    //     });
-
-    // } 
-    // catch (err: any) 
-    // {
-
-    //     res.status(401).json({
-    //         msg: "Error in the token's verification" 
-    //     });    
-    // }
 });
 
 app.post("/api/updateUser", async (req, res) => {
@@ -503,27 +490,23 @@ function createToken(data: any) {
 
 function decodeToken(token: any) {
 
-    return new Promise((resolve, reject) => {
+    try {
+        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
-        try {
-            const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
+        return {
+            status: 200,
+            data: decoded
+        };
 
-            return {
-                status: 200,
-                data: decoded
-            };
+    }
+    catch (err: any) {
 
+
+        return {
+            status: 401,
+            msg: "Error in token's verification"
         }
-        catch (err: any) {
-
-
-            return {
-                status: 401,
-                msg: "Error in token's verification"
-            }
-        }
-
-    });
+    }
 }
 
 /* -------------------------------- */
