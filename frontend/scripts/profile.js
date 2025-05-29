@@ -10,22 +10,23 @@ $(document).ready(async function(){
     
     if(!tokenResponse.data)
         window.location.href = "./home.html";
+    else {
+        checkStatus();
+        checkShowpalette();
+        handleShowHidePwd();
 
-    checkStatus();  
-    checkShowpalette();   
-    handleShowHidePwd(); 
+        $("#changeProfilePic").on("click", function () {
+            $("#imgProfileInput")[0].click();
+        });
 
-    $("#changeProfilePic").on("click", function() {
-        $("#imgProfileInput")[0].click();
-    });
+        $(".ImgPrev").click(function () {
 
-    $(".ImgPrev").click(function(){
+            let img = $(this).attr("src");
+            $("#imgZoomIn").attr("src", img);
+        });
 
-        let img = $(this).attr("src");
-        $("#imgZoomIn").attr("src", img);
-    });
-
-    loadTable();
+        loadTable();
+    }
 });
 
 function loadTable(){
