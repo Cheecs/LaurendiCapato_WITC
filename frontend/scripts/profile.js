@@ -3,7 +3,7 @@
 let clicked = false;
 let varShowPalette = false;
 
-$(document).ready(async function () {
+$(document).ready(function () {
 
     let token = sessionStorage.getItem("token");
 
@@ -11,7 +11,7 @@ $(document).ready(async function () {
 
     try {
 
-        let tokenResponse = await decodeToken(token);
+        let tokenResponse = decodeToken(token);
 
         checkStatus();
         checkShowpalette();
