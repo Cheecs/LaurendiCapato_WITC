@@ -93,7 +93,7 @@ h3 {
     box-shadow: 0px 0px 3px 0px #00ffd071;
     border: 0px;
     color: #050913;
-    width: 100%;
+    width: max-content;
 }
 
 #btnEditProfile:hover {
