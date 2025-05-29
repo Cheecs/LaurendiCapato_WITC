@@ -204,8 +204,6 @@ function showPalette(id, tBody) {
     let _token = sessionStorage.getItem("token");
     let paletteId = id.split('_')[1];
 
-    console.log(paletteId);
-
     let bodyPalette = {
         token: _token,
         idP: paletteId

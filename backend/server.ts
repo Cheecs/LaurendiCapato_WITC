@@ -324,7 +324,7 @@ app.post("/api/getImages", async (req, res) => {
 
 });
 
-app.post("api/getPalette", async (req, res) => {
+app.post("/api/getPalette", async (req, res) => {
 
     let { token, idP } = req.body;
     let tokenResponse:any = await decodeToken(token);
@@ -332,7 +332,6 @@ app.post("api/getPalette", async (req, res) => {
     if (tokenResponse.status == 200) {
 
         /* da guardare come fare le query in relazione a come fare il frontend */
-
 
         let query = "SELECT palettes.NomeP, colori.cRGB, colori.cHEX FROM palettes INNER JOIN colori ON palettes.idP = colori.idP WHERE palettes.idP = ?";
         let params = [idP];
