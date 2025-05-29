@@ -97,12 +97,15 @@ function loadTable() {
 
                 button.click(function () {
 
+                    let varShowPalette = false;
+
                     if (varShowPalette) {
+                        varShowPalette = false;
                         hidePalette();
                     }
                     else {
+                        varShowPalette = true;
                         let id = $(this).attr("id");
-
                         showPalette(id, tBodyPalette);
                     }
                 });
@@ -192,8 +195,6 @@ function hidePalette() {
 
     $(".divShowPalette").empty();
 
-
-    varShowPalette = false;
     $("#paletteTableDiv").removeClass("divTable");
 }
 
@@ -262,7 +263,6 @@ function showPalette(id, tBody) {
         showAlert("Error while getting images");
     })
 
-    varShowPalette = true;
 }
 
 function decodeToken(_token) {
