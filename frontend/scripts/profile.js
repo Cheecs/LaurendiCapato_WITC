@@ -7,9 +7,9 @@ $(document).ready(async function () {
 
     let token = sessionStorage.getItem("token");
 
-    try {
+            console.log("ok");
 
-        console.log("ok");
+    try {
 
         let tokenResponse = await decodeToken(token);
 
