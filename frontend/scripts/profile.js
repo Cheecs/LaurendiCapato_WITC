@@ -5,8 +5,8 @@ let varShowPalette = false;
 
 $(document).ready(function () {
 
-        $("#paletteTable").removeClass("d-none");
-        $("#noImages").addClass("d-none");
+    $("#paletteTable").removeClass("d-none");
+    $("#noImages").addClass("d-none");
 
     let token = sessionStorage.getItem("token");
 
@@ -88,25 +88,24 @@ function loadTable() {
                 img.attr("src", immagine.img);
                 tdImmagine.append(img);
 
+                let tBodyPalette = $(`<tbody id="tbodyP_${immagine.idP}"></tbody>`)
+
+
                 let tdButton = $("<td>");
                 let button = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
                 tdButton.append(button);
 
                 button.click(function () {
 
-                    if (varShowPalette) 
-                    {
+                    if (varShowPalette) {
                         hidePalette();
                     }
-                    else 
-                    {
+                    else {
                         let id = $(this).attr("id");
 
-                        showPalette(id);
+                        showPalette(id, tBody);
                     }
                 });
-
-                let tBodyPalette = $(`<tbody id="tbodyP_${immagine.idP}"></tbody>`)
 
                 tr.append(tdColorName);
                 tr.append(tdColor);
@@ -122,8 +121,7 @@ function loadTable() {
 
             $("#imgAnalizzate").text(`Immagini analizzate: ${immagini.length}`);
         }
-        else
-        {
+        else {
             $("#paletteTable").addClass("d-none");
             $("#noImages").removeClass("d-none");
         }
@@ -201,10 +199,10 @@ function hidePalette() {
     checkShowpalette();
 }
 
-function showPalette(id) {
+function showPalette(id, tBody) {
 
     let _token = sessionStorage.getItem("token");
-    let paletteId = id.split('_')[0];
+    let paletteId = id.split('_')[1];
 
     console.log(paletteId);
 
@@ -213,44 +211,58 @@ function showPalette(id) {
         idP: paletteId
     }
 
-    // let palette = inviaRichiesta("POST", "/api/getPalette", bodyPalette);
+    let palette = inviaRichiesta("POST", "/api/getPalette", bodyPalette);
 
-    // palette.done(() => {
+    palette.done((data) => {
 
-    //     // scrivi in tabella delle palette
+        let colori = data.data;
+        let paletteName = colori[0].nomeP;
 
-    // });
+        let trNomeP = $("<tr>");
+        let th = $("<th>Nome palette: </th>");
+        let tdNome = $(`<td>${paletteName}</td>`);
 
-    // palette.fail((err) => {
-    //     showAlert("Error while getting images");
-    // })
+        let emptyCell1 = $("<td>");
+        let emptyCell2 = $("<td>");
+        let emptyCell3 = $("<td>");
 
+        trNomeP.append(th);
+        trNomeP.append(tdNome);
+        trNomeP.append(emptyCell1);
+        trNomeP.append(emptyCell2);
+        trNomeP.append(emptyCell3);
 
-    const btn = $("#btnShowpalette");
-    const divPal = $(".divShowPalette");
+        tBody.append(trNomeP);
 
-    $("#paletteTableDiv").addClass("divTable");
+        colori.forEach(colore => {
 
+            let tr = $("<tr>");
 
-    btn.text("Hide palette");
+            let emptyCell1 = $("<td>");
+            let emptyCell2 = $("<td>");
 
-    let trNome = $("<tr>");
-    let tdNome = $("<th>Nome Palette:</th><td>[nome]</td><td></td><td></td><td></td>");
+            let tdColor = $(`<td></td>`);
+            let divColor = $("<div class='colorDiv'>");
+            divColor.css("backgroundColor", colore.cHEX);
+            tdColor.append(divColor);
 
-    trNome.append(tdNome);
-    divPal.append(trNome);
+            let tdColorRGB = $(`<td>(${colore.cRGB})</td>`);
+            let tdColorHEX = $(`<td>${colore.cHEX}</td>`);
+ 
+            tr.append(emptyCell1);
+            tr.append(tdColor);
+            tr.append(tdColorHEX);
+            tr.append(tdColorRGB);
+            tr.append(emptyCell2);
 
+            tBody.append(tr);
+        });
 
-    for (let i = 0; i < 10; i++) {
+    });
 
-        const tr = $(`<tr>`);
-        const td = $("<td></td><td>ciao</td><td>ciao</td><td>ciao</td><td></td>");
-
-        tr.append(td);
-        divPal.append(tr)
-    }
-
-
+    palette.fail((err) => {
+        showAlert("Error while getting images");
+    })
 
     varShowPalette = true;
 }

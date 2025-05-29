@@ -291,17 +291,6 @@ app.post("/api/getImages", async (req, res) => {
 
     // passo il token che decifro, se è valido allora mando i dati all'utente
 
-    /*
-    
-        SELECT immagini.Img, immagini.cRGB, immagini.cHEX, immagini.nomeC, palettes.NomeP, colori.cRGB, colori.cHEX
-        FROM immagini, palettes, colori
-        WHERE immagini.IdP = palettes.idP
-        AND colori.IdP = palettes.idP
-        AND immagini.idU = 15
-
-
-    */
-
     let { token } = req.body;
     let tokenResponse:any = await decodeToken(token);
 
@@ -337,36 +326,34 @@ app.post("/api/getImages", async (req, res) => {
 
 app.post("api/getPalette", async (req, res) => {
 
-    let { token } = req.body;
+    let { token, idP } = req.body;
     let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
-        let id = tokenResponse.data.id;
-
         /* da guardare come fare le query in relazione a come fare il frontend */
 
 
-        // let query = "SELECT immagini.Img, immagini.cRGB, immagini.cHEX, immagini.idP FROM immagini WHERE immagini.idU = ?";
-        // let params = [id];
+        let query = "SELECT palettes.NomeP, colori.cRGB, colori.cHEX FROM palettes INNER JOIN colori ON palettes.idP = colori.idP WHERE palettes.idP = ?";
+        let params = [idP];
 
-        // db.query(query, params, (err, results) => {
+        db.query(query, params, (err, results) => {
 
-        //     if(err)
-        //     {
-        //         console.log(err);
-        //         res.status(500).json({
-        //             msg: "An error occured while getting informations"
-        //         });
-        //     }
-        //     else
-        //     {
-        //         res.status(200).json({
-        //             data: results // è un array di oggetti
-        //         });
-        //     }
+            if(err)
+            {
+                console.log(err);
+                res.status(500).json({
+                    msg: "An error occured while getting informations"
+                });
+            }
+            else
+            {
+                res.status(200).json({
+                    data: results // è un array di oggetti
+                });
+            }
 
-        // });
+        });
     }
     else {
         res.status(token.status).json({
