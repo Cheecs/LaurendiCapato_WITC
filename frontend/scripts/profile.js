@@ -8,7 +8,9 @@ $(document).ready(async function () {
     let token = sessionStorage.getItem("token");
 
     try {
-        
+
+        console.log("ok");
+
         let tokenResponse = await decodeToken(token);
 
         checkStatus();
@@ -35,6 +37,7 @@ $(document).ready(async function () {
 function loadTable() {
 
     let _token = sessionStorage.getItem("token");
+
     let bodyImages = {
         token: _token
     }
