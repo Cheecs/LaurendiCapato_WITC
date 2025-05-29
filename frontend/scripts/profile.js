@@ -103,7 +103,7 @@ function loadTable() {
                     else {
                         let id = $(this).attr("id");
 
-                        showPalette(id, tBody);
+                        showPalette(id, tBodyPalette);
                     }
                 });
 
