@@ -17,8 +17,33 @@ $(document).ready(function(){
 
         let img = $(this).attr("src");
         $("#imgZoomIn").attr("src", img);
+    });
+
+    loadTable();
+});
+
+function laodTable(){
+
+    let _token = sessionStorage.getItem("token");
+    let bodyImages = {
+        token: _token
+    }
+
+    let immagini = inviaRichiesta("POST", "/api/getImages", bodyImages);
+
+    immagini.done((data) => {
+
+        // scrivi in tabella (ricordati del pulsante)
+
+        console.log(data);
+
+    });
+
+    immagini.fail((err) => {
+        showAlert("Error while getting images");
     })
-})
+
+}
 
 function checkStatus(){
 
@@ -88,6 +113,7 @@ function checkShowpalette(){
 }
 
 function hidePalette(){
+
     const btn = $("#btnShowpalette");
     btn.text("Show palette");
 
@@ -101,8 +127,23 @@ function hidePalette(){
 
 function showPalette(){
 
+    let _token = sessionStorage.getItem("token");
+    let bodyPalette = {
+        token: _token
+    }
 
-    // fai le varie chiamate
+    let palette = inviaRichiesta("POST", "/api/getPalette", bodyPalette);
+
+    palette.done(() => {
+
+        // scrivi in tabella delle palette
+
+    });
+
+    palette.fail((err) => {
+        showAlert("Error while getting images");
+    })
+
 
     const btn = $("#btnShowpalette");
     const divPal = $(".divShowPalette");

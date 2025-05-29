@@ -302,10 +302,12 @@ app.post("/api/getImages", async (req, res) => {
 
     */
 
-    let { id, token } = req.body;
+    let { token } = req.body;
     let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
+
+        let id = tokenResponse.data.id
         let query = "SELECT immagini.Img, immagini.cRGB, immagini.cHEX, immagini.idP FROM immagini WHERE immagini.idU = ?";
         let params = [id];
 
@@ -335,10 +337,12 @@ app.post("/api/getImages", async (req, res) => {
 
 app.post("api/getPalette", async (req, res) => {
 
-    let { id, token } = req.body;
+    let { token } = req.body;
     let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
+
+        let id = tokenResponse.data.id;
 
         /* da guardare come fare le query in relazione a come fare il frontend */
 
