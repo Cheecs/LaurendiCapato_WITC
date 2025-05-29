@@ -7,7 +7,16 @@ $(document).ready(function () {
 
     let token = sessionStorage.getItem("token");
 
-            console.log("ok");
+    console.log("ok");
+
+    if (token && token.trim() != "") {
+        checkToken(token);
+    }
+    else
+        window.location.href = "./home.html";
+});
+
+async function checkToken(token) {
 
     try {
 
@@ -32,7 +41,9 @@ $(document).ready(function () {
     } catch (err) {
         window.location.href = "./home.html";
     }
-});
+
+
+}
 
 function loadTable() {
 
