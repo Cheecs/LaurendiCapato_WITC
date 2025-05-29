@@ -103,7 +103,7 @@ function loadTable() {
                     {
                         let id = $(this).attr("id");
 
-                        console.log(id);
+                        console.log("ok" + id);
 
                         showPalette(id);
                     }
@@ -191,12 +191,6 @@ function HideEdit() {
     checkStatus();
 }
 
-function checkShowpalette() {
-
-    console.log("gna");
-
-}
-
 function hidePalette() {
 
     const btn = $("#btnShowpalette");
@@ -213,7 +207,7 @@ function hidePalette() {
 function showPalette(id) {
 
     let _token = sessionStorage.getItem("token");
-    
+
     let bodyPalette = {
         token: _token,
         idP: id
