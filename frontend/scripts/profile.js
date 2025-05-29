@@ -39,7 +39,6 @@ async function checkToken(token) {
         loadTable();
 
         $("#txtChangeUsr").val(info.usrName);
-        $("#txtChangePwd").val(info.psw);
 
         if (info.img != null)
             $("#imgProfile").attr("src", info.img);

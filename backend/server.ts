@@ -483,7 +483,6 @@ function createToken(data: any) {
         "mail": data.Email,
         "usrName": data.Nickname,
         "img": data.Img,
-        "psw": data.Password,
         "iat": now,
         "exp": now + DURATA_TOKEN, // scadenza del token (15 minuti)
     };
