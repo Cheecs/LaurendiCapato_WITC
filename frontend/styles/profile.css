@@ -179,7 +179,7 @@ h3 {
     color: #050913;
 }
 
-#btnShowpalette:hover {
+.btnShowpalette:hover {
     transition: 0.15s;
     box-shadow: 0px 0px 35px 1px #00ffd071;
 }
@@ -320,4 +320,10 @@ footer{
 
 a.text-white {
     transition: opacity 0.2s;
+}
+
+.colorDiv{
+    width: 30px;
+    height: 30px;
+    border-radius:50%;
 }
