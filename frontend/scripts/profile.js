@@ -68,8 +68,6 @@ function loadTable() {
 
         let tBody = $("#tBodyColor");
 
-        console.log(data.data);
-
         let immagini = data.data
 
         immagini.forEach(immagine => {
