@@ -9,6 +9,10 @@ $(document).ready(function(){
         changeImg();
     });
 
+    $("#imgUtente").click(() => {
+        window.location.href = "./profile.html";
+    })
+
     $("#btnAnalizza").on("click", () => {
         
         let imgInfo = extractColor();
