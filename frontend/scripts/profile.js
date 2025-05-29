@@ -22,7 +22,7 @@ $(document).ready(function(){
     loadTable();
 });
 
-function laodTable(){
+function loadTable(){
 
     let _token = sessionStorage.getItem("token");
     let bodyImages = {
