@@ -337,3 +337,7 @@ a.text-white {
     height: 30px;
     border-radius:50%;
 }
+
+#noImages{
+    font-style: italic;
+}

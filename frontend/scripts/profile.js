@@ -5,6 +5,9 @@ let varShowPalette = false;
 
 $(document).ready(function () {
 
+        $("#paletteTable").removeClass("d-none");
+        $("#noImages").addClass("d-none");
+
     let token = sessionStorage.getItem("token");
 
     if (token && token.trim() != "") {
@@ -62,8 +65,6 @@ function loadTable() {
 
     request.done((data) => {
 
-        // scrivi in tabella (ricordati del pulsante)
-
         let tBody = $("#tBodyColor");
 
         let immagini = data.data
@@ -88,7 +89,25 @@ function loadTable() {
                 img.attr("src", immagine.img);
                 tdImmagine.append(img);
 
-                let tdButton = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
+                let tdButton = $("<td>");
+                let button = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
+                tdButton.append(button);
+
+                button.click(function () {
+
+                    if (varShowPalette) 
+                    {
+                        hidePalette();
+                    }
+                    else 
+                    {
+                        let id = $(this).attr("id");
+
+                        console.log(id);
+
+                        showPalette(id);
+                    }
+                });
 
                 let tBodyPalette = $(`<tbody id="tbodyP_${immagine.idP}"></tbody>`)
 
@@ -108,7 +127,8 @@ function loadTable() {
         }
         else
         {
-            // nascondi tabella e scrivi: Nothing to see here yet!
+            $("#paletteTable").addClass("d-none");
+            $("#noImages").removeClass("d-none");
         }
 
     });
@@ -173,18 +193,7 @@ function HideEdit() {
 
 function checkShowpalette() {
 
-    if (varShowPalette) {
-        const btn = $("#btnShowpalette");
-        btn.click(function () {
-            hidePalette();
-        });
-    }
-    else {
-        const btn = $("#btnShowpalette");
-        btn.click(function () {
-            showPalette();
-        });
-    }
+    console.log("gna");
 
 }
 
@@ -201,11 +210,13 @@ function hidePalette() {
     checkShowpalette();
 }
 
-function showPalette() {
+function showPalette(id) {
 
     let _token = sessionStorage.getItem("token");
+    
     let bodyPalette = {
-        token: _token
+        token: _token,
+        idP: id
     }
 
     let palette = inviaRichiesta("POST", "/api/getPalette", bodyPalette);
