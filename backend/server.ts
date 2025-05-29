@@ -491,6 +491,7 @@ function createToken(data: any) {
 function decodeToken(token: any) {
 
     try {
+        
         const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
         return {

@@ -100,6 +100,10 @@ function hidePalette(){
 }
 
 function showPalette(){
+
+
+    // fai le varie chiamate
+
     const btn = $("#btnShowpalette");
     const divPal = $(".divShowPalette");
 
@@ -108,10 +112,17 @@ function showPalette(){
 
     btn.text("Hide palette");
 
+    let trNome = $("<tr>");
+    let tdNome = $("<th>Nome Palette:</th><td>[nome]</td><td></td><td></td><td></td>");
+
+    trNome.append(tdNome);
+    divPal.append(trNome);
+
+
     for(let i = 0; i < 10; i++){
 
         const tr = $(`<tr>`);
-        const td = $("<td>ciao</td><td>ciao</td><td>ciao</td><td>ciao</td><td>ciao</td>");
+        const td = $("<td></td><td>ciao</td><td>ciao</td><td>ciao</td><td></td>");
 
         tr.append(td);
         divPal.append(tr)
