@@ -88,7 +88,7 @@ function loadTable() {
                 img.attr("src", immagine.img);
                 tdImmagine.append(img);
 
-                let tBodyPalette = $(`<tbody id="tbodyP_${immagine.idP}"></tbody>`)
+                let tBodyPalette = $(`<tbody class="divShowPalette" id="tbodyP_${immagine.idP}"></tbody>`)
 
 
                 let tdButton = $("<td>");
@@ -188,8 +188,7 @@ function HideEdit() {
 
 function hidePalette() {
 
-    const btn = $("#btnShowpalette");
-    btn.text("Show palette");
+    $("#btnShowpalette").text("Show palette");
 
     $(".divShowPalette").empty();
 
@@ -199,6 +198,9 @@ function hidePalette() {
 }
 
 function showPalette(id) {
+
+    $("#btnShowpalette").text("Hide palette");
+
 
     let _token = sessionStorage.getItem("token");
     let paletteId = id.split('_')[1];
@@ -216,26 +218,21 @@ function showPalette(id) {
         let colori = data.data;
         let paletteName = colori[0].nomeP;
 
-        // let trNomeP = $("<tr>");
-        // let th = $("<th>Nome palette: </th>");
-        // let tdNome = $(`<td>${paletteName}</td>`);
+        let trNomeP = $("<tr>");
+        let th = $("<th>Nome palette: </th>");
+        let tdNome = $(`<td>${paletteName}</td>`);
 
-        // let emptyCell1 = $("<td>");
-        // let emptyCell2 = $("<td>");
-        // let emptyCell3 = $("<td>");
+        let emptyCell1 = $("<td>");
+        let emptyCell2 = $("<td>");
+        let emptyCell3 = $("<td>");
 
-        // trNomeP.append(th);
-        // trNomeP.append(tdNome);
-        // trNomeP.append(emptyCell1);
-        // trNomeP.append(emptyCell2);
-        // trNomeP.append(emptyCell3);
+        trNomeP.append(th);
+        trNomeP.append(tdNome);
+        trNomeP.append(emptyCell1);
+        trNomeP.append(emptyCell2);
+        trNomeP.append(emptyCell3);
 
-            let trNome = $("<tr>");
-        let tdNome = $("<th>Nome Palette:</th><td>[nome]</td><td></td><td></td><td></td>");
-
-        trNome.append(tdNome);
-
-        tBody.append(trNome);
+        tBody.append(trNomeP);
 
         colori.forEach(colore => {
 
