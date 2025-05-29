@@ -7,8 +7,6 @@ $(document).ready(function () {
 
     let token = sessionStorage.getItem("token");
 
-    console.log("ok");
-
     if (token && token.trim() != "") {
         checkToken(token);
     }
