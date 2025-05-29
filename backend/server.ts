@@ -152,11 +152,11 @@ app.post('/api/signup', async (req, res) => {
 
 });
 
-app.post("/api/decodeToken", (req, res) => {
+app.post("/api/decodeToken", async (req, res) => {
 
     let { token } = req.body;
 
-    let tokenResponse = decodeToken(token);
+    let tokenResponse:any = decodeToken(token);
 
     if (tokenResponse.status == 200) {
         res.status(token.status).json({
@@ -187,10 +187,10 @@ app.post("/api/decodeToken", (req, res) => {
     // }
 });
 
-app.post("/api/updateUser", (req, res) => {
+app.post("/api/updateUser", async (req, res) => {
 
     let { id, username, pwd, img, token } = req.body
-    let tokenResponse = decodeToken(token);
+    let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
@@ -300,7 +300,7 @@ app.post("/api/saveColor", async (req, res) => {
 
 });
 
-app.post("/api/getImages", (req, res) => {
+app.post("/api/getImages", async (req, res) => {
 
     // passo il token che decifro, se è valido allora mando i dati all'utente
 
@@ -316,7 +316,7 @@ app.post("/api/getImages", (req, res) => {
     */
 
     let { id, token } = req.body;
-    let tokenResponse = decodeToken(token);
+    let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
         let query = "SELECT immagini.Img, immagini.cRGB, immagini.cHEX, immagini.idP FROM immagini WHERE immagini.idU = ?";
@@ -346,10 +346,10 @@ app.post("/api/getImages", (req, res) => {
 
 });
 
-app.post("api/getPalette", (req, res) => {
+app.post("api/getPalette", async (req, res) => {
 
     let { id, token } = req.body;
-    let tokenResponse = decodeToken(token);
+    let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
@@ -503,23 +503,27 @@ function createToken(data: any) {
 
 function decodeToken(token: any) {
 
-    try {
-        const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
+    return new Promise((resolve, reject) => {
 
-        return {
-            status: 200,
-            data: decoded
-        };
+        try {
+            const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
-    }
-    catch (err: any) {
+            return {
+                status: 200,
+                data: decoded
+            };
 
-
-        return {
-            status: 401,
-            msg: "Error in token's verification"
         }
-    }
+        catch (err: any) {
+
+
+            return {
+                status: 401,
+                msg: "Error in token's verification"
+            }
+        }
+
+    });
 }
 
 /* -------------------------------- */
