@@ -24,8 +24,7 @@ async function checkToken(token) {
         checkShowpalette();
         handleShowHidePwd();
 
-        $("#lblUsername").val(info.usrName);
-
+        $("#txtUsername").val(info.usrName);
 
         $("#changeProfilePic").on("click", function () {
             $("#imgProfileInput")[0].click();
