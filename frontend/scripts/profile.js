@@ -44,7 +44,9 @@ function loadTable(){
 
         console.log(data.data);
 
-        data.forEach(immagine => {
+        let immagini = data.data
+
+        immagini.forEach(immagine => {
 
             let tr = $("<tr>");
 
