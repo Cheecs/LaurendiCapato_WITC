@@ -103,7 +103,7 @@ function loadTable() {
                     else {
                         let id = $(this).attr("id");
 
-                        showPalette(id, tBodyPalette);
+                        showPalette(id);
                     }
                 });
 
@@ -199,10 +199,11 @@ function hidePalette() {
     checkShowpalette();
 }
 
-function showPalette(id, tBody) {
+function showPalette(id) {
 
     let _token = sessionStorage.getItem("token");
     let paletteId = id.split('_')[1];
+    let tBody = $("#tbodyP_77"); // da cambiare
 
     let bodyPalette = {
         token: _token,
