@@ -18,11 +18,14 @@ async function checkToken(token) {
 
     try {
 
-        let tokenResponse = decodeToken(token);
+        let tokenResponse = await decodeToken(token);
 
         checkStatus();
         checkShowpalette();
         handleShowHidePwd();
+
+        $("#lblUsername").text(tokenResponse.usrName);
+
 
         $("#changeProfilePic").on("click", function () {
             $("#imgProfileInput")[0].click();
@@ -35,6 +38,12 @@ async function checkToken(token) {
         });
 
         loadTable();
+
+        $("#txtChangeUsr").text(tokenResponse.usrName);
+        $("#txtChangePwd").text(tokenResponse.psw);
+
+        if(tokenResponse.img != null)
+            $("#imgProfile").attr("src", tokenResponse.img);
 
     } catch (err) {
         window.location.href = "./home.html";
@@ -127,6 +136,7 @@ function checkStatus() {
 }
 
 function ShowEdit() {
+
     const btn = $("#btnEditProfile");
     btn.text("Show less");
 
@@ -142,6 +152,7 @@ function ShowEdit() {
 }
 
 function HideEdit() {
+
     const btn = $("#btnEditProfile");
     btn.text("Edit Profile");
 
