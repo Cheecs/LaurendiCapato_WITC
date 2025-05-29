@@ -308,7 +308,7 @@ app.post("/api/getImages", async (req, res) => {
     if (tokenResponse.status == 200) {
 
         let id = tokenResponse.data.id
-        let query = "SELECT immagini.nomeC immagini.Img, immagini.cRGB, immagini.cHEX, immagini.idP FROM immagini WHERE immagini.idU = ?";
+        let query = "SELECT immagini.nomeC, immagini.Img, immagini.cRGB, immagini.cHEX, immagini.idP FROM immagini WHERE immagini.idU = ?";
         let params = [id];
 
         db.query(query, params, (err, results) => {
