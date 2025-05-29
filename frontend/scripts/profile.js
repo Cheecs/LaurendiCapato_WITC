@@ -24,7 +24,7 @@ async function checkToken(token) {
         checkShowpalette();
         handleShowHidePwd();
 
-        $("#lblUsername").text(info.usrName);
+        $("#lblUsername").val(info.usrName);
 
 
         $("#changeProfilePic").on("click", function () {
@@ -39,8 +39,8 @@ async function checkToken(token) {
 
         loadTable();
 
-        $("#txtChangeUsr").text(info.usrName);
-        $("#txtChangePwd").text(info.psw);
+        $("#txtChangeUsr").val(info.usrName);
+        $("#txtChangePwd").val(info.psw);
 
         if(info.img != null)
             $("#imgProfile").attr("src", info.img);
