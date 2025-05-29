@@ -35,7 +35,44 @@ function loadTable(){
 
         // scrivi in tabella (ricordati del pulsante)
 
+        let tBody = $("#tBodyColor");
+
         console.log(data);
+
+        data.forEach(immagine => {
+
+            let tr = $("<tr>");
+
+            let tdColorName = $(`<td>${immagine.nomeC}</td>`);
+
+            let tdColor = $(`<td></td>`);
+            let divColor = $("<div class='colorDiv'>");
+            divColor.css("backgroundColor", immagine.cHEX);
+            tdColor.append(divColor);
+
+            let tdColorRGB = $(`<td>(${immagine.cRGB})</td>`);
+            let tdColorHEX = $(`<td>${immagine.cHEX}</td>`);
+
+            let tdImmagine = $("<td>");
+            let img = $("<img class='imgTable'>");
+            img.attr("src", immagine.img);
+            tdImmagine.append(img);
+
+            let tdButton = $(`<button id="buttonP_${immagine.idP}" class="btnShowpalette">Show palette</button>`);
+
+            let tBodyPalette = $(`<tbody id="tbodyP_${immagine.idP}"></tbody>`)
+
+            tr.append(tdColorName);
+            tr.append(tdColor);
+            tr.append(tdColorHEX);
+            tr.append(tdColorRGB);
+            tr.append(tdImmagine);
+            tr.append(tdButton);
+            tr.append(tBodyPalette);
+
+            tBody.append(tr);
+            
+        });
 
     });
 
