@@ -24,7 +24,7 @@ async function checkToken(token) {
         checkShowpalette();
         handleShowHidePwd();
 
-        $("#txtUsername").val(info.usrName);
+        $("#txtUsername").text(info.usrName);
 
         $("#changeProfilePic").on("click", function () {
             $("#imgProfileInput")[0].click();
@@ -41,7 +41,7 @@ async function checkToken(token) {
         $("#txtChangeUsr").val(info.usrName);
         $("#txtChangePwd").val(info.psw);
 
-        if(info.img != null)
+        if (info.img != null)
             $("#imgProfile").attr("src", info.img);
 
     } catch (err) {
@@ -59,9 +59,9 @@ function loadTable() {
         token: _token
     }
 
-    let immagini = inviaRichiesta("POST", "/api/getImages", bodyImages);
+    let request = inviaRichiesta("POST", "/api/getImages", bodyImages);
 
-    immagini.done((data) => {
+    request.done((data) => {
 
         // scrivi in tabella (ricordati del pulsante)
 
@@ -69,44 +69,52 @@ function loadTable() {
 
         let immagini = data.data
 
-        immagini.forEach(immagine => {
+        if (immagini.length > 0) {
+            immagini.forEach(immagine => {
 
-            let tr = $("<tr>");
+                let tr = $("<tr>");
 
-            let tdColorName = $(`<td>${immagine.nomeC}</td>`);
+                let tdColorName = $(`<td>${immagine.nomeC}</td>`);
 
-            let tdColor = $(`<td></td>`);
-            let divColor = $("<div class='colorDiv'>");
-            divColor.css("backgroundColor", immagine.cHEX);
-            tdColor.append(divColor);
+                let tdColor = $(`<td></td>`);
+                let divColor = $("<div class='colorDiv'>");
+                divColor.css("backgroundColor", immagine.cHEX);
+                tdColor.append(divColor);
 
-            let tdColorRGB = $(`<td>(${immagine.cRGB})</td>`);
-            let tdColorHEX = $(`<td>${immagine.cHEX}</td>`);
+                let tdColorRGB = $(`<td>(${immagine.cRGB})</td>`);
+                let tdColorHEX = $(`<td>${immagine.cHEX}</td>`);
 
-            let tdImmagine = $("<td>");
-            let img = $("<img class='imgTable'>");
-            img.attr("src", immagine.img);
-            tdImmagine.append(img);
+                let tdImmagine = $("<td>");
+                let img = $("<img class='imgTable'>");
+                img.attr("src", immagine.img);
+                tdImmagine.append(img);
 
-            let tdButton = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
+                let tdButton = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
 
-            let tBodyPalette = $(`<tbody id="tbodyP_${immagine.idP}"></tbody>`)
+                let tBodyPalette = $(`<tbody id="tbodyP_${immagine.idP}"></tbody>`)
 
-            tr.append(tdColorName);
-            tr.append(tdColor);
-            tr.append(tdColorHEX);
-            tr.append(tdColorRGB);
-            tr.append(tdImmagine);
-            tr.append(tdButton);
-            tr.append(tBodyPalette);
+                tr.append(tdColorName);
+                tr.append(tdColor);
+                tr.append(tdColorHEX);
+                tr.append(tdColorRGB);
+                tr.append(tdImmagine);
+                tr.append(tdButton);
+                tr.append(tBodyPalette);
 
-            tBody.append(tr);
+                tBody.append(tr);
 
-        });
+            });
+
+            $("#imgAnalizzate").text(`Immagini analizzate: ${immagini.length}`);
+        }
+        else
+        {
+            // nascondi tabella e scrivi: Nothing to see here yet!
+        }
 
     });
 
-    immagini.fail((err) => {
+    request.fail((err) => {
         showAlert("Error while getting images");
     })
 
