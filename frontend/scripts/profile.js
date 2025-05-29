@@ -18,13 +18,13 @@ async function checkToken(token) {
 
     try {
 
-        let tokenResponse = await decodeToken(token);
+        let info = await decodeToken(token);
 
         checkStatus();
         checkShowpalette();
         handleShowHidePwd();
 
-        $("#lblUsername").text(tokenResponse.usrName);
+        $("#lblUsername").text(info.usrName);
 
 
         $("#changeProfilePic").on("click", function () {
@@ -39,11 +39,11 @@ async function checkToken(token) {
 
         loadTable();
 
-        $("#txtChangeUsr").text(tokenResponse.usrName);
-        $("#txtChangePwd").text(tokenResponse.psw);
+        $("#txtChangeUsr").text(info.usrName);
+        $("#txtChangePwd").text(info.psw);
 
-        if(tokenResponse.img != null)
-            $("#imgProfile").attr("src", tokenResponse.img);
+        if(info.img != null)
+            $("#imgProfile").attr("src", info.img);
 
     } catch (err) {
         window.location.href = "./home.html";
@@ -256,7 +256,7 @@ function decodeToken(_token) {
         let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
 
         request.done((data) => {
-            resolve(data);
+            resolve(data.data);
         });
 
         request.fail((err) => {
