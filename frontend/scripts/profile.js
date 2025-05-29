@@ -3,11 +3,12 @@
 let clicked = false;
 let varShowPalette = false;
 
-$(document).ready(function(){
+$(document).ready(async function(){
 
     let token = sessionStorage.getItem("token");
+    let tokenResponse = await decodeToken(token);
     
-    if(!token)
+    if(!tokenResponse.data)
         window.location.href = "./home.html";
 
     checkStatus();  
@@ -217,5 +218,24 @@ function showPalette(){
     
     varShowPalette = true;
     checkShowpalette();
+}
 
+function decodeToken(_token){
+
+    let reqBody = {
+        token: _token
+    };
+
+    return new Promise((resolve, reject) => {
+
+        let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
+        
+        request.done((data) => {
+            resolve(data);
+        });
+
+        request.fail((err) => {
+            reject(err);
+        });
+    });
 }
