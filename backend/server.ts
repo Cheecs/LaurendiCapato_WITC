@@ -156,7 +156,7 @@ app.post("/api/decodeToken", async (req, res) => {
 
     let { token } = req.body;
 
-    let tokenResponse:any = decodeToken(token);
+    let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
         res.status(token.status).json({
