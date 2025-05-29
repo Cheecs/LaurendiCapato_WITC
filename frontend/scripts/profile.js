@@ -103,7 +103,7 @@ function loadTable() {
                     else {
                         let id = $(this).attr("id");
 
-                        showPalette(id);
+                        showPalette(id, tBodyPalette);
                     }
                 });
 
@@ -197,14 +197,12 @@ function hidePalette() {
     $("#paletteTableDiv").removeClass("divTable");
 }
 
-function showPalette(id) {
+function showPalette(id, tBody) {
 
     $("#btnShowpalette").text("Hide palette");
 
-
     let _token = sessionStorage.getItem("token");
     let paletteId = id.split('_')[1];
-    let tBody = $("#tbodyP_77"); // da cambiare
 
     let bodyPalette = {
         token: _token,
@@ -234,29 +232,29 @@ function showPalette(id) {
 
         tBody.append(trNomeP);
 
-        colori.forEach(colore => {
+        // colori.forEach(colore => {
 
-            let tr = $("<tr>");
+        //     let tr = $("<tr>");
 
-            let emptyCell1 = $("<td>");
-            let emptyCell2 = $("<td>");
+        //     let emptyCell1 = $("<td>");
+        //     let emptyCell2 = $("<td>");
 
-            let tdColor = $(`<td></td>`);
-            let divColor = $("<div class='colorDiv'>");
-            divColor.css("backgroundColor", colore.cHEX);
-            tdColor.append(divColor);
+        //     let tdColor = $(`<td></td>`);
+        //     let divColor = $("<div class='colorDiv'>");
+        //     divColor.css("backgroundColor", colore.cHEX);
+        //     tdColor.append(divColor);
 
-            let tdColorRGB = $(`<td>(${colore.cRGB})</td>`);
-            let tdColorHEX = $(`<td>${colore.cHEX}</td>`);
+        //     let tdColorRGB = $(`<td>(${colore.cRGB})</td>`);
+        //     let tdColorHEX = $(`<td>${colore.cHEX}</td>`);
  
-            tr.append(emptyCell1);
-            tr.append(tdColor);
-            tr.append(tdColorHEX);
-            tr.append(tdColorRGB);
-            tr.append(emptyCell2);
+        //     tr.append(emptyCell1);
+        //     tr.append(tdColor);
+        //     tr.append(tdColorHEX);
+        //     tr.append(tdColorRGB);
+        //     tr.append(emptyCell2);
 
-            tBody.append(tr);
-        });
+        //     tBody.append(tr);
+        // });
 
     });
 
