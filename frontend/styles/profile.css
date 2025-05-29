@@ -118,6 +118,16 @@ h3 {
     align-items: center;
 }
 
+#imgProfile{
+    height: 100px;
+    width: auto;
+
+    max-height: 100px;
+    max-width: 100px;
+
+    border-radius: 50%;
+}
+
 .form {
     margin-top: 1.5rem;
 }
