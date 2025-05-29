@@ -3,14 +3,14 @@
 let clicked = false;
 let varShowPalette = false;
 
-$(document).ready(async function(){
+$(document).ready(async function () {
 
     let token = sessionStorage.getItem("token");
-    let tokenResponse = await decodeToken(token);
-    
-    if(!tokenResponse.data)
-        window.location.href = "./home.html";
-    else {
+
+    try {
+        
+        let tokenResponse = await decodeToken(token);
+
         checkStatus();
         checkShowpalette();
         handleShowHidePwd();
@@ -26,10 +26,13 @@ $(document).ready(async function(){
         });
 
         loadTable();
+
+    } catch (err) {
+        window.location.href = "./home.html";
     }
 });
 
-function loadTable(){
+function loadTable() {
 
     let _token = sessionStorage.getItem("token");
     let bodyImages = {
@@ -80,7 +83,7 @@ function loadTable(){
             tr.append(tBodyPalette);
 
             tBody.append(tr);
-            
+
         });
 
     });
@@ -91,27 +94,27 @@ function loadTable(){
 
 }
 
-function checkStatus(){
+function checkStatus() {
 
-    if(clicked){
+    if (clicked) {
         const btn = $("#btnEditProfile");
-        btn.click(function(){
+        btn.click(function () {
             HideEdit();
         });
 
-        $("#cancel").click(function() {
+        $("#cancel").click(function () {
             HideEdit();
         })
     }
-    else{
+    else {
         const btn = $("#btnEditProfile");
-        btn.click(function(){
+        btn.click(function () {
             ShowEdit();
         });
     }
 }
 
-function ShowEdit(){
+function ShowEdit() {
     const btn = $("#btnEditProfile");
     btn.text("Show less");
 
@@ -120,16 +123,16 @@ function ShowEdit(){
     $("#showPwd").prop("disabled", false);
     $("#save").prop("disabled", false);
     $("#cancel").prop("disabled", false);
-    
+
     $(".divForm").removeClass("d-none");
     clicked = true;
     checkStatus();
 }
 
-function HideEdit(){
+function HideEdit() {
     const btn = $("#btnEditProfile");
     btn.text("Edit Profile");
-    
+
     $("#username").prop("disabled", true);
     $("#password").prop("disabled", true);
     $("#showPwd").prop("disabled", true);
@@ -141,37 +144,37 @@ function HideEdit(){
     checkStatus();
 }
 
-function checkShowpalette(){
+function checkShowpalette() {
 
-    if(varShowPalette){
+    if (varShowPalette) {
         const btn = $("#btnShowpalette");
-        btn.click(function(){
+        btn.click(function () {
             hidePalette();
         });
     }
-    else{
+    else {
         const btn = $("#btnShowpalette");
-        btn.click(function(){
+        btn.click(function () {
             showPalette();
         });
     }
-    
+
 }
 
-function hidePalette(){
+function hidePalette() {
 
     const btn = $("#btnShowpalette");
     btn.text("Show palette");
 
     $(".divShowPalette").empty();
-    
-    
+
+
     varShowPalette = false;
     $("#paletteTableDiv").removeClass("divTable");
     checkShowpalette();
 }
 
-function showPalette(){
+function showPalette() {
 
     let _token = sessionStorage.getItem("token");
     let bodyPalette = {
@@ -195,7 +198,7 @@ function showPalette(){
     const divPal = $(".divShowPalette");
 
     $("#paletteTableDiv").addClass("divTable");
-    
+
 
     btn.text("Hide palette");
 
@@ -206,7 +209,7 @@ function showPalette(){
     divPal.append(trNome);
 
 
-    for(let i = 0; i < 10; i++){
+    for (let i = 0; i < 10; i++) {
 
         const tr = $(`<tr>`);
         const td = $("<td></td><td>ciao</td><td>ciao</td><td>ciao</td><td></td>");
@@ -215,13 +218,13 @@ function showPalette(){
         divPal.append(tr)
     }
 
-    
-    
+
+
     varShowPalette = true;
     checkShowpalette();
 }
 
-function decodeToken(_token){
+function decodeToken(_token) {
 
     let reqBody = {
         token: _token
@@ -230,7 +233,7 @@ function decodeToken(_token){
     return new Promise((resolve, reject) => {
 
         let request = inviaRichiesta("POST", "/api/decodeToken", reqBody);
-        
+
         request.done((data) => {
             resolve(data);
         });
