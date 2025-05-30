@@ -103,6 +103,14 @@ function loadTable() {
                 let buttonMod = $(`<button id="id_${immagine.idP}_${immagine.idI}" class="btn secondary-btn" data-bs-target="#ModifyModal" data-bs-toggle="modal">Modify</button>`);
                 tdButtonMod.append(buttonMod);
 
+                tdButtonMod.click(function(){
+
+                    let idP = $(this).split('_')[1];
+                    let idI = $(this).split('_')[2];
+
+                    setUpUpdateDelete(idP, idI);
+                })
+
                 tr.append(tdColorName);
                 tr.append(tdColor);
                 tr.append(tdColorHEX);
@@ -128,6 +136,17 @@ function loadTable() {
         showAlert("Error while getting images");
     })
 
+}
+
+function setUpUpdateDelete(idP, idI){
+
+    $("#updateBtn").click(function(){
+        console.log(idP + " " + idI);
+    });
+
+    $("#deleteBtn").click(function(){
+        console.log(idP + " " + idI);
+    })
 }
 
 function checkStatus() {
