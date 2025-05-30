@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mysql from 'mysql2';
 import nodemailer from 'nodemailer'
 import jwt from "jsonwebtoken";
+import { createHash } from 'crypto';
 
 const privateKey = process.env.PRIVATE_KEY!;
 const DURATA_TOKEN = 900; // secondi
@@ -241,6 +242,57 @@ app.delete("/api/deleteUser", async (req, res) => {
         });
     }
 });
+
+app.patch("/api/updateUser", async (req, res) => {
+
+    let { token, usr, pwd, img } = req.body;
+    let idU: number = req.body.idU;
+
+    let tokenResponse: any = await decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        let queryUpUser;
+        let paramsUpdate;
+
+        if(pwd.trim() != "")
+        {
+            let hashPwd = md5(pwd);
+
+            queryUpUser = "UPDATE utenti SET Nickname = ?, Img = ?, Password = ? WHERE idU = ?";
+            paramsUpdate = [usr, img, hashPwd, idU];
+        }
+        else
+        {
+            queryUpUser = "UPDATE utenti SET Nickname = ?, Img = ? WHERE idU = ?";
+            paramsUpdate = [usr, img, idU];
+        }
+
+        db.query(queryUpUser, paramsUpdate, (err, results) => {
+
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    msg: "An error occured during the update"
+                });
+            }
+            else {
+
+                res.status(200).json({
+                    msg: "Update succesfull"
+                });
+
+            }
+        });
+
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
+});
+
 
 /* -- ENDPOINTS COLORI -- */
 
@@ -650,6 +702,10 @@ function decodeToken(token: any) {
             msg: "Error in token's verification"
         }
     }
+}
+
+function md5(input: string): string {
+  return createHash('md5').update(input).digest('hex');
 }
 
 /* -------------------------------- */

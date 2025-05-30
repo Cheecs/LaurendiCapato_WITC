@@ -36,6 +36,7 @@ async function checkToken(token) {
         });
 
         $("#save").click(function(){
+
             updateUser(info.id);
         });
 
@@ -66,6 +67,42 @@ async function checkToken(token) {
         window.location.href = "./home.html";
     }
 
+
+}
+
+async function updateUser(id){
+
+    let token = sessionStorage.getItem("token");
+    let username = $("#txtChangeUsr").val();
+    let psw = $("#txtChangePwd").val();
+    let newImg;
+
+    if($("#imgProfile").attr("src") == "../img/defaultProfile.png")
+        newImg = null;
+    else
+    {
+        let img = $("#imgProfileInput")[0].files[0];
+        newImg = await imgToBase64(img);
+    }
+
+    let reqBody = {
+        idU: id,
+        usr: username,
+        pwd: psw,
+        img: base64Img,
+        token:token
+    }
+
+    let request = inviaRichiesta("PATCH", "/api/updateUser", reqBody);
+
+    request.done(() => {
+        location.reload();
+    });
+
+    request.fail(() => {
+
+        showAlert("An error occured during the update");
+    })
 
 }
 
