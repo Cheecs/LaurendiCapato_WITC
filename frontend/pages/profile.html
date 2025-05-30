@@ -75,7 +75,7 @@
                         </div>
                         <div id="buttons">
                             <button class="btn btnShowpalette" id="updateBtn" data-bs-dismiss="modal">Update</button>
-                            <button class="btn ms-2" id="deleteBtn" data-bs-dismiss="modal">Delete</button>
+                            <button class="btn deleteBtn ms-2" data-bs-dismiss="modal">Delete</button>
                         </div>
                     </div>
 
@@ -90,36 +90,6 @@
             <div class="modal-content text-white showImgModal">
                 <!-- Modal body -->
                 <div class="modal-body modalBackground">
-                    <div id="closePreview">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                            class="mb-2 bi bi-x" viewBox="0 0 16 16" data-bs-dismiss="modal">
-                            <path
-                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                        </svg>
-                    </div>
-                    <h5 class="modal-title mb-2" id="paletteName">Palette:</h5>
-                    <table class="table table-dark table-borderless rounded-table">
-                        <thead>
-                            <tr>
-                                <th>Color</th>
-                                <th>HEX</th>
-                                <th>RGB</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tBodyPalette">
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="modal" id="ModifyModal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-white showImgModal">
-                <!-- Modal body -->
-                <div class="modal-body" id="showImgZoomIn">
                     <div id="closePreview">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                             class="mb-2 bi bi-x" viewBox="0 0 16 16" data-bs-dismiss="modal">
@@ -220,8 +190,9 @@
                                         Show password
                                     </label>
                                 </div>
-                                <button type="submit" class="btn me-3" id="save" disabled>Save</button>
-                                <button class="btn secondary-btn" id="cancel" disabled>Cancel</button>
+                                <button type="submit" class="btn me-3" id="save">Save</button>
+                                <button class="btn secondary-btn" id="cancel">Cancel</button><br>
+                                <button class="btn deleteBtn" id="cancel">Delte profile</button>
                             </form>
                         </div>
                         <div class="mt-3">

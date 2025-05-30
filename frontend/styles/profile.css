@@ -354,14 +354,14 @@ a.text-white {
     box-shadow: -5px 5px 2px 0px black;
 }   
 
-#deleteBtn {
+.deleteBtn {
     background-color: #273339;
     box-shadow: 0px 0px 3px 0px #ff0000a7;
     border: 1px solid #ff0000a7;
     color: #ff0000e1;
 }
 
-#deleteBtn:hover {
+.deleteBtn:hover {
     transition: 0.15s;
     box-shadow: 0px 0px 35px 1px #ff0000a7;
 }

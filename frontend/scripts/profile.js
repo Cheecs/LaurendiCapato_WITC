@@ -316,3 +316,16 @@ function decodeToken(_token) {
         });
     });
 }
+
+function imgToBase64(img) {
+
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(img);
+
+    });
+}
