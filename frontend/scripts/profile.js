@@ -105,10 +105,9 @@ function loadTable() {
 
                 tdButtonMod.click(function(){
 
-                    let idP = $(this).attr("id").split('_')[1];
-                    let idI = $(this).attr("id").split('_')[2];
+                    let idS = $(this).attr("id");
 
-                    setUpUpdateDelete(idP, idI);
+                    setUpUpdateDelete(idS);
                 })
 
                 tr.append(tdColorName);
@@ -138,7 +137,10 @@ function loadTable() {
 
 }
 
-function setUpUpdateDelete(idP, idI){
+function setUpUpdateDelete(id){
+
+    let idP = id.split('_')[1];
+    let idI = id.split('_')[2];
 
     $("#updateBtn").click(function(){
         console.log(idP + " " + idI);
