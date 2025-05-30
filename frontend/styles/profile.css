@@ -230,7 +230,7 @@ td {
     justify-content: center;
 }
 
-#showImgZoomIn {
+.modalBackground {
     border-radius: 12px;
     border: none;
     background-color: #455a6454;
