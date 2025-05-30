@@ -16,8 +16,8 @@ const PWD = process.env.DB_passwd;
 const SERVER = process.env.DB_host;
 
 let app = express();
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Configure the mailer service
 const mailerService = nodemailer.createTransport({
