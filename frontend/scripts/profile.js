@@ -62,6 +62,7 @@ function loadTable() {
         let immagini = data.data
 
         if (immagini.length > 0) {
+
             immagini.forEach(immagine => {
 
                 let tr = $("<tr>");
@@ -87,16 +88,14 @@ function loadTable() {
                 });
                 tdImmagine.append(img);
 
-                let tBodyPalette = $(`<tbody class="divShowPalette" id="tbodyP_${immagine.idP}"></tbody>`)
-
-
                 let tdButton = $("<td>");
                 let button = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette" data-bs-target="#PaletteModal" data-bs-toggle="modal">Show palette</button>`);
                 tdButton.append(button);
 
                 button.click(function () {
-                    
-                    // chiamata e costruisci palette
+
+                        let id = $(this).attr("id");
+                        showPalette(id);
                 });
 
                 // fai modale per modifica o eliminazione
@@ -110,7 +109,6 @@ function loadTable() {
                 tr.append(tdColorRGB);
                 tr.append(tdImmagine);
                 tr.append(tdButton);
-                tr.append(tBodyPalette);
 
                 tBody.append(tr);
 
@@ -183,21 +181,11 @@ function HideEdit() {
     checkStatus();
 }
 
-function hidePalette() {
-
-    $("#btnShowpalette").text("Show palette");
-
-    $(".divShowPalette").empty();
-
-    $("#paletteTableDiv").removeClass("divTable");
-}
-
-function showPalette(id, tBody) {
-
-    $("#btnShowpalette").text("Hide palette");
+function showPalette(id) {
 
     let _token = sessionStorage.getItem("token");
     let paletteId = id.split('_')[1];
+    let tBody = $("#tBodyPalette")
 
     let bodyPalette = {
         token: _token,
@@ -211,45 +199,28 @@ function showPalette(id, tBody) {
         let colori = data.data;
         let paletteName = colori[0].nomeP;
 
-        let trNomeP = $("<tr>");
-        let th = $("<th>Nome palette: </th>");
-        let tdNome = $(`<td>${paletteName}</td>`);
-
-        let emptyCell1 = $("<td>");
-        let emptyCell2 = $("<td>");
-        let emptyCell3 = $("<td>");
-
-        trNomeP.append(th);
-        trNomeP.append(tdNome);
-        trNomeP.append(emptyCell1);
-        trNomeP.append(emptyCell2);
-        trNomeP.append(emptyCell3);
+        $("#paletteName").text(`Palette: ${paletteName}`);
 
         tBody.append(trNomeP);
 
-        // colori.forEach(colore => {
+        colori.forEach(colore => {
 
-        //     let tr = $("<tr>");
+            let tr = $("<tr>");
 
-        //     let emptyCell1 = $("<td>");
-        //     let emptyCell2 = $("<td>");
+            let tdColor = $(`<td></td>`);
+            let divColor = $("<div class='colorDiv'>");
+            divColor.css("backgroundColor", colore.cHEX);
+            tdColor.append(divColor);
 
-        //     let tdColor = $(`<td></td>`);
-        //     let divColor = $("<div class='colorDiv'>");
-        //     divColor.css("backgroundColor", colore.cHEX);
-        //     tdColor.append(divColor);
+            let tdColorRGB = $(`<td>(${colore.cRGB})</td>`);
+            let tdColorHEX = $(`<td>${colore.cHEX}</td>`);
 
-        //     let tdColorRGB = $(`<td>(${colore.cRGB})</td>`);
-        //     let tdColorHEX = $(`<td>${colore.cHEX}</td>`);
+            tr.append(tdColor);
+            tr.append(tdColorHEX);
+            tr.append(tdColorRGB);
 
-        //     tr.append(emptyCell1);
-        //     tr.append(tdColor);
-        //     tr.append(tdColorHEX);
-        //     tr.append(tdColorRGB);
-        //     tr.append(emptyCell2);
-
-        //     tBody.append(tr);
-        // });
+            tBody.append(tr);
+        });
 
     });
 
