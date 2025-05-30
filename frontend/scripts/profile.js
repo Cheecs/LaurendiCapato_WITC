@@ -58,7 +58,7 @@ function deleteUser(id){
         token: token
     }
 
-    let request = inviaRichiesta("DELETE", "/api/deleteUser");
+    let request = inviaRichiesta("DELETE", "/api/deleteUser", reqBody);
 
     request.done(() => {
 
