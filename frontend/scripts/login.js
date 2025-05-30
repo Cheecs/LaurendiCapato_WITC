@@ -35,8 +35,8 @@ $(document).ready(function () {
 
     request.fail((err) => {
 
-      showAlert(err.responseJSON.msg);
       console.log(err);
+      showAlert(err.responseJSON.msg);
 
     });
     request.done(function (data) {
