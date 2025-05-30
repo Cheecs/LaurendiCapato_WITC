@@ -360,7 +360,7 @@ app.post("/api/getPalette", async (req, res) => {
 
 });
 
-app.post("/api/updateColorPalette", async (req, res) => {
+app.patch("/api/updateColorPalette", async (req, res) => {
 
     let { idP, idI, colore, palette, token } = req.body;
     let tokenResponse:any = await decodeToken(token);
