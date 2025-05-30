@@ -373,7 +373,7 @@ app.patch("/api/updateColorPalette", async (req, res) => {
         let queryUpColor = "UPDATE immagini SET nomeC = ? WHERE idI = ?";
         let paramsColor = [colore, idI];
 
-        let queryUpPalette = "UPDATE palette SET NomeP = ? WHERE idP = ?";
+        let queryUpPalette = "UPDATE palettes SET NomeP = ? WHERE idP = ?";
         let paramsPalette = [palette, idP];
 
         db.query(queryUpColor, paramsColor, (err, results) => {
