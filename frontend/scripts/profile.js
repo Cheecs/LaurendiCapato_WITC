@@ -83,6 +83,8 @@ function loadTable() {
 
                 img.click(function () {
 
+                    console.log("ok");
+
                     let prevImg = $(this).attr("src");
                     $("#imgZoomIn").attr("src", prevImg);
                 });
