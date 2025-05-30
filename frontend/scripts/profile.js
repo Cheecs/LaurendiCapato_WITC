@@ -78,12 +78,10 @@ function loadTable() {
                 let tdColorHEX = $(`<td>${immagine.cHEX}</td>`);
 
                 let tdImmagine = $("<td>");
-                let img = $("<img class='imgTable'>");
+                let img = $("<img class='imgTable' data-bs-target='#ImgModal' data-bs-toggle='modal'>");
                 img.attr("src", immagine.Img);
 
                 img.click(function () {
-
-                    console.log("ok");
 
                     let prevImg = $(this).attr("src");
                     $("#imgZoomIn").attr("src", prevImg);
