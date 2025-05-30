@@ -95,7 +95,8 @@ async function updateUser(id){
     let request = inviaRichiesta("PATCH", "/api/updateUser", reqBody);
 
     request.done(() => {
-        location.reload();
+        sessionStorage.removeItem("token");
+        lwindow.location.href = "./login.html";
     });
 
     request.fail(() => {
