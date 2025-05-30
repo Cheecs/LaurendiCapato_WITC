@@ -346,4 +346,10 @@ a.text-white {
     height: 50px;
     width: auto;
     border-radius: 10px;
+    cursor: pointer;
 }
+
+.ImgPrev:hover{
+    transition: 0.2s;
+    box-shadow: -5px 5px 2px 0px black;
+}   

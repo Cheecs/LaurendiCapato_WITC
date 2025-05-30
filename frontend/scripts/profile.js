@@ -1,7 +1,6 @@
 "use strict";
 
 let clicked = false;
-let varShowPalette = false;
 
 $(document).ready(function () {
 
@@ -92,23 +91,18 @@ function loadTable() {
 
 
                 let tdButton = $("<td>");
-                let button = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
+                let button = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette" data-bs-target="#PaletteModal" data-bs-toggle="modal">Show palette</button>`);
                 tdButton.append(button);
 
                 button.click(function () {
-
-                    let varShowPalette = false;
-
-                    if (varShowPalette) {
-                        varShowPalette = false;
-                        hidePalette();
-                    }
-                    else {
-                        varShowPalette = true;
-                        let id = $(this).attr("id");
-                        showPalette(id, tBodyPalette);
-                    }
+                    
+                    // chiamata e costruisci palette
                 });
+
+                // fai modale per modifica o eliminazione
+                // let tdButtonMod = $("<td>");
+                // let buttonMod = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
+                // tdButton.append(button);
 
                 tr.append(tdColorName);
                 tr.append(tdColor);
