@@ -22,6 +22,10 @@ async function getUserInfo(token) {
         $("#imgUtente").attr("title", usrData.mail);
         $("#imgUtente").tooltip("dispose").tooltip();
 
+        $("#imgUtente").click(() => {
+            window.location.href = "./profile.html";
+        })
+
 
     } catch (err) 
     {   
