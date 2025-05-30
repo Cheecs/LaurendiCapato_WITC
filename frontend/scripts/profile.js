@@ -161,7 +161,7 @@ function setUpUpdateDelete(idP, idI){
             token: token
         };
 
-        let request = inviaRichiesta("PATCH", "/api/updateColorPalette");
+        let request = inviaRichiesta("POST", "/api/updateColorPalette");
 
         request.done(() => {
 
