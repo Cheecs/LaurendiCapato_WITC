@@ -32,12 +32,6 @@ async function checkToken(token) {
             $("#imgProfileInput")[0].click();
         });
 
-        $(".ImgTable").click(function () {
-
-            let img = $(this).attr("src");
-            $("#imgZoomIn").attr("src", img);
-        });
-
         loadTable();
 
         $("#txtChangeUsr").val(info.usrName);
@@ -86,6 +80,12 @@ function loadTable() {
                 let tdImmagine = $("<td>");
                 let img = $("<img class='imgTable'>");
                 img.attr("src", immagine.Img);
+
+                img.click(function () {
+
+                    let prevImg = $(this).attr("src");
+                    $("#imgZoomIn").attr("src", prevImg);
+                });
                 tdImmagine.append(img);
 
                 let tBodyPalette = $(`<tbody class="divShowPalette" id="tbodyP_${immagine.idP}"></tbody>`)
@@ -247,7 +247,7 @@ function showPalette(id, tBody) {
 
         //     let tdColorRGB = $(`<td>(${colore.cRGB})</td>`);
         //     let tdColorHEX = $(`<td>${colore.cHEX}</td>`);
- 
+
         //     tr.append(emptyCell1);
         //     tr.append(tdColor);
         //     tr.append(tdColorHEX);
