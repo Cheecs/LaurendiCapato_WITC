@@ -403,3 +403,7 @@ a.text-white {
     animation: showAlert 0.3s ease;
     opacity: 1;
 }
+
+#comingSoon{
+    font-style: italic;
+}
