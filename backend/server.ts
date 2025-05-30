@@ -367,8 +367,8 @@ app.patch("/api/updateColorPalette", async (req, res) => {
 
     if (tokenResponse.status == 200) {
 
-        let query = "UPDATE immagini SET nomeC = ? WHERE idI = ?";
-        let params = [colore, idI];
+        let query = "UPDATE immagini SET nomeC = ? WHERE idI = ?; UPDATE palette SET NomeP = ? WHERE idP = ?";
+        let params = [colore, idI, palette, idP];
 
         db.query(query, params, (err, results) => {
 
