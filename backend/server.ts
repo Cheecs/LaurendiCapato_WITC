@@ -289,8 +289,6 @@ app.post("/api/saveColor", async (req, res) => {
 
 app.post("/api/getImages", async (req, res) => {
 
-    // passo il token che decifro, se è valido allora mando i dati all'utente
-
     let { token } = req.body;
     let tokenResponse:any = await decodeToken(token);
 
@@ -360,6 +358,40 @@ app.post("/api/getPalette", async (req, res) => {
         });
     }
 
+});
+
+app.patch("/api/updateColorPalette", async (req, res) => {
+
+    let { idP, idI, colore, palette, token } = req.body;
+    let tokenResponse:any = await decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        let query = "UPDATE immagini SET nomeC = ? WHERE idI = ?";
+        let params = [colore, idI];
+
+        db.query(query, params, (err, results) => {
+
+            if(err)
+            {
+                console.log(err);
+                res.status(500).json({
+                    msg: "An error occured while getting informations"
+                });
+            }
+            else
+            {
+                res.status(200).json({
+                    msg: "Update succesfull"
+                });
+            }
+        });
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
 });
 
 /* -------------  OTHER FUNCTIONS ------------------ */

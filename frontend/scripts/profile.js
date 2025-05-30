@@ -140,12 +140,59 @@ function loadTable() {
 
 function setUpUpdateDelete(idP, idI){
 
+    let token = sessionStorage.getItem("token");
+
     $("#updateBtn").click(function(){
-        console.log(idP + " " + idI);
+
+        let nomeColore = $("#").text();
+        let nomePalette = $("#").text();
+
+        if(nomeColore.trim() == "")
+            nomeColore = "Colore";
+
+        if(nomePalette.trim() == "")
+            nomePalette = "Palette";
+        
+        let reqBodyUpdate = {
+            idP: idP,
+            idI: idI,
+            colore: nomeColore,
+            palette: nomePalette,
+            token: token
+        };
+
+        let request = inviaRichiesta("PATCH", "/api/updateColorPalette");
+
+        request.done(() => {
+
+            loadTable();
+        });
+
+        request.fail(() => {
+
+            showAlert("An error occured during the update");
+        });
     });
 
     $("#deleteBtn").click(function(){
-        console.log(idP + " " + idI);
+        
+        let reqBodyDelete = {
+            idP: idP,
+            idI: idI,
+            token: token
+        };
+
+        let request = inviaRichiesta("DELTE", "/api/deleteColorPalette");
+
+        request.done(() => {
+
+            loadTable();
+        });
+
+        request.fail(() => {
+
+            showAlert("An error occured during the delete");
+        });
     })
 }
 
