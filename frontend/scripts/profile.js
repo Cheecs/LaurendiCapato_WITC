@@ -96,7 +96,7 @@ async function updateUser(id){
 
     request.done(() => {
         sessionStorage.removeItem("token");
-        lwindow.location.href = "./login.html";
+        window.location.href = "./login.html";
     });
 
     request.fail(() => {
