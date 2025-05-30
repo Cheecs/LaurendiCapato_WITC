@@ -99,7 +99,7 @@ async function saveColor(id, img){
     let paletteNameInput = $("#paletteName").val();
 
     let promiseResponse = await imgToBase64(img);
-    let imgBase64 = promiseResponse.split(',')[1];
+    let imgBase64 = promiseResponse;
 
     let mainHEX = $(".mainColorHEX").text();
     let mainRGB = $(".mainColorRGB").text();
