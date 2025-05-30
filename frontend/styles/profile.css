@@ -341,3 +341,9 @@ a.text-white {
 #noImages{
     font-style: italic;
 }
+
+.imgTable{
+    height: 50px;
+    width: auto;
+    border-radius: 10px
+}
