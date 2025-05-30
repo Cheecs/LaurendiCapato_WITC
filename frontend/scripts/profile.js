@@ -100,7 +100,7 @@ function loadTable() {
 
                 // fai modale per modifica o eliminazione
                 let tdButtonMod = $("<td>");
-                let buttonMod = $(`<button id="id_${immagine.idP}_${immagine.idI}" class="btn secondary-btn">Modify</button>`);
+                let buttonMod = $(`<button id="id_${immagine.idP}_${immagine.idI}" class="btn secondary-btn" data-bs-target="#ModifyModal" data-bs-toggle="modal">Modify</button>`);
                 tdButtonMod.append(buttonMod);
 
                 tr.append(tdColorName);

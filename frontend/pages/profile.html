@@ -78,6 +78,72 @@
     </div>
   </div>
 
+<div class="modal" id="PaletteModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-white showImgModal">
+        <!-- Modal body -->
+        <div class="modal-body" id="showImgZoomIn">
+          <div id="closePreview">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="mb-2 bi bi-x"
+              viewBox="0 0 16 16" data-bs-dismiss="modal">
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </div>
+          <h5 class="modal-title mb-2" id="paletteName">Palette:</h5>
+          <table class="table table-dark table-borderless rounded-table">
+            <thead>
+              <tr>
+                <th>Color</th>
+                <th>HEX</th>
+                <th>RGB</th>
+              </tr>
+            </thead>
+            <tbody id="tBodyPalette">
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="ModifyModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-white SaveModalContent">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h3 class="modal-title">Update or delete your color and palette</h3>
+        <div id="closePreview">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="mb-2 bi bi-x"
+              viewBox="0 0 16 16" data-bs-dismiss="modal">
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+            </svg>
+          </div>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h5 class="modal-title mb-2">Add a name for your color</h5>
+          <div class="form-group">
+            <input type="text" class="inputName form-control mb-3 text-dark" id="colorName" aria-describedby="name" placeholder="Enter name">
+          </div>      
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h5 class="modal-title mb-2">Add a name for your Palette</h5>
+          <div class="form-group">
+            <input type="text" class="inputName form-control mb-3 text-dark" id="paletteName" aria-describedby="name" placeholder="Enter name">
+            <button id="saveImgInfo" class="btn btnSave" data-bs-dismiss="modal">Save</button>
+          </div>      
+      </div>
+
+    </div>
+  </div>
+</div>
 
     <header class="mb-5">
         <nav id="navbar" class="navbar navbar-expand-sm fixed-top">
@@ -149,7 +215,7 @@
                                 </label>
                             </div>
                             <button type="submit" class="btn me-3" id="save" disabled>Save</button>
-                            <button class="btn" id="cancel" class="secondary-btn" disabled>Cancel</button>
+                            <button class="btn secondary-btn" id="cancel" disabled>Cancel</button>
                         </form>
                     </div>
                     <div class="mt-3">
