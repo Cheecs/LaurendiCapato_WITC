@@ -39,6 +39,11 @@ async function checkToken(token) {
             updateUser(info.id);
         });
 
+        $("#logout").click(() => {
+            sessionStorage.removeItem("token");
+            window.location.href = "./home.html";
+        })
+
         $("#imgProfileInput").change(function () {
 
             const fileInput = $(this)[0].files[0];

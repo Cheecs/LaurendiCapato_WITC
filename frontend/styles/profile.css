@@ -407,3 +407,15 @@ a.text-white {
 #comingSoon{
     font-style: italic;
 }
+
+.deleteBtn {
+    background-color: #273339;
+    box-shadow: 0px 0px 3px 0px #ffcc00a7;
+    border: 1px solid #ffcc00a7;
+    color: #ffcc00e1;
+}
+
+.deleteBtn:hover {
+    transition: 0.15s;
+    box-shadow: 0px 0px 35px 1px #ffcc00a7;
+}
