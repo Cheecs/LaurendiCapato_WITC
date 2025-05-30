@@ -185,7 +185,9 @@ function showPalette(id) {
 
     let _token = sessionStorage.getItem("token");
     let paletteId = id.split('_')[1];
-    let tBody = $("#tBodyPalette")
+    let tBody = $("#tBodyPalette");
+
+    tBody.empty();
 
     let bodyPalette = {
         token: _token,
