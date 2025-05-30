@@ -99,9 +99,9 @@ function loadTable() {
                 });
 
                 // fai modale per modifica o eliminazione
-                // let tdButtonMod = $("<td>");
-                // let buttonMod = $(`<button id="buttonP_${immagine.idP}" class="btn btnShowpalette">Show palette</button>`);
-                // tdButton.append(button);
+                let tdButtonMod = $("<td>");
+                let buttonMod = $(`<button id="id_${immagine.idP}_${immagine.idI}" class="btn secondary-btn">Modify</button>`);
+                tdButtonMod.append(buttonMod);
 
                 tr.append(tdColorName);
                 tr.append(tdColor);
@@ -109,6 +109,7 @@ function loadTable() {
                 tr.append(tdColorRGB);
                 tr.append(tdImmagine);
                 tr.append(tdButton);
+                tr.append(tdButtonMod);
 
                 tBody.append(tr);
 
