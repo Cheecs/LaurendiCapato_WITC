@@ -31,6 +31,10 @@ async function checkToken(token) {
             $("#imgProfileInput")[0].click();
         });
 
+        $("#deleteBtn").click(function(){
+            delteUser(info.id);
+        })
+
         loadTable();
 
         $("#txtChangeUsr").val(info.usrName);
@@ -43,6 +47,27 @@ async function checkToken(token) {
     }
 
 
+}
+
+function deleteUser(id){
+
+    let token = sessionStorage.getItem("token");
+
+    let reqBody = {
+        idU: id,
+        token: token
+    }
+
+    let request = inviaRichiesta("DELETE", "/api/deleteUser");
+
+    request.done(() => {
+
+        window.location.href = "./home.html"
+    });
+
+    request.fail(() => {
+        showAlert("An error occured while deleting");
+    })
 }
 
 function loadTable() {

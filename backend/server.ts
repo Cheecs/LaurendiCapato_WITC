@@ -205,6 +205,43 @@ app.post("/api/updateUser", async (req, res) => {
 
 });
 
+app.delete("/api/deleteUser", async (req, res) => {
+
+    let { token } = req.body;
+    let idU: number = req.body.idU;
+
+    let tokenResponse: any = await decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        let queryDelUser = "DELETE FROM utenti WHERE idU = ?"
+        let paramsUtenti = [idU];
+
+        db.query(queryDelUser, paramsUtenti, (err, results) => {
+
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    msg: "An error occured during the delete"
+                });
+            }
+            else {
+
+                res.status(200).json({
+                    msg: "Delete succesfull"
+                });
+
+            }
+        });
+
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
+});
+
 /* -- ENDPOINTS COLORI -- */
 
 app.post("/api/savePalette", async (req, res) => {

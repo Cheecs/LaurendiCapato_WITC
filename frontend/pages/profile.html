@@ -73,7 +73,7 @@
                             <input type="text" name="username" id="txtChangePaletteName"
                                 placeholder="Change palette name" required>
                         </div>
-                        <div id="buttons">
+                        <div>
                             <button class="btn btnShowpalette" id="updateBtn" data-bs-dismiss="modal">Update</button>
                             <button class="btn deleteBtn ms-2" data-bs-dismiss="modal">Delete</button>
                         </div>
@@ -115,6 +115,30 @@
             </div>
         </div>
     </div>
+    <!-- DELETE -->
+         <div class="modal" id="DeleteModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white showImgModal">
+                <!-- Modal body -->
+                <div class="modal-body modalBackground">
+                    <div id="closePreview">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="mb-2 bi bi-x" viewBox="0 0 16 16" data-bs-dismiss="modal">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        </svg>
+                    </div>
+                    <h5 class="modal-title mb-2">Are you sure that you want to delete your profile?</h5>
+                    <div id="buttons">
+                            <button class="btn btnShowpalette" id="deleteBtn" data-bs-dismiss="modal">Yes, delete</button>
+                            <button class="btn secondary-btn ms-2" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div id="containerAlert" class="sticky-top">
         <div class="hideAlert alert alert-danger col-4 container mt-4" id="divAlert">
             <strong id="alertHeading">Error</strong>
@@ -192,7 +216,7 @@
                                 </div>
                                 <button type="submit" class="btn me-3" id="save">Save</button>
                                 <button class="btn secondary-btn" id="cancel">Cancel</button><br>
-                                <button class="btn deleteBtn mt-3" id="deleteBtn">Delete profile</button>
+                                <button class="btn deleteBtn mt-3" data-bs-target="#DeleteModal" data-bs-toggle="modal">Delete profile</button>
                             </div>
                         </div>
                         <div class="mt-3">
