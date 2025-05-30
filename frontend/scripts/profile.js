@@ -36,7 +36,6 @@ async function checkToken(token) {
         });
 
         $("#save").click(function(){
-
             updateUser(info.id);
         });
 
@@ -89,7 +88,7 @@ async function updateUser(id){
         idU: id,
         usr: username,
         pwd: psw,
-        img: base64Img,
+        img: newImg,
         token:token
     }
 
