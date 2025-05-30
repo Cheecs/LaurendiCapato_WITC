@@ -103,11 +103,12 @@ function loadTable() {
                 let buttonMod = $(`<button id="id_${immagine.idP}_${immagine.idI}" class="btn secondary-btn" data-bs-target="#ModifyModal" data-bs-toggle="modal">Modify</button>`);
                 tdButtonMod.append(buttonMod);
 
-                tdButtonMod.click(function(){
+                buttonMod.click(function(){
 
-                    let idS = $(this).attr("id");
+                    let idP = $(this).attr("id").split('_')[1];
+                    let idI = $(this).attr("id").split('_')[2];
 
-                    setUpUpdateDelete(idS);
+                    setUpUpdateDelete(idP, idI);
                 })
 
                 tr.append(tdColorName);
@@ -137,10 +138,7 @@ function loadTable() {
 
 }
 
-function setUpUpdateDelete(id){
-
-    let idP = id.split('_')[1];
-    let idI = id.split('_')[2];
+function setUpUpdateDelete(idP, idI){
 
     $("#updateBtn").click(function(){
         console.log(idP + " " + idI);
