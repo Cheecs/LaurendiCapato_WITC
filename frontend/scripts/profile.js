@@ -48,6 +48,8 @@ async function checkToken(token) {
 function loadTable() {
 
     let _token = sessionStorage.getItem("token");
+    let tBody = $("#tBodyColor");
+    tBody.empty();
 
     let bodyImages = {
         token: _token
@@ -56,8 +58,6 @@ function loadTable() {
     let request = inviaRichiesta("POST", "/api/getImages", bodyImages);
 
     request.done((data) => {
-
-        let tBody = $("#tBodyColor");
 
         let immagini = data.data
 
