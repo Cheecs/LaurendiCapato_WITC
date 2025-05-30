@@ -182,7 +182,7 @@ function setUpUpdateDelete(idP, idI){
             token: token
         };
 
-        let request = inviaRichiesta("DELETE", "/api/deleteColorPalette");
+        let request = inviaRichiesta("DELETE", "/api/deleteColorPalette", reqBodyDelete);
 
         request.done(() => {
 

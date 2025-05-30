@@ -381,7 +381,7 @@ app.patch("/api/updateColorPalette", async (req, res) => {
                 });
             }
             else {
-                
+
                 db.query(queryUpPalette, paramsPalette, (err, results) => {
 
                     if (err) {
@@ -407,6 +407,75 @@ app.patch("/api/updateColorPalette", async (req, res) => {
         });
     }
 });
+
+app.delete("/api/updateColorPalette", async (req, res) => {
+
+    let { token } = req.body;
+    let idI: number = req.body.idI;
+    let idP: number = req.body.idP;
+
+    let tokenResponse: any = await decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        let queryDelColor = "DELETE FROM immagini WHERE idI = ?";
+        let paramsColor = [idI];
+
+        let queryDelColors = "DELETE FROM colori WHERE idP = ?";
+        let paramsColors = [idP];
+
+        let queryDelPalette = "DELETE FROM palettes WHERE idP = ?";
+        let paramsPalette = [idP];
+
+
+        db.query(queryDelColor, paramsColor, (err, results) => {
+
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    msg: "An error occured during the delete"
+                });
+            }
+            else {
+
+                db.query(queryDelColors, paramsColors, (err, results) => {
+
+                    if (err) {
+                        console.log(err);
+                        res.status(500).json({
+                            msg: "An error occured during the update"
+                        });
+                    }
+                    else {
+
+                        db.query(queryDelPalette, paramsPalette, (err, results) => {
+
+                            if (err) {
+                                console.log(err);
+                                res.status(500).json({
+                                    msg: "An error occured during the update"
+                                });
+                            }
+                            else {
+
+                                res.status(200).json({
+                                    msg: "Update succesfull"
+                                });
+
+                            }
+                        });
+                    }
+                })
+            }
+        });
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
+});
+
 
 /* -------------  OTHER FUNCTIONS ------------------ */
 
