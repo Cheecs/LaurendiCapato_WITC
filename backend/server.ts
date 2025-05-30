@@ -156,28 +156,26 @@ app.post("/api/decodeToken", async (req, res) => {
 
     let { token } = req.body;
 
-    try 
-    {
+    try {
         const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
         res.status(200).json({
             data: decoded
         });
 
-    } 
-    catch (err: any) 
-    {
+    }
+    catch (err: any) {
 
         res.status(401).json({
-            msg: "Error in the token's verification" 
-        });    
+            msg: "Error in the token's verification"
+        });
     }
 });
 
 app.post("/api/updateUser", async (req, res) => {
 
     let { id, username, pwd, img, token } = req.body
-    let tokenResponse:any = await decodeToken(token);
+    let tokenResponse: any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
@@ -290,7 +288,7 @@ app.post("/api/saveColor", async (req, res) => {
 app.post("/api/getImages", async (req, res) => {
 
     let { token } = req.body;
-    let tokenResponse:any = await decodeToken(token);
+    let tokenResponse: any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
@@ -325,7 +323,7 @@ app.post("/api/getImages", async (req, res) => {
 app.post("/api/getPalette", async (req, res) => {
 
     let { token, idP } = req.body;
-    let tokenResponse:any = await decodeToken(token);
+    let tokenResponse: any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
@@ -336,15 +334,13 @@ app.post("/api/getPalette", async (req, res) => {
 
         db.query(query, params, (err, results) => {
 
-            if(err)
-            {
+            if (err) {
                 console.log(err);
                 res.status(500).json({
                     msg: "An error occured while getting informations"
                 });
             }
-            else
-            {
+            else {
                 res.status(200).json({
                     data: results // è un array di oggetti
                 });
@@ -363,10 +359,10 @@ app.post("/api/getPalette", async (req, res) => {
 app.patch("/api/updateColorPalette", async (req, res) => {
 
     let { colore, palette, token } = req.body;
-    let idI:number = req.body.idI;
-    let idP:number = req.body.idP;
+    let idI: number = req.body.idI;
+    let idP: number = req.body.idP;
 
-    let tokenResponse:any = await decodeToken(token);
+    let tokenResponse: any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
@@ -378,35 +374,29 @@ app.patch("/api/updateColorPalette", async (req, res) => {
 
         db.query(queryUpColor, paramsColor, (err, results) => {
 
-            if(err)
-            {
+            if (err) {
                 console.log(err);
                 res.status(500).json({
                     msg: "An error occured during the update"
                 });
             }
-            else
-            {
-                res.status(200).json({
-                    msg: "Update succesfull"
-                });
-            }
-        });
+            else {
+                
+                db.query(queryUpPalette, paramsPalette, (err, results) => {
 
-        db.query(queryUpPalette, paramsPalette, (err, results) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).json({
+                            msg: "An error occured during the update"
+                        });
+                    }
+                    else {
+                        res.status(200).json({
+                            msg: "Update succesfull"
+                        });
+                    }
+                });
 
-            if(err)
-            {
-                console.log(err);
-                res.status(500).json({
-                    msg: "An error occured during the update"
-                });
-            }
-            else
-            {
-                res.status(200).json({
-                    msg: "Update succesfull"
-                });
             }
         });
 
@@ -537,7 +527,7 @@ function createToken(data: any) {
 function decodeToken(token: any) {
 
     try {
-        
+
         const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
         return {
