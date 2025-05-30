@@ -32,7 +32,7 @@ async function checkToken(token) {
             $("#imgProfileInput")[0].click();
         });
 
-        $(".ImgPrev").click(function () {
+        $(".ImgTable").click(function () {
 
             let img = $(this).attr("src");
             $("#imgZoomIn").attr("src", img);
