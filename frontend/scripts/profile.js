@@ -144,8 +144,8 @@ function setUpUpdateDelete(idP, idI){
 
     $("#updateBtn").click(function(){
 
-        let nomeColore = $("#txtChangeColorName").text();
-        let nomePalette = $("#txtChangePaletteName").text();
+        let nomeColore = $("#txtChangeColorName").val();
+        let nomePalette = $("#txtChangePaletteName").val();
 
         if(nomeColore.trim() == "")
             nomeColore = "Colore";

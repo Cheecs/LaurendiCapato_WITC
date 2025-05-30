@@ -362,7 +362,9 @@ app.post("/api/getPalette", async (req, res) => {
 
 app.patch("/api/updateColorPalette", async (req, res) => {
 
-    let { idP, idI, colore, palette, token } = req.body;
+    let { colore, palette, token } = req.body;
+    let idI:number = req.body.idI;
+    let idP:number = req.body.idP;
     let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
@@ -376,7 +378,7 @@ app.patch("/api/updateColorPalette", async (req, res) => {
             {
                 console.log(err);
                 res.status(500).json({
-                    msg: "An error occured while getting informations"
+                    msg: "An error occured during the update"
                 });
             }
             else
