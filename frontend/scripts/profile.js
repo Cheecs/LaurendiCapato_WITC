@@ -39,8 +39,20 @@ async function checkToken(token) {
             updateUser(info.id);
         });
 
-        $("#imgProfileInput").change(function(){
-            $("#imgProfile").attr("src", $(this.val()));
+        $("#imgProfileInput").change(function () {
+
+            const fileInput = $(this)[0].files[0];
+
+            if (fileInput) {
+
+                const reader = new FileReader();
+
+                reader.readAsDataURL(fileInput);
+
+                reader.onload = function (e) {
+                    $("#imgProfile").attr("src", e.target.result);
+                }
+            }
         });
 
         loadTable();
