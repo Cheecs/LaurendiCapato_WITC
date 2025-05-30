@@ -32,7 +32,7 @@ async function checkToken(token) {
         });
 
         $("#deleteBtn").click(function(){
-            delteUser(info.id);
+            deleteUser(info.id);
         })
 
         loadTable();
