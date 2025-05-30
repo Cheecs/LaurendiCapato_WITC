@@ -33,7 +33,15 @@ async function checkToken(token) {
 
         $("#deleteBtn").click(function(){
             deleteUser(info.id);
-        })
+        });
+
+        $("#save").click(function(){
+            updateUser(info.id);
+        });
+
+        $("#imgProfileInput").change(function(){
+            $("#imgProfile").attr("src", $(this.val()));
+        });
 
         loadTable();
 
