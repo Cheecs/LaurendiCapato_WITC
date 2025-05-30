@@ -201,8 +201,6 @@ function showPalette(id) {
 
         $("#paletteName").text(`Palette: ${paletteName}`);
 
-        tBody.append(trNomeP);
-
         colori.forEach(colore => {
 
             let tr = $("<tr>");
