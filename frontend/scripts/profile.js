@@ -15,12 +15,6 @@ $(document).ready(function () {
     }
     else
         window.location.href = "./home.html";
-
-    $(".ImgTable").click(function () {
-
-        let img = $(this).attr("src");
-        $("#imgZoomIn").attr("src", img);
-    })
 });
 
 async function checkToken(token) {
