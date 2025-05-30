@@ -197,9 +197,7 @@ function showPalette(id) {
     palette.done((data) => {
 
         let colori = data.data;
-        let paletteName = colori[0].nomeP;
-
-        $("#paletteName").text(`Palette: ${paletteName}`);
+        let paletteName;
 
         colori.forEach(colore => {
 
@@ -217,8 +215,12 @@ function showPalette(id) {
             tr.append(tdColorHEX);
             tr.append(tdColorRGB);
 
+            paletteName = colore.nomeP;            
+
             tBody.append(tr);
         });
+
+        $("#paletteName").text(`Palette: ${paletteName}`);
 
     });
 
