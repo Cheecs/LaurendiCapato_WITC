@@ -365,6 +365,7 @@ app.patch("/api/updateColorPalette", async (req, res) => {
     let { colore, palette, token } = req.body;
     let idI:number = req.body.idI;
     let idP:number = req.body.idP;
+    
     let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
