@@ -105,8 +105,8 @@ function loadTable() {
 
                 tdButtonMod.click(function(){
 
-                    let idP = $(this).split('_')[1];
-                    let idI = $(this).split('_')[2];
+                    let idP = $(this).attr("id").split('_')[1];
+                    let idI = $(this).attr("id").split('_')[2];
 
                     setUpUpdateDelete(idP, idI);
                 })
