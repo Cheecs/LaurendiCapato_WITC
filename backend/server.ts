@@ -408,7 +408,7 @@ app.patch("/api/updateColorPalette", async (req, res) => {
     }
 });
 
-app.delete("/api/updateColorPalette", async (req, res) => {
+app.delete("/api/deleteColorPalette", async (req, res) => {
 
     let { token } = req.body;
     let idI: number = req.body.idI;
