@@ -85,7 +85,7 @@ function loadTable() {
 
                 let tdImmagine = $("<td>");
                 let img = $("<img class='imgTable'>");
-                img.attr("src", immagine.img);
+                img.attr("src", immagine.Img);
                 tdImmagine.append(img);
 
                 let tBodyPalette = $(`<tbody class="divShowPalette" id="tbodyP_${immagine.idP}"></tbody>`)
