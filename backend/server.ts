@@ -365,15 +365,18 @@ app.patch("/api/updateColorPalette", async (req, res) => {
     let { colore, palette, token } = req.body;
     let idI:number = req.body.idI;
     let idP:number = req.body.idP;
-    
+
     let tokenResponse:any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
-        let query = "UPDATE immagini SET nomeC = ? WHERE idI = ?; UPDATE palette SET NomeP = ? WHERE idP = ?";
-        let params = [colore, idI, palette, idP];
+        let queryUpColor = "UPDATE immagini SET nomeC = ? WHERE idI = ?";
+        let paramsColor = [colore, idI];
 
-        db.query(query, params, (err, results) => {
+        let queryUpPalette = "UPDATE palette SET NomeP = ? WHERE idP = ?";
+        let paramsPalette = [palette, idP];
+
+        db.query(queryUpColor, paramsColor, (err, results) => {
 
             if(err)
             {
@@ -389,6 +392,24 @@ app.patch("/api/updateColorPalette", async (req, res) => {
                 });
             }
         });
+
+        db.query(queryUpPalette, paramsPalette, (err, results) => {
+
+            if(err)
+            {
+                console.log(err);
+                res.status(500).json({
+                    msg: "An error occured during the update"
+                });
+            }
+            else
+            {
+                res.status(200).json({
+                    msg: "Update succesfull"
+                });
+            }
+        });
+
     }
     else {
         res.status(token.status).json({
