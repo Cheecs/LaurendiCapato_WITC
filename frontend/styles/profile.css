@@ -37,7 +37,10 @@ header {
     height: 35px;
     width: auto;
 
-    border-radius: 50%;
+    max-height: 35px;
+    max-width: 35px;
+
+    border-radius: 50;
 }
 
 
