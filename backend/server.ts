@@ -179,20 +179,6 @@ app.post("/api/updateUser", async (req, res) => {
     let { id, username, pwd, img, token } = req.body;
     let tokenResponse: any = await decodeToken(token);
 
-    const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
-
-    function getBase64Size(base64String: string): number {
-        if (!base64String) return 0;
-        let base64 = base64String.split(',').pop() || '';
-        return Math.ceil((base64.length * 3) / 4);
-    }
-
-    if (img && getBase64Size(img) > MAX_IMAGE_SIZE) {
-        res.status(413).json({
-            msg: "L'immagine supera il limite di 10MB"
-        });
-        return;
-    }
 
     if (tokenResponse.status == 200) {
         let query = "UPDATE utenti SET Nickname = ?, Password = ?, Img = ? WHERE idU = ?";
