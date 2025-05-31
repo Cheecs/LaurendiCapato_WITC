@@ -175,33 +175,6 @@ app.post("/api/decodeToken", async (req, res) => {
     }
 });
 
-app.post("/api/updateUser", async (req, res) => {
-    let { id, username, pwd, img, token } = req.body;
-    let tokenResponse: any = await decodeToken(token);
-
-
-    if (tokenResponse.status == 200) {
-        let query = "UPDATE utenti SET Nickname = ?, Password = ?, Img = ? WHERE idU = ?";
-        let params = [username, pwd, img, id];
-
-        db.query(query, params, (err, results) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json({
-                    msg: "Error during the update of the user"
-                });
-            } else {
-                res.status(200).json({
-                    msg: "User updated correctly"
-                });
-            }
-        });
-        return;
-    }
-    res.status(tokenResponse.status).json({
-        msg: tokenResponse.msg
-    });
-});
 
 app.delete("/api/deleteUser", async (req, res) => {
 
