@@ -35,21 +35,32 @@ async function getUserInfo(token) {
     }
 }
 
-function getProfilePic(id) {
-
-    let request = inviaRichiesta("GET", `/api/getProfilePic/${id}`);
-
-    request.done((data) => {
-        console.log(data);
-        if(data.data && data.data != "")
-            $("#imgUtente").attr("src", data.data);
-        else
+async function getProfilePic(id) {
+    try {
+        let token = sessionStorage.getItem("token");
+        if (!token) {
             $("#imgUtente").attr("src", "./images/user.png");
-    });
+            return;
+        }
 
-    request.fail((err) => {
+        let reqBody = { token };
+        let request = inviaRichiesta("POST", "/api/getProfile", reqBody);
+
+        request.done((data) => {
+            if (data.data && data.data.Img && data.data.Img !== "")
+                $("#imgUtente").attr("src", data.data.Img);
+            else
+                $("#imgUtente").attr("src", "./images/user.png");
+        });
+
+        request.fail((err) => {
+            console.error(err);
+            $("#imgUtente").attr("src", "./images/user.png");
+        });
+    } catch (err) {
         console.error(err);
-    });
+        $("#imgUtente").attr("src", "./images/user.png");
+    }
 }
 
 
