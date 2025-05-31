@@ -67,7 +67,7 @@ app.post('/api/login', async (req, res) => {
     req.setTimeout(300000);
 
     let { mail, pwd } = req.body;
-    let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
+    let query = "SELECT `idU`,`Nickname`,`Email`,`Password` FROM utenti WHERE Email = ? AND Password = ?"
     let login = await UserExists(mail, pwd, query);
 
     if (login.status == 200) {
