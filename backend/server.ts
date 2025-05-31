@@ -176,54 +176,45 @@ app.post("/api/decodeToken", async (req, res) => {
 });
 
 app.post("/api/updateUser", async (req, res) => {
-
-    let { id, username, pwd, img, token } = req.body
+    let { id, username, pwd, img, token } = req.body;
     let tokenResponse: any = await decodeToken(token);
 
-    // Limite di 10MB per l'immagine (base64)
     const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
 
-    // Calcola la dimensione effettiva del buffer decodificato
     function getBase64Size(base64String: string): number {
         if (!base64String) return 0;
-        // Rimuove eventuale header tipo "data:image/png;base64,"
         let base64 = base64String.split(',').pop() || '';
         return Math.ceil((base64.length * 3) / 4);
     }
 
     if (img && getBase64Size(img) > MAX_IMAGE_SIZE) {
-        return res.status(413).json({
+        res.status(413).json({
             msg: "L'immagine supera il limite di 10MB"
         });
+        return;
     }
 
     if (tokenResponse.status == 200) {
-
         let query = "UPDATE utenti SET Nickname = ?, Password = ?, Img = ? WHERE idU = ?";
         let params = [username, pwd, img, id];
 
-        db.query(query, params, (err, resluts) => {
-
+        db.query(query, params, (err, results) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({
                     msg: "Error during the update of the user"
                 });
-            }
-            else {
+            } else {
                 res.status(200).json({
-                    msg: "User upated correctly"
+                    msg: "User updated correctly"
                 });
             }
-
         });
-
-        return; // Importante per evitare doppia risposta
+        return;
     }
-    res.status(token.status).json({
-        msg: token.msg
+    res.status(tokenResponse.status).json({
+        msg: tokenResponse.msg
     });
-
 });
 
 app.delete("/api/deleteUser", async (req, res) => {
