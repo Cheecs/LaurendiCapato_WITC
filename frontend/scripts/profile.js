@@ -64,6 +64,7 @@ async function checkToken(token) {
 
         $("#txtChangeUsr").val(info.usrName);
 
+        getProfilePic(info.id);
         if (info.img != null)
             $("#imgProfile").attr("src", info.img);
 
@@ -72,6 +73,33 @@ async function checkToken(token) {
     }
 
 
+}
+async function getProfilePic(id) {
+    try {
+        let token = sessionStorage.getItem("token");
+        if (!token) {
+            $("#imgProfile").attr("src", "../img/defaultProfile.png");
+            return;
+        }
+
+        let reqBody = { token };
+        let request = inviaRichiesta("POST", "/api/getProfile", reqBody);
+
+        request.done((data) => {
+            if (data.data && data.data.Img && data.data.Img !== "")
+                $("#imgProfile").attr("src", data.data.Img);
+            else
+                $("#imgProfile").attr("src", "../img/defaultProfile.png");
+        });
+
+        request.fail((err) => {
+            console.error(err);
+            $("#imgProfile").attr("src", "../img/defaultProfile.png");
+        });
+    } catch (err) {
+        console.error(err);
+        $("#imgProfile").attr("src", "../img/defaultProfile.png");
+    }
 }
 
 async function updateUser(id){
