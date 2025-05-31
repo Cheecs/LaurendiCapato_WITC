@@ -213,12 +213,17 @@ app.delete("/api/deleteUser", async (req, res) => {
     }
 });
 
+// ...existing code...
 app.patch("/api/updateUser", async (req, res) => {
+
+    console.log("[/api/updateUser] Richiesta ricevuta:", req.body);
 
     let { token, usr, pwd, img } = req.body;
     let idU: number = req.body.idU;
 
     let tokenResponse: any = await decodeToken(token);
+
+    console.log("[/api/updateUser] Risposta decodeToken:", tokenResponse);
 
     if (tokenResponse.status == 200) {
 
@@ -228,26 +233,31 @@ app.patch("/api/updateUser", async (req, res) => {
         if(pwd.trim() != "")
         {
             let hashPwd = md5(pwd);
+            console.log("[/api/updateUser] Password aggiornata, hash:", hashPwd);
 
             queryUpUser = "UPDATE utenti SET Nickname = ?, Img = ?, Password = ? WHERE idU = ?";
             paramsUpdate = [usr, img, hashPwd, idU];
         }
         else
         {
+            console.log("[/api/updateUser] Password non aggiornata");
             queryUpUser = "UPDATE utenti SET Nickname = ?, Img = ? WHERE idU = ?";
             paramsUpdate = [usr, img, idU];
         }
 
+        console.log("[/api/updateUser] Query:", queryUpUser);
+        console.log("[/api/updateUser] Params:", paramsUpdate);
+
         db.query(queryUpUser, paramsUpdate, (err, results) => {
 
             if (err) {
-                console.log(err);
+                console.log("[/api/updateUser] Errore DB:", err);
                 res.status(500).json({
                     msg: "An error occured during the update"
                 });
             }
             else {
-
+                console.log("[/api/updateUser] Update riuscito:", results);
                 res.status(200).json({
                     msg: "Update succesfull"
                 });
@@ -257,11 +267,13 @@ app.patch("/api/updateUser", async (req, res) => {
 
     }
     else {
+        console.log("[/api/updateUser] Token non valido:", tokenResponse);
         res.status(token.status).json({
             msg: token.msg
         });
     }
 });
+// ...existing code...
 
 
 /* -- ENDPOINTS COLORI -- */
