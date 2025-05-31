@@ -273,7 +273,41 @@ app.patch("/api/updateUser", async (req, res) => {
         });
     }
 });
-// ...existing code...
+app.post("/api/getProfile", async (req, res) => {
+    let { token } = req.body;
+    let tokenResponse: any = await decodeToken(token);
+
+    if (tokenResponse.status === 200) {
+        let id = tokenResponse.data.id;
+        let query = "SELECT idU, Nickname, Email, Img FROM utenti WHERE idU = ?";
+        let params = [id];
+
+        db.query(query, params, (err, results) => {
+            if (err) {
+                console.error("DB error:", err);
+                return res.status(500).json({
+                    msg: "An error occurred while fetching profile"
+                });
+            }
+
+            const rows = results as any[];
+            if (rows.length === 0) {
+                return res.status(404).json({
+                    msg: "User not found"
+                });
+            }
+
+            res.status(200).json({
+                data: rows[0]  // single user profile object
+            });
+        });
+    } else {
+        res.status(tokenResponse.status).json({
+            msg: tokenResponse.msg
+        });
+    }
+});
+
 
 
 /* -- ENDPOINTS COLORI -- */

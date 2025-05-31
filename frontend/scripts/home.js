@@ -19,6 +19,8 @@ async function getUserInfo(token) {
 
         let usrData = await decodeToken(token);
 
+        getProfilePic(usrData.id);
+
         $("#imgUtente").attr("title", usrData.mail);
         $("#imgUtente").tooltip("dispose").tooltip();
 
@@ -31,6 +33,23 @@ async function getUserInfo(token) {
     {   
         loggedIn = false;
     }
+}
+
+function getProfilePic(id) {
+
+    let request = inviaRichiesta("GET", `/api/getProfilePic/${id}`);
+
+    request.done((data) => {
+        console.log(data);
+        if(data.data && data.data != "")
+            $("#imgUtente").attr("src", data.data);
+        else
+            $("#imgUtente").attr("src", "./images/user.png");
+    });
+
+    request.fail((err) => {
+        console.error(err);
+    });
 }
 
 
