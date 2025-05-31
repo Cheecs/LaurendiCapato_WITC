@@ -44,6 +44,10 @@ async function checkToken(token) {
             window.location.href = "./home.html";
         })
 
+        $("#btnAnalyzeImage").click(() => {
+            window.location.href = "./product.html";
+        })
+
         $("#imgProfileInput").change(function () {
 
             const fileInput = $(this)[0].files[0];
