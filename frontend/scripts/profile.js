@@ -86,19 +86,23 @@ async function getProfilePic(id) {
         let request = inviaRichiesta("POST", "/api/getProfile", reqBody);
 
         request.done((data) => {
-            if (data.data && data.data.Img && data.data.Img !== "")
+            if (data.data && data.data.Img && data.data.Img !== ""){
                 $("#imgProfile").attr("src", data.data.Img);
-            else
+                $("#imgUtente").attr("src", data.data.Img);}
+            else{
                 $("#imgProfile").attr("src", "../img/defaultProfile.png");
+            $("#imgUtente").attr("src", data.data.Img);}
         });
 
         request.fail((err) => {
             console.error(err);
             $("#imgProfile").attr("src", "../img/defaultProfile.png");
+            $("#imgUtente").attr("src", "../img/defaultProfile.png");
         });
     } catch (err) {
         console.error(err);
         $("#imgProfile").attr("src", "../img/defaultProfile.png");
+        $("#imgUtente").attr("src", "../img/defaultProfile.png");
     }
 }
 
