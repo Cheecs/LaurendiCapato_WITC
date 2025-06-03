@@ -16,8 +16,8 @@ const PWD = process.env.DB_passwd;
 const SERVER = process.env.DB_host;
 
 let app = express();
-app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
+app.use(express.json({ limit: '1000mb' }));
+app.use(express.urlencoded({ limit: '1000mb', extended: true }));
 
 // Configure the mailer service
 const mailerService = nodemailer.createTransport({
@@ -67,7 +67,7 @@ app.post('/api/login', async (req, res) => {
     req.setTimeout(300000);
 
     let { mail, pwd } = req.body;
-    let query = "SELECT * FROM utenti WHERE Email = ? AND Password = ?"
+    let query = "SELECT `idU`,`Nickname`,`Email`,`Password` FROM utenti WHERE Email = ? AND Password = ?"
     let login = await UserExists(mail, pwd, query);
 
     if (login.status == 200) {
@@ -175,38 +175,6 @@ app.post("/api/decodeToken", async (req, res) => {
     }
 });
 
-app.post("/api/updateUser", async (req, res) => {
-
-    let { id, username, pwd, img, token } = req.body
-    let tokenResponse: any = await decodeToken(token);
-
-    if (tokenResponse.status == 200) {
-
-        let query = "UPDATE utenti SET Nickname = ?, Password = ?, Img = ? WHERE idU = ?";
-        let params = [username, pwd, img, id];
-
-        db.query(query, params, (err, resluts) => {
-
-            if (err) {
-                console.log(err);
-                res.status(500).json({
-                    msg: "Error during the update of the user"
-                });
-            }
-            else {
-                res.status(200).json({
-                    msg: "User upated correctly"
-                });
-            }
-
-        });
-
-    }
-    res.status(token.status).json({
-        msg: token.msg
-    });
-
-});
 
 app.delete("/api/deleteUser", async (req, res) => {
 
@@ -245,12 +213,17 @@ app.delete("/api/deleteUser", async (req, res) => {
     }
 });
 
+// ...existing code...
 app.patch("/api/updateUser", async (req, res) => {
+
+    console.log("[/api/updateUser] Richiesta ricevuta:", req.body);
 
     let { token, usr, pwd, img } = req.body;
     let idU: number = req.body.idU;
 
     let tokenResponse: any = await decodeToken(token);
+
+    console.log("[/api/updateUser] Risposta decodeToken:", tokenResponse);
 
     if (tokenResponse.status == 200) {
 
@@ -260,26 +233,31 @@ app.patch("/api/updateUser", async (req, res) => {
         if(pwd.trim() != "")
         {
             let hashPwd = md5(pwd);
+            console.log("[/api/updateUser] Password aggiornata, hash:", hashPwd);
 
             queryUpUser = "UPDATE utenti SET Nickname = ?, Img = ?, Password = ? WHERE idU = ?";
             paramsUpdate = [usr, img, hashPwd, idU];
         }
         else
         {
+            console.log("[/api/updateUser] Password non aggiornata");
             queryUpUser = "UPDATE utenti SET Nickname = ?, Img = ? WHERE idU = ?";
             paramsUpdate = [usr, img, idU];
         }
 
+        console.log("[/api/updateUser] Query:", queryUpUser);
+        console.log("[/api/updateUser] Params:", paramsUpdate);
+
         db.query(queryUpUser, paramsUpdate, (err, results) => {
 
             if (err) {
-                console.log(err);
+                console.log("[/api/updateUser] Errore DB:", err);
                 res.status(500).json({
                     msg: "An error occured during the update"
                 });
             }
             else {
-
+                console.log("[/api/updateUser] Update riuscito:", results);
                 res.status(200).json({
                     msg: "Update succesfull"
                 });
@@ -289,11 +267,47 @@ app.patch("/api/updateUser", async (req, res) => {
 
     }
     else {
+        console.log("[/api/updateUser] Token non valido:", tokenResponse);
         res.status(token.status).json({
             msg: token.msg
         });
     }
 });
+app.post("/api/getProfile", async (req, res) => {
+    let { token } = req.body;
+    let tokenResponse: any = await decodeToken(token);
+
+    if (tokenResponse.status === 200) {
+        let id = tokenResponse.data.id;
+        let query = "SELECT idU, Nickname, Email, Img FROM utenti WHERE idU = ?";
+        let params = [id];
+
+        db.query(query, params, (err, results) => {
+            if (err) {
+                console.error("DB error:", err);
+                return res.status(500).json({
+                    msg: "An error occurred while fetching profile"
+                });
+            }
+
+            const rows = results as any[];
+            if (rows.length === 0) {
+                return res.status(404).json({
+                    msg: "User not found"
+                });
+            }
+
+            res.status(200).json({
+                data: rows[0]  // single user profile object
+            });
+        });
+    } else {
+        res.status(tokenResponse.status).json({
+            msg: tokenResponse.msg
+        });
+    }
+});
+
 
 
 /* -- ENDPOINTS COLORI -- */

@@ -59,3 +59,4 @@ function errore(jqXHR, text_status, string_error) {
         alert("Server Error: " + jqXHR.status + " - " + jqXHR.responseText);
 }
 
+

@@ -19,6 +19,8 @@ async function getUserInfo(token) {
 
         let usrData = await decodeToken(token);
 
+        getProfilePic(usrData.id);
+
         $("#imgUtente").attr("title", usrData.mail);
         $("#imgUtente").tooltip("dispose").tooltip();
 
@@ -30,6 +32,34 @@ async function getUserInfo(token) {
     } catch (err) 
     {   
         loggedIn = false;
+    }
+}
+
+async function getProfilePic(id) {
+    try {
+        let token = sessionStorage.getItem("token");
+        if (!token) {
+            $("#imgUtente").attr("src", "./images/user.png");
+            return;
+        }
+
+        let reqBody = { token };
+        let request = inviaRichiesta("POST", "/api/getProfile", reqBody);
+
+        request.done((data) => {
+            if (data.data && data.data.Img && data.data.Img !== "")
+                $("#imgUtente").attr("src", data.data.Img);
+            else
+                $("#imgUtente").attr("src", "./images/user.png");
+        });
+
+        request.fail((err) => {
+            console.error(err);
+            $("#imgUtente").attr("src", "./images/user.png");
+        });
+    } catch (err) {
+        console.error(err);
+        $("#imgUtente").attr("src", "./images/user.png");
     }
 }
 
