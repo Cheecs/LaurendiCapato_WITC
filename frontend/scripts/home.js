@@ -28,11 +28,28 @@ async function getUserInfo(token) {
             window.location.href = "./profile.html";
         })
 
+        $("#btnWriteReview").click(function () {
+
+            const selectedStars = $('.star:checked');
+
+            const stelle = selectedStars.val();
+
+            if (ultimaStella) {
+                inviaRecensione(stelle);
+            } else {
+                console.log('Nessuna stella selezionata');
+            }
+        });
+
 
     } catch (err) 
     {   
         loggedIn = false;
     }
+}
+
+function inviaRecensione(stelle){
+    
 }
 
 async function getProfilePic(id) {

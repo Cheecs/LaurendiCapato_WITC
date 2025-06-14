@@ -163,7 +163,7 @@ app.post("/api/decodeToken", async (req, res) => {
         const decoded = jwt.verify(token, privateKey, { algorithms: ["HS256"] });
 
         res.status(200).json({
-            data: decoded
+            data: decoded  
         });
 
     }
@@ -213,7 +213,6 @@ app.delete("/api/deleteUser", async (req, res) => {
     }
 });
 
-// ...existing code...
 app.patch("/api/updateUser", async (req, res) => {
 
     console.log("[/api/updateUser] Richiesta ricevuta:", req.body);
