@@ -59,7 +59,7 @@ async function getUserInfo(token) {
     }
 }
 
-function inviaRecensione(stelle){
+function inviaRecensione(reqBody){
 
     let req = inviaRichiesta("POST", "/api/sendReview", reqBody);
 
