@@ -222,7 +222,7 @@ h3 {
     height: 350px;
     border-radius: 15px;
     border: 1px transparent;
-        background-color: #455a6454;
+    background-color: #00000000;
     width: fit-content;
     scrollbar-width: none;
     -ms-overflow-style: none;
