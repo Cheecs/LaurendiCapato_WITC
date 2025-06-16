@@ -42,8 +42,10 @@ async function getUserInfo(token) {
                 text: review
             };
 
+            console.log(stelle);
 
-            if (stelle) {
+
+            if (stelle > 0) {
                 inviaRecensione(reqBody);
             } else {
                 console.log('Nessuna stella selezionata');
