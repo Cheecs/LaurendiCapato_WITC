@@ -50,7 +50,7 @@ function writeReviews(){
         reviews.forEach(rev => {
 
             let stars;
-            let data = formatDate(rev.Data);
+            let data = formatDate(rev.Data.toISOString());
 
             for(let i = 0; i < rev.Valutazione; i++)
             {
@@ -93,8 +93,7 @@ function writeReviews(){
 
 function formatDate(date){
 
-    let data = date.split(' ');
-    let dateArray = data.split('-');
+    let dateArray = date.split('-');
 
     return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
 }
