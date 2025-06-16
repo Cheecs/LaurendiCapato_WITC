@@ -11,9 +11,71 @@ $(document).ready(function(){
         getUserInfo(token);
     }
 
-    
+    writeReviews();
 
 });
+
+function writeReviews(){
+
+    let req = inviaRichiesta("GET", "/api/getAllReviews");
+
+    let revBody = $("#showAllReviews")
+
+    req.done((data) => {
+
+        let reviews = data.data;
+
+        reviews.forEach(rev => {
+
+            let stars;
+            let data = formatDate(rev.Date);
+
+            for(let i = 0; i < rev.Valutazione; i++)
+            {
+                stars += "★";
+            }
+
+            let review = $(`
+                <div class="card testimonial-card mb-2">
+                    <div class="card-body p-3">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="avatar me-3">
+                          <img src="${rev.Img}">
+                        </div>
+                        <div>
+                          <h5 class="card-title mb-0">${rev.Nickname}</h5>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="text-secondary">${data}</span>
+                      </div>
+                      <div class="stars mb-3">
+                        ${stars}
+                      </div>
+                      <p class="card-text text-light mb-3">
+                        ${rev.Descr}
+                      </p>
+                    </div>
+                </div>`);
+
+            revBody.append(review);
+            
+        });
+    });
+
+    req.fail(() => {
+        showAlert("Error while getting reviews");
+    })
+
+}
+
+function formatRev(date){
+
+    let data = date.split(' ');
+    let dateArray = data.split('-');
+
+    return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
+}
 
 async function getUserInfo(token) {
 

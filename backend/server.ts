@@ -621,7 +621,8 @@ app.get("/api/getAllReviews", async (req, res) => {
 
     if (tokenResponse.status == 200) {
 
-        let query = "SELECT * FROM recensioni";
+        let query = "SELECT recensioni.Valutazione, recensioni.Descr, recensioni.Data, utenti.Img, utenti.Nickname "+
+                    "FROM recensioni INNER JOIN utenti ON recensioni.idU = utenti.idU;";
 
         db.query(query, (err, results) => {
 
