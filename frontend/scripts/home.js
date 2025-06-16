@@ -4,6 +4,8 @@ let showMoreRev = true;
 $(document).ready(function(){
 
     UIsetup();
+ 
+    writeReviews();
 
     let token = sessionStorage.getItem("token");
 
@@ -11,8 +13,6 @@ $(document).ready(function(){
     {
         getUserInfo(token);
     }
-
-    writeReviews();
 
     $("#btnShowMoreRev").click(function () {
 
