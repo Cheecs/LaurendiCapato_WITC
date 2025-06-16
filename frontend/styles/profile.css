@@ -220,6 +220,7 @@ h3 {
     overflow-x: visible;
     overflow-y: auto;
     height: 350px;
+    border-radius: 15px;
     width: fit-content;
     scrollbar-width: none;
     -ms-overflow-style: none;
