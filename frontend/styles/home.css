@@ -463,10 +463,9 @@ h3 {
     font-weight: bold;
 }
 
-#showAllReviews{
-    overflow-x: visible;
+#divOverflow{
     overflow-y: auto;
-    height: 100px;
+    height: 493px;
     border-radius: 15px;
     border: 1px transparent;
     background-color: #00000000;
