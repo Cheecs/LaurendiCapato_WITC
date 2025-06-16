@@ -52,6 +52,7 @@ function writeReviews(){
             let stars;
             let date = new Date(rev.Data);
             let dateString = date.toISOString().split('T')[0];
+            let formattedDate = formatDate(dateString);
 
             for(let i = 0; i < rev.Valutazione; i++)
             {
@@ -70,7 +71,7 @@ function writeReviews(){
                         </div>
                       </div>
                       <div>
-                        <span class="text-secondary">${dateString}</span>
+                        <span class="text-secondary">${formattedDate}</span>
                       </div>
                       <div class="stars mb-3">
                         ${stars}

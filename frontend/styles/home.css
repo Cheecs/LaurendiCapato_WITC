@@ -466,7 +466,7 @@ h3 {
 #showAllReviews{
     overflow-x: visible;
     overflow-y: auto;
-    height: 350px;
+    height: 250px;
     border-radius: 15px;
     border: 1px transparent;
     background-color: #00000000;
