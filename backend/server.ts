@@ -432,8 +432,6 @@ app.post("/api/getPalette", async (req, res) => {
 
     if (tokenResponse.status == 200) {
 
-        /* da guardare come fare le query in relazione a come fare il frontend */
-
         let query = "SELECT palettes.NomeP, colori.cRGB, colori.cHEX FROM palettes INNER JOIN colori ON palettes.idP = colori.idP WHERE palettes.idP = ?";
         let params = [idP];
 
@@ -583,27 +581,34 @@ app.delete("/api/deleteColorPalette", async (req, res) => {
 
 /* ENDPOINT RECENSIONI */
 
-app.post("/api/sendReview", (req, res) => {
+app.post("/api/sendReview", async (req, res) => {
 
-    let { stars, id, text } = req.body;
+    let { stars, id, text, token } = req.body;
 
-    let query = "INSERT INTO recensioni (idU, Valutazione, Descr) VALUES (?, ?, ?);";
-    let params = [id, stars, text];
+    let tokenResponse: any = await decodeToken(token);
 
-    db.query(query, params, (err, results) => {
+    if (tokenResponse.status == 200) {
 
-        if(err)
-        {
-            console.log(err);
-            res.status(500).send("Internal server error");
-        }
-        else
-        {
-            res.status(200).send("Review sent correctly");
-        }
+        let query = "INSERT INTO recensioni (idU, Valutazione, Descr) VALUES (?, ?, ?);";
+        let params = [id, stars, text];
 
-    })
+        db.query(query, params, (err, results) => {
 
+            if (err) {
+                console.log(err);
+                res.status(500).send("Internal server error");
+            }
+            else {
+                res.status(200).send("Review sent correctly");
+            }
+
+        })
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
 
 })
 

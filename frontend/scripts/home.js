@@ -39,7 +39,8 @@ async function getUserInfo(token) {
             let reqBody = {
                 stars: stelle,
                 id: userId,
-                text: review
+                text: review,
+                token: token,
             };
 
             console.log(stelle);
