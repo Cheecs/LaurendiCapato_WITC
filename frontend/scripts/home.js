@@ -66,7 +66,7 @@ function inviaRecensione(stelle){
     });
 
     req.fail(() => {
-        showAlert("An error occured while")
+        showAlert("An error occured while sending review");
     })
     
 }

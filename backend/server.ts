@@ -272,6 +272,7 @@ app.patch("/api/updateUser", async (req, res) => {
         });
     }
 });
+
 app.post("/api/getProfile", async (req, res) => {
     let { token } = req.body;
     let tokenResponse: any = await decodeToken(token);
@@ -580,6 +581,31 @@ app.delete("/api/deleteColorPalette", async (req, res) => {
     }
 });
 
+/* ENDPOINT RECENSIONI */
+
+app.post("/api/getPalette", (req, res) => {
+
+    let { stars, id, text } = req.body;
+
+    let query = "INSERT INTO recensioni (idU, Valutazione, Descr) VALUES (?, ?, ?);";
+    let params = [id, stars, text];
+
+    db.query(query, params, (err, results) => {
+
+        if(err)
+        {
+            console.log(err);
+            res.status(500).send("Internal server error");
+        }
+        else
+        {
+            res.status(200).send("Reviwe sent correctly");
+        }
+
+    })
+
+
+})
 
 /* -------------  OTHER FUNCTIONS ------------------ */
 
