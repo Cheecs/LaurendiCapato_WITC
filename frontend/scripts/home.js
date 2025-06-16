@@ -91,7 +91,7 @@ function writeReviews(){
 
 }
 
-function formatRev(date){
+function formatDate(date){
 
     let data = date.split(' ');
     let dateArray = data.split('-');

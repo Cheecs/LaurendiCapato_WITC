@@ -464,7 +464,7 @@ h3 {
 }
 
 #showAllReviews{
-
+    overflow-y: auto;
 }
 
 .stars {
