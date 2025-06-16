@@ -216,7 +216,7 @@ h3 {
     box-shadow: 0px 0px 35px 1px #00ffd071 !important;
 }
 
-.divTable {
+#paletteTableDiv {
     overflow-x: visible;
     overflow-y: auto;
     height: 350px;

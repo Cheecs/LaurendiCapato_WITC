@@ -11,6 +11,8 @@ $(document).ready(function(){
         getUserInfo(token);
     }
 
+    
+
 });
 
 async function getUserInfo(token) {
@@ -43,9 +45,6 @@ async function getUserInfo(token) {
                 token: token,
             };
 
-            console.log(stelle);
-
-
             if (stelle > 0) {
                 inviaRecensione(reqBody);
             } else {
@@ -65,13 +64,12 @@ function inviaRecensione(reqBody){
     let req = inviaRichiesta("POST", "/api/sendReview", reqBody);
 
     req.done(() => {
-
+        location.reload();
     });
 
     req.fail(() => {
         showAlert("An error occured while sending review");
-    })
-    
+    }) 
 }
 
 async function getProfilePic(id) {

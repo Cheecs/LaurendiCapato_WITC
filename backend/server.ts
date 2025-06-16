@@ -425,6 +425,8 @@ app.post("/api/getImages", async (req, res) => {
 
 });
 
+
+
 app.post("/api/getPalette", async (req, res) => {
 
     let { token, idP } = req.body;
@@ -609,8 +611,73 @@ app.post("/api/sendReview", async (req, res) => {
             msg: token.msg
         });
     }
+});
+
+app.get("/api/getAllReviews", async (req, res) => {
+
+    let { token } = req.body;
+
+    let tokenResponse: any = await decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        let query = "SELECT * FROM recensioni";
+
+        db.query(query, (err, results) => {
+
+            if (err) {
+                console.log(err);
+                res.status(500).send("Internal server error");
+            }
+            else {
+                res.status(200).send({
+                    data: results
+                });
+            }
+
+        })
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
+});
+
+app.get("/api/getUserReviews", async (req, res) => {
+
+    let { token, id } = req.body;
+
+    let tokenResponse: any = await decodeToken(token);
+
+    if (tokenResponse.status == 200) {
+
+        let query = "SELECT * FROM recensioni WHERE idU = ?";
+        let params = [id];
+
+        db.query(query, params, (err, results) => {
+
+            if (err) {
+                console.log(err);
+                res.status(500).send("Internal server error");
+            }
+            else {
+                res.status(200).send({
+                    data: results
+                });
+            }
+
+        })
+    }
+    else {
+        res.status(token.status).json({
+            msg: token.msg
+        });
+    }
 
 })
+
+
 
 /* -------------  OTHER FUNCTIONS ------------------ */
 

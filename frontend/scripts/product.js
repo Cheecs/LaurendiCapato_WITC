@@ -87,11 +87,47 @@ async function getUserInfo(token) {
             saveColor(usrData.id, img);
         });
 
+        $("#btnWriteReview").click(function () {
+
+            const selectedStars = $('.star:checked');
+
+            const stelle = selectedStars.val();
+            const userId = usrData.id;
+            const review = $("#txtReview").val();
+
+            let reqBody = {
+                stars: stelle,
+                id: userId,
+                text: review,
+                token: token,
+            };
+
+            if (stelle > 0) {
+                inviaRecensione(reqBody);
+            } else {
+                console.log('Nessuna stella selezionata');
+            }
+        });
+
+
     } catch (err) 
     {
         showAlert("Errore nel recupero dei dati utente");
         loggedIn = false;
     }
+}
+
+function inviaRecensione(reqBody){
+
+    let req = inviaRichiesta("POST", "/api/sendReview", reqBody);
+
+    req.done(() => {
+        location.reload();
+    });
+
+    req.fail(() => {
+        showAlert("An error occured while sending review");
+    }) 
 }
 
 async function saveColor(id, img){
