@@ -33,9 +33,18 @@ async function getUserInfo(token) {
             const selectedStars = $('.star:checked');
 
             const stelle = selectedStars.val();
+            const userId = usrData.id;
+            const review = $("#txtReview").val();
 
-            if (ultimaStella) {
-                inviaRecensione(stelle);
+            let reqBody = {
+                stars: stelle,
+                id: userId,
+                text: review
+            };
+
+
+            if (stelle) {
+                inviaRecensione(reqBody);
             } else {
                 console.log('Nessuna stella selezionata');
             }
@@ -49,6 +58,16 @@ async function getUserInfo(token) {
 }
 
 function inviaRecensione(stelle){
+
+    let req = inviaRichiesta("POST", "/api/sendReview", reqBody);
+
+    req.done(() => {
+
+    });
+
+    req.fail(() => {
+        showAlert("An error occured while")
+    })
     
 }
 
