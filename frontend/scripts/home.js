@@ -150,7 +150,7 @@ function inviaRecensione(reqBody){
     let req = inviaRichiesta("POST", "/api/sendReview", reqBody);
 
     req.done(() => {
-        location.reload();
+        window.location.reload();
     });
 
     req.fail(() => {
