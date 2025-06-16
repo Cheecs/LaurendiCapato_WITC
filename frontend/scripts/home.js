@@ -43,6 +43,8 @@ function writeReviews(){
 
     req.done((data) => {
 
+        console.log(data);
+
         let reviews = data.data;
 
         reviews.forEach(rev => {
