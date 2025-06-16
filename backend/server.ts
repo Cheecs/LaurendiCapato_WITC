@@ -583,7 +583,7 @@ app.delete("/api/deleteColorPalette", async (req, res) => {
 
 /* ENDPOINT RECENSIONI */
 
-app.post("/api/getPalette", (req, res) => {
+app.post("/api/sendReview", (req, res) => {
 
     let { stars, id, text } = req.body;
 
@@ -599,7 +599,7 @@ app.post("/api/getPalette", (req, res) => {
         }
         else
         {
-            res.status(200).send("Reviwe sent correctly");
+            res.status(200).send("Review sent correctly");
         }
 
     })
