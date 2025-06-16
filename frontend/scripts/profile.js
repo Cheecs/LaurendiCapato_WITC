@@ -79,6 +79,7 @@ async function checkToken(token) {
 
 
 }
+
 async function getProfilePic(id) {
 
     try {
@@ -93,7 +94,7 @@ async function getProfilePic(id) {
 
         request.done((data) => {
 
-            if (data.data && data.data.Img && data.data.Img !== "")
+            if (data.data && data.data.Img && data.data.Img !== null)
             {
                 $("#imgProfile").attr("src", data.data.Img);
                 $("#imgUtente").attr("src", data.data.Img);
