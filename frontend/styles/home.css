@@ -466,11 +466,10 @@ h3 {
 #showAllReviews{
     overflow-x: visible;
     overflow-y: auto;
-    height: 250px;
+    height: 200px;
     border-radius: 15px;
     border: 1px transparent;
     background-color: #00000000;
-    width: fit-content;
     scrollbar-width: none;
     -ms-overflow-style: none;
     position: relative;

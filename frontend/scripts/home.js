@@ -49,7 +49,7 @@ function writeReviews(){
 
         reviews.forEach(rev => {
 
-            let stars;
+            let stars = "";
             let date = new Date(rev.Data);
             let dateString = date.toISOString().split('T')[0];
             let formattedDate = formatDate(dateString);
