@@ -1,4 +1,5 @@
 let seeMore = false;
+let showMoreRev = true;
 
 $(document).ready(function(){
 
@@ -13,13 +14,32 @@ $(document).ready(function(){
 
     writeReviews();
 
+    $("#btnShowMoreRev").click(function () {
+
+        if(showMoreRev)
+        {
+            $("#btnShowMoreRev").text("Show less reviews");
+            $("#showAllReviews").removeClass("d-none");
+
+            showMoreRev = false;
+        }
+        else
+        {
+            $("#btnShowMoreRev").text("Show more reviews");
+            $("#showAllReviews").addClass("d-none");
+
+            showMoreRev = true;
+        }
+
+    })
+
 });
 
 function writeReviews(){
 
     let req = inviaRichiesta("GET", "/api/getAllReviews");
 
-    let revBody = $("#showAllReviews")
+    let revBody = $("#showAllReviews");
 
     req.done((data) => {
 

@@ -453,15 +453,18 @@ h3 {
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    background-color: #00ffd0;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: bold;
+}
+
+#showAllReviews{
+
 }
 
 .stars {
