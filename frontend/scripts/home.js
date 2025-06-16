@@ -50,7 +50,7 @@ function writeReviews(){
         reviews.forEach(rev => {
 
             let stars;
-            let data = formatDate(rev.Date);
+            let data = formatDate(rev.Data);
 
             for(let i = 0; i < rev.Valutazione; i++)
             {
