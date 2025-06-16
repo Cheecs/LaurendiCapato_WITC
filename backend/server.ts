@@ -615,34 +615,22 @@ app.post("/api/sendReview", async (req, res) => {
 
 app.get("/api/getAllReviews", async (req, res) => {
 
-    let { token } = req.body;
+    let query = "SELECT recensioni.Valutazione, recensioni.Descr, recensioni.Data, utenti.Img, utenti.Nickname " +
+        "FROM recensioni INNER JOIN utenti ON recensioni.idU = utenti.idU; ";
 
-    let tokenResponse: any = await decodeToken(token);
+    db.query(query, (err, results) => {
 
-    if (tokenResponse.status == 200) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Internal server error");
+        }
+        else {
+            res.status(200).send({
+                data: results
+            });
+        }
 
-        let query = "SELECT recensioni.Valutazione, recensioni.Descr, recensioni.Data, utenti.Img, utenti.Nickname "+
-                    "FROM recensioni INNER JOIN utenti ON recensioni.idU = utenti.idU;";
-
-        db.query(query, (err, results) => {
-
-            if (err) {
-                console.log(err);
-                res.status(500).send("Internal server error");
-            }
-            else {
-                res.status(200).send({
-                    data: results
-                });
-            }
-
-        })
-    }
-    else {
-        res.status(token.status).json({
-            msg: token.msg
-        });
-    }
+    })
 });
 
 app.get("/api/getUserReviews", async (req, res) => {
