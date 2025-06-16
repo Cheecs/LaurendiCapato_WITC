@@ -62,8 +62,8 @@ function writeReviews(){
                 <div class="card testimonial-card mb-2">
                     <div class="card-body p-3">
                       <div class="d-flex align-items-center mb-3">
-                        <div class="avatar me-3">
-                          <img src="${rev.Img}">
+                        <div class="me-3">
+                          <img class="avatar" src="${rev.Img}">
                         </div>
                         <div>
                           <h5 class="card-title mb-0">${rev.Nickname}</h5>
