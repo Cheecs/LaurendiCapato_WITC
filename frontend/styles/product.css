@@ -346,6 +346,28 @@ h3 {
     align-items: center;
 }
 
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+#divOverflow{
+    overflow-y: auto;
+    height: 493px;
+    border-radius: 15px;
+    border: 1px transparent;
+    background-color: #00000000;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+}
+
 .rating input {
     appearance: unset;
 }
@@ -486,18 +508,6 @@ h3 {
     border: 1px solid #4e5152;
     color: white;
     font-size: small;
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-    background-color: #00ffd0;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
 }
 
 .stars {

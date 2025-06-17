@@ -5,6 +5,8 @@ $(document).ready(function(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
+    writeReviews();
+
     $("#file").on("change", () => {
         changeImg();
     });
@@ -71,6 +73,66 @@ $(document).ready(function(){
 
 });
 
+function writeReviews(){
+
+    let req = inviaRichiesta("GET", "/api/getAllReviews");
+
+    let revBody = $("#showAllReviews");
+
+    req.done((data) => {
+
+        console.log(data);
+
+        let reviews = data.data;
+
+        reviews.forEach(rev => {
+
+            let stars = "";
+            let date = new Date(rev.Data);
+            let dateString = date.toISOString().split('T')[0];
+            let formattedDate = formatDate(dateString);
+            let img = rev.Img != null ? rev.Img : "../img/defaultProfile.png"
+
+            for(let i = 0; i < rev.Valutazione; i++)
+            {
+                stars += "★";
+            }
+
+            let review = $(`
+                <div class="card testimonial-card mb-2">
+                    <div class="card-body p-3">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="me-3">
+                          <img class="avatar" src="${img}">
+                        </div>
+                        <div>
+                          <h5 class="card-title mb-0">${rev.Nickname}</h5>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="text-secondary">${formattedDate}</span>
+                      </div>
+                      <div class="stars mb-3">
+                        ${stars}
+                      </div>
+                      <p class="card-text text-light mb-3">
+                        ${rev.Descr}
+                      </p>
+                    </div>
+                </div>`);
+
+            revBody.append(review);
+            
+        });
+    });
+
+    req.fail(() => {
+        showAlert("Error while getting reviews");
+    })
+
+}
+
+
 async function getUserInfo(token) {
 
     try {
@@ -122,7 +184,7 @@ function inviaRecensione(reqBody){
     let req = inviaRichiesta("POST", "/api/sendReview", reqBody);
 
     req.done(() => {
-        location.reload();
+        window.location.reload();
     });
 
     req.fail(() => {
