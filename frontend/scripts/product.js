@@ -1,11 +1,32 @@
 let loggedIn;
 let analized;
+let showMoreRev = true;
 
 $(document).ready(function(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
     writeReviews();
+
+        $("#btnShowMoreRev").click(function () {
+
+        if(showMoreRev)
+        {
+            $("#btnShowMoreRev").text("Show less reviews");
+            $("#showAllReviews").removeClass("d-none");
+
+            showMoreRev = false;
+        }
+        else
+        {
+            $("#btnShowMoreRev").text("Show more reviews");
+            $("#showAllReviews").addClass("d-none");
+
+            showMoreRev = true;
+        }
+
+    })
+
 
     $("#file").on("change", () => {
         changeImg();
