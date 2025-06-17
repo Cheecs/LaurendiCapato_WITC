@@ -666,8 +666,6 @@ app.post("/api/getUserReviews", async (req, res) => {
 
 })
 
-
-
 /* -------------  OTHER FUNCTIONS ------------------ */
 
 function UserExists(mail: string, pwd: string, query: string): Promise<any> {
