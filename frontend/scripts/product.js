@@ -102,8 +102,6 @@ function writeReviews(){
 
     req.done((data) => {
 
-        console.log(data);
-
         let reviews = data.data;
 
         reviews.forEach(rev => {
@@ -195,7 +193,7 @@ async function getUserInfo(token) {
             if (stelle > 0) {
                 inviaRecensione(reqBody);
             } else {
-                console.log('Nessuna stella selezionata');
+                showAlert('Nessuna stella selezionata');
             }
         });
 

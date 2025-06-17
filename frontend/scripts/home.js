@@ -134,7 +134,7 @@ async function getUserInfo(token) {
             if (stelle > 0) {
                 inviaRecensione(reqBody);
             } else {
-                console.log('Nessuna stella selezionata');
+                showAlert('Nessuna stella selezionata');
             }
         });
 
