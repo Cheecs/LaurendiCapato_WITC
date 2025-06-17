@@ -635,14 +635,14 @@ app.get("/api/getAllReviews", async (req, res) => {
 
 app.post("/api/getUserReviews", async (req, res) => {
 
-    let { token, id } = req.body;
+    let { token, idU } = req.body;
 
     let tokenResponse: any = await decodeToken(token);
 
     if (tokenResponse.status == 200) {
 
         let query = "SELECT * FROM recensioni WHERE idU = ?";
-        let params = [id];
+        let params = [idU];
 
         db.query(query, params, (err, results) => {
 
