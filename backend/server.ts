@@ -633,7 +633,7 @@ app.get("/api/getAllReviews", async (req, res) => {
     })
 });
 
-app.get("/api/getUserReviews", async (req, res) => {
+app.post("/api/getUserReviews", async (req, res) => {
 
     let { token, id } = req.body;
 

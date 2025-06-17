@@ -65,6 +65,7 @@ async function checkToken(token) {
         });
 
         loadTable();
+        loadTableReviews(token, info.id);
 
         $("#txtChangeUsr").val(info.usrName);
 
@@ -76,8 +77,61 @@ async function checkToken(token) {
     } catch (err) {
         window.location.href = "./home.html";
     }
+}
 
+function loadTableReviews(token, id){
 
+    let tBody = $("#tBodyReviews");
+
+    let reqBody = {
+        token: token,
+        idU: id
+    };
+
+    let req = inviaRichiesta("POST", "/api/getUserReviews", reqBody);
+
+    req.done((data) => {
+
+        let reviews = data.data;
+
+        $("#revPubblicate").text(`Recensioni pubblicate: ${reviews.length}`);
+
+        reviews.forEach(rev => {
+
+            let date = new Date(rev.Data);
+            let dateString = date.toISOString().split('T')[0];
+            let formattedDate = formatDate(dateString); 
+            let stars = "";
+            
+            for(let i = 0; i < rev.Valutazione; i++)
+            {
+                stars += "★";
+            }    
+                
+            let tr = $("<tr>");
+
+            let tdRating = $(`<td>${stars}</td>`);
+            let tdReview = $(`<td>${rev.Descr}</td>`);
+            let tdData = $(`<td>${formattedDate}</td>`);
+
+            tr.append(tdRating);
+            tr.append(tdReview);
+            tr.append(tdData);
+
+            tBody.append(tr);
+        })
+    });
+
+    req.fail(() => {
+        showAlert("Error while getting the reviews");
+    })
+}
+
+function formatDate(date){
+
+    let dateArray = date.split('-');
+
+    return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
 }
 
 async function getProfilePic(id) {
